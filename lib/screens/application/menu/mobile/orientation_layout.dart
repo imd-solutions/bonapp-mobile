@@ -42,80 +42,126 @@ class MenuMobilePortrait extends BaseModelWidget<MenuViewModel> {
     return BusyOverlay(
       show: data.state == ViewState.Busy,
       child: Scaffold(
-        body: ListView.builder(
-          itemCount: data.menus.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-              child: GestureDetector(
-                onTap: () => goToNewPage(data.menus[index].info),
-                child: Card(
-                  elevation: 5.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  clipBehavior: Clip.antiAlias,
-                  child: Container(
-                    height: 150.0,
-                    child: Stack(
-                      children: <Widget>[
-                        Hero(
-                          tag: 'background_' + data.menus[index].info.name,
-                          child: Container(
-                            color: Color(secondaryColour),
-                          ),
-                        ),
-                        Positioned(
-                          top: 0.0,
-                          left: 0.0,
-                          right: 0.0,
-                          child: Hero(
-                            tag: 'imgae_' + data.menus[index].info.name,
-                            child: Image.network(
-                              graphQLApi + '/storage/' + data.menus[index].info.imgUrl,
-                              fit: BoxFit.fitWidth,
-                              height: 80.0,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 90.0,
-                          left: 10.0,
-                          width: _screenWidth,
-                          height: 250.0,
-                          child: Text(
-                            data.menus[index].info.name,
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: primaryFont,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 115.0,
-                          width: _screenWidth,
-                          height: 120.0,
-                          child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10.0),
-                            width: _screenWidth,
-                            child: Text(
-                              data.menus[index].info.description,
-                              softWrap: true,
-                              style: TextStyle(
-                                fontSize: 12.0,
-                                fontFamily: secondaryFont,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+        body: Column(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(left: 20.0, right: 50.0, top: 20.0),
+              child: Text(
+                'Hi Sophie, \nWhat would you like today?',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                  color: Color(accentThirdColour),
                 ),
               ),
-            );
-          },
+            ), // I want widget or widgets here to be part of the scroll instead of them being fixed.
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 5.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    'Top Sellers',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.0,
+                      color: Color(accentSecondColour),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => print('See All'),
+                    child: Text(
+                      'See All',
+                      style: TextStyle(
+                        color: Color(primaryColour),
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 1.0,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: data.menus.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                    child: GestureDetector(
+                      onTap: () => goToNewPage(data.menus[index].info),
+                      child: Card(
+                        elevation: 5.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        clipBehavior: Clip.antiAlias,
+                        child: Container(
+                          height: 150.0,
+                          child: Stack(
+                            children: <Widget>[
+                              Hero(
+                                tag: 'background_' + data.menus[index].info.name,
+                                child: Container(
+                                  color: Color(secondaryColour),
+                                ),
+                              ),
+                              Positioned(
+                                top: 0.0,
+                                left: 0.0,
+                                right: 0.0,
+                                child: Hero(
+                                  tag: 'imgae_' + data.menus[index].info.name,
+                                  child: Image.network(
+                                    graphQLApi + '/storage/' + data.menus[index].info.imgUrl,
+                                    fit: BoxFit.fitWidth,
+                                    height: 80.0,
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                top: 90.0,
+                                left: 10.0,
+                                width: _screenWidth,
+                                height: 250.0,
+                                child: Text(
+                                  data.menus[index].info.name,
+                                  style: TextStyle(
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: primaryFont,
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                top: 115.0,
+                                width: _screenWidth,
+                                height: 120.0,
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                                  width: _screenWidth,
+                                  child: Text(
+                                    data.menus[index].info.description,
+                                    softWrap: true,
+                                    style: TextStyle(
+                                      fontSize: 12.0,
+                                      fontFamily: secondaryFont,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
