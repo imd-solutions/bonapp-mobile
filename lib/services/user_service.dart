@@ -1,7 +1,7 @@
-import 'package:flutter_resp_mvvm/api/mutations/user_mutation.dart';
-import 'package:flutter_resp_mvvm/models/message.dart';
-import 'package:flutter_resp_mvvm/models/title.dart';
-import 'package:flutter_resp_mvvm/utils/constants.dart';
+import 'package:flutter_bonapp/api/mutations/user_mutation.dart';
+import 'package:flutter_bonapp/models/message.dart';
+import 'package:flutter_bonapp/models/title.dart';
+import 'package:flutter_bonapp/utils/constants.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import './../models/user.dart';
 import './../config/graphql.dart';

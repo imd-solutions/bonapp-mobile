@@ -2,10 +2,11 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_resp_mvvm/screens/intro_screen.dart';
-import 'package:flutter_resp_mvvm/services/locator.dart';
-import 'package:flutter_resp_mvvm/utils/constants.dart';
-import 'package:flutter_resp_mvvm/utils/routing_constants.dart';
+import 'package:flutter_bonapp/screens/application/menu/menu_screen.dart';
+import 'package:flutter_bonapp/screens/intro_screen.dart';
+import 'package:flutter_bonapp/services/locator.dart';
+import 'package:flutter_bonapp/utils/constants.dart';
+import 'package:flutter_bonapp/utils/routing_constants.dart';
 import 'services/router.dart' as router;
 
 void main() {
@@ -31,7 +32,8 @@ class MyApp extends StatelessWidget {
       ),
       onGenerateRoute: router.generateRoute,
       initialRoute: IntroScreenRoute,
-      home: IntroScreen(),
+      home: MenuScreen(),
+//      home: IntroScreen(),
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resp_mvvm/utils/constants.dart';
+import 'package:flutter_bonapp/utils/constants.dart';
 
 class PageTitle extends StatelessWidget {
   final double height;
@@ -16,7 +16,7 @@ class PageTitle extends StatelessWidget {
             title,
             style: TextStyle(
               fontSize: 25.0,
-              fontFamily: 'Poppins',
+              fontFamily: primaryFont,
             ),
           ),
           Text(
@@ -25,7 +25,7 @@ class PageTitle extends StatelessWidget {
               fontSize: 25.0,
               fontWeight: FontWeight.w900,
               color: Color(primaryColour),
-              fontFamily: 'Poppins',
+              fontFamily: primaryFont,
             ),
           ),
         ],

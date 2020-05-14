@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resp_mvvm/utils/env.dart';
-import 'package:flutter_resp_mvvm/models/sliders.dart';
+import 'package:flutter_bonapp/utils/constants.dart';
+import 'package:flutter_bonapp/utils/env.dart';
+import 'package:flutter_bonapp/models/sliders.dart';
 
 class FullList extends StatelessWidget {
   final Sliders sliders;
@@ -28,7 +29,7 @@ class FullList extends StatelessWidget {
               child: Text(
                 sliders.title,
                 style: TextStyle(
-                    color: Colors.white, fontSize: 35.0, fontFamily: 'Raleway'),
+                    color: Colors.white, fontSize: 35.0, fontFamily: secondaryFont),
               ),
             ),
             SizedBox(

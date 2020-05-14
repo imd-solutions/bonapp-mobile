@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resp_mvvm/models/drawer_items.dart';
-import 'package:flutter_resp_mvvm/widgets/base_model_widget.dart';
+import 'package:flutter_bonapp/models/drawer_items.dart';
+import 'package:flutter_bonapp/widgets/base_model_widget.dart';
 
 class DrawerOptionMobileLandscape extends BaseModelWidget<DrawerItems> {
   @override

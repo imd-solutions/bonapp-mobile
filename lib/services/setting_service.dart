@@ -10,7 +10,13 @@ SettingsQuery settingQuery = SettingsQuery();
 class SettingService {
   Future<Setting> getSetting() async {
     GraphQLClient _setting = graphQLConfiguration.clientToQuery();
-    QueryResult response = await _setting.query(QueryOptions(documentNode: gql(settingQuery.getApplicationSettings())));
+    QueryResult response = await _setting.query(
+      QueryOptions(
+        documentNode: gql(
+          settingQuery.getApplicationSettings(),
+        ),
+      ),
+    );
 
     if (response.hasException) {
       throw new Exception('Could not get setting data.');

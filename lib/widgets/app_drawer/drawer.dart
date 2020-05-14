@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resp_mvvm/responsive/orientation_layout.dart';
-import 'package:flutter_resp_mvvm/responsive/screen_type_layout.dart';
-import 'package:flutter_resp_mvvm/widgets/app_drawer/mobile/orientation_layout.dart';
-import 'package:flutter_resp_mvvm/widgets/app_drawer/tablet/orientation_layout.dart';
-import 'package:flutter_resp_mvvm/widgets/drawer_option/option.dart';
+import 'package:flutter_bonapp/responsive/orientation_layout.dart';
+import 'package:flutter_bonapp/responsive/screen_type_layout.dart';
+import 'package:flutter_bonapp/widgets/app_drawer/mobile/orientation_layout.dart';
+import 'package:flutter_bonapp/widgets/app_drawer/tablet/orientation_layout.dart';
+import 'package:flutter_bonapp/widgets/drawer_option/option.dart';
 
 class AppDrawer extends StatelessWidget {
   @override

@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:flutter_resp_mvvm/utils/env.dart';
+import 'package:flutter_bonapp/utils/env.dart';
 import "package:graphql_flutter/graphql_flutter.dart";
 
 class GraphQLConfiguration {

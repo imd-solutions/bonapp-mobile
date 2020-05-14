@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resp_mvvm/viewmodels/home/viewmodel.dart';
-import 'package:flutter_resp_mvvm/widgets/app_drawer/drawer.dart';
-import 'package:flutter_resp_mvvm/widgets/base_model_widget.dart';
-import 'package:flutter_resp_mvvm/enums/viewstate.dart';
-import 'package:flutter_resp_mvvm/widgets/busy_overlay.dart';
+import 'package:flutter_bonapp/utils/constants.dart';
+import 'package:flutter_bonapp/viewmodels/home/viewmodel.dart';
+import 'package:flutter_bonapp/widgets/app_drawer/drawer.dart';
+import 'package:flutter_bonapp/widgets/base_model_widget.dart';
+import 'package:flutter_bonapp/enums/viewstate.dart';
+import 'package:flutter_bonapp/widgets/busy_overlay.dart';
 
 class HomeMobilePortrait extends BaseModelWidget<HomeViewModel> {
   final GlobalKey<ScaffoldState> _scaffold = GlobalKey<ScaffoldState>();
@@ -76,7 +77,7 @@ Widget _appInfo(data) {
             data.appInfo.name,
             style: TextStyle(
               fontSize: 20.0,
-              fontFamily: 'Poppins',
+              fontFamily: primaryFont,
             ),
           ),
         )

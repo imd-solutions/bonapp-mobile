@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resp_mvvm/utils/constants.dart';
+import 'package:flutter_bonapp/utils/constants.dart';
 
 class ApplicationFooter extends StatelessWidget {
   final String name;

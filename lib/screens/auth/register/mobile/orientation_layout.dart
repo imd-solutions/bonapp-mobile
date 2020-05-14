@@ -1,17 +1,17 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_resp_mvvm/includes/input/text.dart';
-import 'package:flutter_resp_mvvm/includes/select/dropdown.dart';
-import 'package:flutter_resp_mvvm/models/message.dart';
-import 'package:flutter_resp_mvvm/models/user.dart';
-import 'package:flutter_resp_mvvm/partials/logo.dart';
-import 'package:flutter_resp_mvvm/partials/page_title.dart';
-import 'package:flutter_resp_mvvm/utils/constants.dart';
-import 'package:flutter_resp_mvvm/utils/routing_constants.dart';
-import 'package:flutter_resp_mvvm/viewmodels/register/viewmodel.dart';
-import 'package:flutter_resp_mvvm/widgets/base_model_widget.dart';
-import 'package:flutter_resp_mvvm/enums/viewstate.dart';
-import 'package:flutter_resp_mvvm/widgets/busy_overlay.dart';
+import 'package:flutter_bonapp/includes/input/text.dart';
+import 'package:flutter_bonapp/includes/select/dropdown.dart';
+import 'package:flutter_bonapp/models/message.dart';
+import 'package:flutter_bonapp/models/user.dart';
+import 'package:flutter_bonapp/partials/logo.dart';
+import 'package:flutter_bonapp/partials/page_title.dart';
+import 'package:flutter_bonapp/utils/constants.dart';
+import 'package:flutter_bonapp/utils/routing_constants.dart';
+import 'package:flutter_bonapp/viewmodels/register/viewmodel.dart';
+import 'package:flutter_bonapp/widgets/base_model_widget.dart';
+import 'package:flutter_bonapp/enums/viewstate.dart';
+import 'package:flutter_bonapp/widgets/busy_overlay.dart';
 import 'package:validators/validators.dart' as validator;
 
 class RegisterMobilePortrait extends BaseModelWidget<RegisterViewModel> {
@@ -302,7 +302,7 @@ Widget listWidget(context, _formKey, data, user, profile) {
                       'Register',
                       style: TextStyle(
                         color: Colors.white,
-                        fontFamily: 'Raleway',
+                        fontFamily: secondaryFont,
                       ),
                     ),
               color: Color(primaryColour),
@@ -332,7 +332,7 @@ Widget listWidget(context, _formKey, data, user, profile) {
             style: TextStyle(
               color: Color(accentSecondColour),
               fontWeight: FontWeight.bold,
-              fontFamily: 'Raleway',
+              fontFamily: secondaryFont,
             ),
           ),
           onTap: () {

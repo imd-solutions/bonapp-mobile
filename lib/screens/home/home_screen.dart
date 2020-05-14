@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resp_mvvm/responsive/orientation_layout.dart';
-import 'package:flutter_resp_mvvm/responsive/screen_type_layout.dart';
-import 'package:flutter_resp_mvvm/screens/home/mobile/orientation_layout.dart';
-import 'package:flutter_resp_mvvm/screens/home/tablet/view_layout.dart';
-import 'package:flutter_resp_mvvm/viewmodels/home/viewmodel.dart';
-import 'package:flutter_resp_mvvm/widgets/base_widget.dart';
+import 'package:flutter_bonapp/responsive/orientation_layout.dart';
+import 'package:flutter_bonapp/responsive/screen_type_layout.dart';
+import 'package:flutter_bonapp/screens/home/mobile/orientation_layout.dart';
+import 'package:flutter_bonapp/screens/home/tablet/view_layout.dart';
+import 'package:flutter_bonapp/viewmodels/home/viewmodel.dart';
+import 'package:flutter_bonapp/widgets/base_widget.dart';
 
 class HomeScreen extends StatelessWidget {
 

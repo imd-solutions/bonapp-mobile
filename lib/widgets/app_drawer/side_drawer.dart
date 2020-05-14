@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resp_mvvm/widgets/app_drawer/drawer.dart';
+import 'package:flutter_bonapp/widgets/app_drawer/drawer.dart';
 
 class SideDrawer extends StatelessWidget {
   final bool isRow;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resp_mvvm/models/application.dart';
-import 'package:flutter_resp_mvvm/services/application_service.dart';
-import 'package:flutter_resp_mvvm/utils/enum.dart';
+import 'package:flutter_bonapp/models/application.dart';
+import 'package:flutter_bonapp/services/application_service.dart';
+import 'package:flutter_bonapp/utils/enum.dart';
 
 class ApplicationViewModel extends ChangeNotifier {
   Application _application;

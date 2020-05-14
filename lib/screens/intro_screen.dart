@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resp_mvvm/screens/sliders/sliders_screen.dart';
+import 'package:flutter_bonapp/screens/sliders/sliders_screen.dart';
 import 'package:splashscreen/splashscreen.dart';
-import 'package:flutter_resp_mvvm/utils/constants.dart';
-import 'package:flutter_resp_mvvm/partials/application_footer.dart';
+import 'package:flutter_bonapp/utils/constants.dart';
+import 'package:flutter_bonapp/partials/application_footer.dart';
 
 class IntroScreen extends StatelessWidget {
   @override
@@ -32,7 +32,7 @@ class IntroScreen extends StatelessWidget {
             loadingText: Text(
               'Loading app...',
               style: TextStyle(
-                fontFamily: 'Raleway',
+                fontFamily: secondaryFont,
                 color: Color(primaryColour),
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,

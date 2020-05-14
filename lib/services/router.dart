@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resp_mvvm/screens/application/initial/initial_screen.dart';
-import 'package:flutter_resp_mvvm/screens/auth/login/login_screen.dart';
-import 'package:flutter_resp_mvvm/screens/auth/register/register_screen.dart';
-import 'package:flutter_resp_mvvm/screens/intro_screen.dart';
-import 'package:flutter_resp_mvvm/screens/undefind_screen.dart';
-import 'package:flutter_resp_mvvm/utils/routing_constants.dart';
+import 'package:flutter_bonapp/screens/application/initial/initial_screen.dart';
+import 'package:flutter_bonapp/screens/auth/login/login_screen.dart';
+import 'package:flutter_bonapp/screens/auth/register/register_screen.dart';
+import 'package:flutter_bonapp/screens/intro_screen.dart';
+import 'package:flutter_bonapp/screens/undefind_screen.dart';
+import 'package:flutter_bonapp/utils/routing_constants.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {

@@ -1,11 +1,11 @@
-import 'package:flutter_resp_mvvm/enums/viewstate.dart';
-import 'package:flutter_resp_mvvm/models/message.dart';
-import 'package:flutter_resp_mvvm/models/title.dart';
-import 'package:flutter_resp_mvvm/models/user.dart';
-import 'package:flutter_resp_mvvm/services/locator.dart';
-import 'package:flutter_resp_mvvm/services/user_service.dart';
-import 'package:flutter_resp_mvvm/viewmodels/base_model.dart';
-import 'package:flutter_resp_mvvm/viewmodels/titles/viewmodel.dart';
+import 'package:flutter_bonapp/enums/viewstate.dart';
+import 'package:flutter_bonapp/models/message.dart';
+import 'package:flutter_bonapp/models/title.dart';
+import 'package:flutter_bonapp/models/user.dart';
+import 'package:flutter_bonapp/services/locator.dart';
+import 'package:flutter_bonapp/services/user_service.dart';
+import 'package:flutter_bonapp/viewmodels/base_model.dart';
+import 'package:flutter_bonapp/viewmodels/titles/viewmodel.dart';
 
 class RegisterViewModel extends BaseModel {
   UserService userService = locator<UserService>();

@@ -1,7 +1,7 @@
 // Class to determine the device screen type.
 import 'package:flutter/material.dart';
-import 'package:flutter_resp_mvvm/enums/device_screen_type.dart';
-import 'package:flutter_resp_mvvm/ui/responsive_builder.dart';
+import 'package:flutter_bonapp/enums/device_screen_type.dart';
+import 'package:flutter_bonapp/ui/responsive_builder.dart';
 
 class ScreenTypeLayout extends StatelessWidget {
   final Widget mobile;

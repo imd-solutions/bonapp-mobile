@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resp_mvvm/utils/constants.dart';
-import 'package:flutter_resp_mvvm/utils/env.dart';
-import 'package:flutter_resp_mvvm/models/sliders.dart';
+import 'package:flutter_bonapp/utils/constants.dart';
+import 'package:flutter_bonapp/utils/env.dart';
+import 'package:flutter_bonapp/models/sliders.dart';
 
 class SlideItems extends StatelessWidget {
   final Sliders sliders;
@@ -37,7 +37,7 @@ class SlideItems extends StatelessWidget {
           style: TextStyle(
             fontSize: 22.0,
             color: Color(accentSecondColour),
-            fontFamily: 'Poppins',
+            fontFamily: primaryFont,
           ),
         ),
         SizedBox(
@@ -48,7 +48,7 @@ class SlideItems extends StatelessWidget {
           style: TextStyle(
             color: Color(accentSecondColour),
             fontSize: 15.0,
-            fontFamily: 'Raleway',
+            fontFamily: secondaryFont,
           ),
           textAlign: TextAlign.center,
         ),

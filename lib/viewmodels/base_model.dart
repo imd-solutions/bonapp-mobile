@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resp_mvvm/enums/viewstate.dart';
+import 'package:flutter_bonapp/enums/viewstate.dart';
 
 class BaseModel extends ChangeNotifier {
   ViewState _state = ViewState.Idle;

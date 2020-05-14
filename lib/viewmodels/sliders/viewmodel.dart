@@ -1,8 +1,8 @@
-import 'package:flutter_resp_mvvm/enums/viewstate.dart';
-import 'package:flutter_resp_mvvm/models/sliders.dart';
-import 'package:flutter_resp_mvvm/services/locator.dart';
-import 'package:flutter_resp_mvvm/services/slider_service.dart';
-import 'package:flutter_resp_mvvm/viewmodels/base_model.dart';
+import 'package:flutter_bonapp/enums/viewstate.dart';
+import 'package:flutter_bonapp/models/sliders.dart';
+import 'package:flutter_bonapp/services/locator.dart';
+import 'package:flutter_bonapp/services/slider_service.dart';
+import 'package:flutter_bonapp/viewmodels/base_model.dart';
 
 class SlidersViewModel extends BaseModel {
   Sliders _slider;

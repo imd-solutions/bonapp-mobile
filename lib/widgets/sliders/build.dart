@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resp_mvvm/viewmodels/sliders/viewmodel.dart';
-import 'package:flutter_resp_mvvm/widgets/sliders/items.dart';
+import 'package:flutter_bonapp/viewmodels/sliders/viewmodel.dart';
+import 'package:flutter_bonapp/widgets/sliders/items.dart';
 
 class BuildSliders extends StatelessWidget {
   final PageController pageController;

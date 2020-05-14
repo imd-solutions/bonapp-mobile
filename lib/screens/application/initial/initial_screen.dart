@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resp_mvvm/models/user.dart';
+import 'package:flutter_bonapp/models/user.dart';
 
 class InitialScreen extends StatelessWidget {
   final User user;

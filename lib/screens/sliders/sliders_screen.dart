@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resp_mvvm/responsive/orientation_layout.dart';
-import 'package:flutter_resp_mvvm/responsive/screen_type_layout.dart';
-import 'package:flutter_resp_mvvm/screens/sliders/mobile/orientation_layout.dart';
-import 'package:flutter_resp_mvvm/viewmodels/sliders/viewmodel.dart';
-import 'package:flutter_resp_mvvm/screens/sliders/tablet/view_layout.dart';
-import 'package:flutter_resp_mvvm/widgets/base_widget.dart';
+import 'package:flutter_bonapp/responsive/orientation_layout.dart';
+import 'package:flutter_bonapp/responsive/screen_type_layout.dart';
+import 'package:flutter_bonapp/screens/sliders/mobile/orientation_layout.dart';
+import 'package:flutter_bonapp/viewmodels/sliders/viewmodel.dart';
+import 'package:flutter_bonapp/screens/sliders/tablet/view_layout.dart';
+import 'package:flutter_bonapp/widgets/base_widget.dart';
 
 class SlidersScreen extends StatelessWidget {
   @override

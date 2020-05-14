@@ -1,4 +1,4 @@
-package com.imd.company.flutter_resp_mvvm
+package com.imd.company.flutter_bonapp
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

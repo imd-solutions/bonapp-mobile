@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resp_mvvm/enums/viewstate.dart';
-import 'package:flutter_resp_mvvm/screens/auth/login/login_screen.dart';
-import 'package:flutter_resp_mvvm/screens/auth/register/register_screen.dart';
-import 'package:flutter_resp_mvvm/utils/constants.dart';
-import 'package:flutter_resp_mvvm/viewmodels/sliders/viewmodel.dart';
-import 'package:flutter_resp_mvvm/widgets/base_model_widget.dart';
-import 'package:flutter_resp_mvvm/widgets/busy_overlay.dart';
-import 'package:flutter_resp_mvvm/widgets/sliders/dots.dart';
-import 'package:flutter_resp_mvvm/widgets/sliders/build.dart';
+import 'package:flutter_bonapp/enums/viewstate.dart';
+import 'package:flutter_bonapp/screens/auth/login/login_screen.dart';
+import 'package:flutter_bonapp/screens/auth/register/register_screen.dart';
+import 'package:flutter_bonapp/utils/constants.dart';
+import 'package:flutter_bonapp/viewmodels/sliders/viewmodel.dart';
+import 'package:flutter_bonapp/widgets/base_model_widget.dart';
+import 'package:flutter_bonapp/widgets/busy_overlay.dart';
+import 'package:flutter_bonapp/widgets/sliders/dots.dart';
+import 'package:flutter_bonapp/widgets/sliders/build.dart';
 
 class SlidersMobilePortrait extends BaseModelWidget<SlidersViewModel> {
   final PageController _pageController = PageController(initialPage: 0);
@@ -53,7 +53,7 @@ class SlidersMobilePortrait extends BaseModelWidget<SlidersViewModel> {
                             style: TextStyle(
                               color: Color(blackColour),
                               fontSize: 18.0,
-                              fontFamily: 'Raleway',
+                              fontFamily: secondaryFont,
                             ),
                           ),
                           LoginBtn()
@@ -145,7 +145,7 @@ class RegisterBtn extends StatelessWidget {
         style: TextStyle(
           fontSize: 18.0,
           color: Colors.white,
-          fontFamily: 'Raleway',
+          fontFamily: secondaryFont,
         ),
       ),
       shape: RoundedRectangleBorder(
@@ -178,7 +178,7 @@ class LoginBtn extends StatelessWidget {
         style: TextStyle(
           color: Color(accentSecondColour),
           fontSize: 18.0,
-          fontFamily: 'Raleway',
+          fontFamily: secondaryFont,
         ),
       ),
     );

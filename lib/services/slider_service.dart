@@ -1,4 +1,4 @@
-import 'package:flutter_resp_mvvm/models/sliders.dart';
+import 'package:flutter_bonapp/models/sliders.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import './../config/graphql.dart';
 import './../api/queries/slider_query.dart';

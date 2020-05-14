@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resp_mvvm/widgets/app_drawer/side_drawer.dart';
+import 'package:flutter_bonapp/widgets/app_drawer/side_drawer.dart';
 
 class AppDrawerMobile extends StatelessWidget {
   @override

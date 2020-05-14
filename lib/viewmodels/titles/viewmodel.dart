@@ -1,4 +1,4 @@
-import 'package:flutter_resp_mvvm/models/title.dart';
+import 'package:flutter_bonapp/models/title.dart';
 
 import '../base_model.dart';
 

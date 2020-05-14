@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resp_mvvm/models/drawer_items.dart';
-import 'package:flutter_resp_mvvm/responsive/orientation_layout.dart';
-import 'package:flutter_resp_mvvm/responsive/screen_type_layout.dart';
-import 'package:flutter_resp_mvvm/widgets/drawer_option/mobile/orientation_layout.dart';
-import 'package:flutter_resp_mvvm/widgets/drawer_option/tablet/orientation_layout.dart';
+import 'package:flutter_bonapp/models/drawer_items.dart';
+import 'package:flutter_bonapp/responsive/orientation_layout.dart';
+import 'package:flutter_bonapp/responsive/screen_type_layout.dart';
+import 'package:flutter_bonapp/widgets/drawer_option/mobile/orientation_layout.dart';
+import 'package:flutter_bonapp/widgets/drawer_option/tablet/orientation_layout.dart';
 import 'package:provider/provider.dart';
 
 class DrawerOption extends StatelessWidget {
