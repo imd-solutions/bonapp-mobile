@@ -22,18 +22,18 @@ class Menu {
   });
 
   factory Menu.fromJson(Map<String, dynamic> json) => Menu(
-    name: json["name"],
-    description: json["description"],
-    imgUrl: json["imgUrl"],
-    items:  List<Items>.from(json["items"].map((x) => Items.fromJson(x))),
-  );
+        name: json["name"],
+        description: json["description"],
+        imgUrl: json["imgUrl"],
+        items: List<Items>.from(json["items"].map((x) => Items.fromJson(x))),
+      );
 
   Map<String, dynamic> toJson() => {
-    "name": name,
-    "description": description,
-    "imgUrl": imgUrl,
-    "items":  List<dynamic>.from(items.map((x) => x.toJson())),
-  };
+        "name": name,
+        "description": description,
+        "imgUrl": imgUrl,
+        "items": List<dynamic>.from(items.map((x) => x.toJson())),
+      };
 }
 
 class Items {
@@ -50,16 +50,39 @@ class Items {
   });
 
   factory Items.fromJson(Map<String, dynamic> json) => Items(
-    name: json["name"],
-    description: json["description"],
-    price: json["price"].toDouble(),
-    imgUrl: json["imgUrl"],
-  );
+        name: json["name"],
+        description: json["description"],
+        price: json["price"].toDouble(),
+        imgUrl: json["imgUrl"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "name": name,
-    "description": description,
-    "price": price,
-    "imgUrl": imgUrl,
-  };
+        "name": name,
+        "description": description,
+        "price": price,
+        "imgUrl": imgUrl,
+      };
 }
+
+final items = [
+  Items(
+      name: "Burgers",
+      imgUrl: "assets/images/burgers.jpeg",
+      description: 'This is for the Burgers'),
+  Items(
+      name: "Drinks",
+      imgUrl: "assets/images/drinks.jpeg",
+      description: 'This is for the Drinks'),
+  Items(
+      name: "Keebabs",
+      imgUrl: "assets/images/keebab.jpeg",
+      description: 'This is for the Keebabs'),
+  Items(
+      name: "Salads",
+      imgUrl: "assets/images/salads.jpeg",
+      description: 'This is for the Salads'),
+  Items(
+      name: "Wraps",
+      imgUrl: "assets/images/wraps.jpeg",
+      description: 'This is for the Wraps'),
+];
