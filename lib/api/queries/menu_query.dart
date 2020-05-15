@@ -17,6 +17,7 @@ class MenuQuery {
             }
       """;
   }
+
   // Get a single menu.
   String getMenu() {
     return """
@@ -35,6 +36,7 @@ class MenuQuery {
             }
       """;
   }
+
   // Get all the menu items.
   String getItems() {
     return """
@@ -48,11 +50,26 @@ class MenuQuery {
             }
       """;
   }
+
   // Get a single menu item.
   String getItem() {
     return """
             query menuitem (\$id: ID!)  {
                menuitem (id: 1) {
+                name
+                description
+                price
+                imgUrl    
+              }
+            }
+      """;
+  }
+
+  // Get featured menu items.
+  String getFeaturedItems() {
+    return """
+            query {
+             menuitemFeatured {
                 name
                 description
                 price

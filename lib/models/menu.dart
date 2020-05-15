@@ -65,24 +65,9 @@ class Items {
 }
 
 final items = [
-  Items(
-      name: "Burgers",
-      imgUrl: "assets/images/burgers.jpeg",
-      description: 'This is for the Burgers'),
-  Items(
-      name: "Drinks",
-      imgUrl: "assets/images/drinks.jpeg",
-      description: 'This is for the Drinks'),
-  Items(
-      name: "Keebabs",
-      imgUrl: "assets/images/keebab.jpeg",
-      description: 'This is for the Keebabs'),
-  Items(
-      name: "Salads",
-      imgUrl: "assets/images/salads.jpeg",
-      description: 'This is for the Salads'),
-  Items(
-      name: "Wraps",
-      imgUrl: "assets/images/wraps.jpeg",
-      description: 'This is for the Wraps'),
+  Items(name: "Burgers", imgUrl: "assets/images/no_image.jpg", description: 'This is for the Burgers'),
+  Items(name: "Drinks", imgUrl: "assets/images/no_image.jpg", description: 'This is for the Drinks'),
+  Items(name: "Keebabs", imgUrl: "assets/images/no_image.jpg", description: 'This is for the Keebabs'),
+  Items(name: "Salads", imgUrl: "assets/images/no_image.jpg", description: 'This is for the Salads'),
+  Items(name: "Wraps", imgUrl: "assets/images/no_image.jpg", description: 'This is for the Wraps'),
 ];

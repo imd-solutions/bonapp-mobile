@@ -98,7 +98,7 @@ class UserService {
             userMutation.loginUser(),
           ),
           variables: {
-            "data": {
+            "input": {
               "username": user.email,
               "password": user.password,
             }
@@ -114,7 +114,7 @@ class UserService {
           throw new Exception(message + ' Please try again');
         } else {
           // Any other message.
-          throw new Exception('Something has gone wrong. Please contact the system administrator.');
+          throw new Exception(response.exception.graphqlErrors.toString());
         }
       }
 
@@ -165,13 +165,13 @@ class UserService {
             userMutation.createUser(),
           ),
           variables: {
-            "data": {
+            "input": {
               "firstname": profile.firstname,
               "lastname": profile.lastname,
               "mobile_number": profile.mobileNumber,
               "email": user.email,
               "password": user.password,
-              "mobile_token": token,
+//              "mobile_token": token,
               "title": profile.title,
             }
           },
@@ -189,7 +189,7 @@ class UserService {
       }
 
       if (response.hasException) {
-        throw new Exception('Something went wrong.');
+        throw new Exception(response.exception.graphqlErrors.toString());
       }
 
       return Message(
@@ -218,7 +218,7 @@ class UserService {
             userMutation.forgottenPassword(),
           ),
           variables: {
-            "data": {
+            "input": {
               "email": email,
             }
           },

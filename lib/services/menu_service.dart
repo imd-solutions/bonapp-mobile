@@ -29,4 +29,26 @@ class MenuService {
 
     return list.map((menu) => Menu.fromJson(menu)).toList();
   }
+
+  // Get featured Items.
+  Future<List<Items>> getFeaturedItems() async {
+    GraphQLClient _items = graphQLConfiguration.clientToQuery();
+    QueryResult response = await _items.query(
+      QueryOptions(
+        documentNode: gql(
+          menuQuery.getFeaturedItems(),
+        ),
+      ),
+    );
+
+    if (response.hasException) {
+      throw new Exception('Could not get setting data.');
+    }
+
+    final result = response.data;
+
+    Iterable list = result['menuitemFeatured'];
+
+    return list.map((menu) => Items.fromJson(menu)).toList();
+  }
 }

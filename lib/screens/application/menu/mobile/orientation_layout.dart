@@ -7,14 +7,11 @@ import 'package:flutter_bonapp/utils/constants.dart';
 import 'package:flutter_bonapp/utils/env.dart';
 import 'package:flutter_bonapp/viewmodels/menu/viewmodel.dart';
 import 'package:flutter_bonapp/widgets/busy_overlay.dart';
-import '../../../../widgets/base_model_widget.dart';
+import 'package:flutter_bonapp/widgets/base_model_widget.dart';
 
 class MenuMobilePortrait extends BaseModelWidget<MenuViewModel> {
   @override
   Widget build(BuildContext context, MenuViewModel data) {
-    final List<Items> _items = items;
-    var _screenWidth = MediaQuery.of(context).size.width;
-
     return BusyOverlay(
       show: data.state == ViewState.Busy,
       child: Scaffold(
@@ -91,9 +88,9 @@ class MenuMobilePortrait extends BaseModelWidget<MenuViewModel> {
                 child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemCount: _items.length,
+                  itemCount: data.featuredItems.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return ItemCard(_items[index]);
+                    return ItemCard(data.featuredItems[index].itemInfo);
                   },
                 ),
               ),
@@ -154,7 +151,7 @@ class ItemCard extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Image(
-                image: AssetImage(items.imgUrl),
+                image: NetworkImage(graphQLApi + '/storage/' + items.imgUrl),
                 height: 65.0,
                 width: 65.0,
               ),
@@ -166,11 +163,13 @@ class ItemCard extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     items.name,
-                    style:
-                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Text(
-                    "${items.description}",
+                    '£${items.price.toStringAsFixed(2)}',
                     style: TextStyle(fontSize: 13.0),
                   ),
                 ],
@@ -192,8 +191,7 @@ class BannerWidgetArea extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
 
-    PageController controller =
-        PageController(viewportFraction: 1.0, initialPage: 0);
+    PageController controller = PageController(viewportFraction: 1.0, initialPage: 0);
 
     List<Widget> banners = new List<Widget>();
 
@@ -203,8 +201,7 @@ class BannerWidgetArea extends StatelessWidget {
         PageRouteBuilder(
           fullscreenDialog: true,
           transitionDuration: Duration(milliseconds: 1000),
-          pageBuilder: (BuildContext context, Animation<double> animation,
-              Animation<double> secondaryAnimation) {
+          pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
             return MenuItemScreen(
               heroType: HeroType(
                 title: data.name,
@@ -214,13 +211,9 @@ class BannerWidgetArea extends StatelessWidget {
               ),
             );
           },
-          transitionsBuilder: (BuildContext context,
-              Animation<double> animation,
-              Animation<double> secondaryAnimation,
-              Widget child) {
+          transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
             return FadeTransition(
-              opacity:
-                  animation, // CurvedAnimation(parent: animation, curve: Curves.elasticInOut),
+              opacity: animation, // CurvedAnimation(parent: animation, curve: Curves.elasticInOut),
               child: child,
             );
           },

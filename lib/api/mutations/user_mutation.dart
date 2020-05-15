@@ -2,8 +2,8 @@ class UserMutation {
   // Register the user.
   String loginUser() {
     return """
-      mutation login (\$data: LoginInput) {
-        login (data: \$data) {
+      mutation login (\$input: LoginInput) {
+        login (input: \$input) {
           user {
             name
             email
@@ -21,16 +21,13 @@ class UserMutation {
   // Register the user.
   String createUser() {
     return """
-      mutation userCreate (\$data: UserInput) {
-        userCreate (data: \$data) {
+      mutation userCreate (\$input: UserInput) {
+        userCreate (input: \$input) {
           name
           email
           profile {
             firstname
             lastname
-            dob
-            phone_number
-            mobile_number
           }    
         }
       }
@@ -40,8 +37,8 @@ class UserMutation {
   // User forgotten password.
   String forgottenPassword() {
     return """
-      mutation forgotPassword (\$data: ForgotPasswordInput!) {
-        forgotPassword (data: \$data) {
+      mutation forgotPassword (\$input: ForgotPasswordInput!) {
+        forgotPassword (input: \$input) {
          status
          message 
         }

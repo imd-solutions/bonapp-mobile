@@ -10,8 +10,13 @@ SliderQuery sliderQuery = SliderQuery();
 class SliderService {
   Future<List<Sliders>> getSliders() async {
     GraphQLClient _sliders = graphQLConfiguration.clientToQuery();
-    QueryResult response = await _sliders
-        .query(QueryOptions(documentNode: gql(sliderQuery.getSliders())));
+    QueryResult response = await _sliders.query(
+      QueryOptions(
+        documentNode: gql(
+          sliderQuery.getSliders(),
+        ),
+      ),
+    );
 
     if (response.hasException) {
       throw new Exception();
