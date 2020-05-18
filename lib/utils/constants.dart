@@ -2,6 +2,8 @@
 const int whiteColour = 0xFFFFFFFF;
 const int greyColour = 0xFFE2E4E6;
 const int blackColour = 0xFF000000;
+const int blueColour = 0xFF5588F9;
+
 const int primaryColour = 0xFFFF891B;
 const int secondaryColour = 0xFFF9B855;
 const int thirdColour = 0xFFFF9800;

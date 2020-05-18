@@ -2,6 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_bonapp/screens/application/initial/initial_screen.dart';
 import 'package:flutter_bonapp/screens/application/menu/menu_screen.dart';
 import 'package:flutter_bonapp/screens/intro_screen.dart';
 import 'package:flutter_bonapp/services/locator.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
       ),
       onGenerateRoute: router.generateRoute,
       initialRoute: IntroScreenRoute,
-//      home: MenuScreen(),
+//      home: InitialScreen(),
       home: IntroScreen(),
     );
   }
