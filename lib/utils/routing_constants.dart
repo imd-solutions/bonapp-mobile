@@ -8,3 +8,4 @@ const String InitialScreenRoute = '/application';
 const String AccountScreenRoute = '/application/account';
 const String OrdersScreenRoute = '/application/orders';
 const String FavouritesScreenRoute = '/application/favourites';
+const String SettingsScreenRoute = '/application/settings';

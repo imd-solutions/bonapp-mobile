@@ -131,13 +131,17 @@ Widget listWidget(context, _formKey, data, user, profile) {
             child: Container(
               margin: EdgeInsets.only(left: 5.0),
               padding: EdgeInsets.only(left: 5.0),
-              child: Dropdown(
-                selected: data.selectedDropdown,
-                data: data.titles,
-                updateSelected: (val) {
-                  profile.title = val;
-                  data.updateNumber(val);
-                },
+              child: GestureDetector(
+                onTap: () => data.initialVariables(),
+                child: Dropdown(
+                  selectedTitle: 'Title',
+                  selected: data.titleDropdown,
+                  data: data.titles,
+                  updateSelected: (val) {
+                    profile.title = val;
+                    data.updateTitleNumber(val);
+                  },
+                ),
               ),
             ),
           ),
@@ -145,6 +149,7 @@ Widget listWidget(context, _formKey, data, user, profile) {
             flex: 2,
             child: Container(
               child: InputText(
+                initialValue: data.firstName,
                 icon: Icons.person,
                 hintText: 'First Name',
                 validator: (String value) {
@@ -152,6 +157,9 @@ Widget listWidget(context, _formKey, data, user, profile) {
                     return 'Enter firstname.';
                   }
                   return null;
+                },
+                onChanged: (String value) {
+                  data.updateFirstName(value);
                 },
                 onSaved: (String value) {
                   profile.firstname = value;
@@ -162,13 +170,17 @@ Widget listWidget(context, _formKey, data, user, profile) {
           Expanded(
             flex: 2,
             child: InputText(
+              initialValue: data.lastName,
               icon: Icons.person,
               hintText: 'Surname',
               validator: (String value) {
                 if (value.isEmpty) {
-                  return 'Enter surname.';
+                  return 'Enter lastname.';
                 }
                 return null;
+              },
+              onChanged: (String value) {
+                data.updateLastName(value);
               },
               onSaved: (String value) {
                 profile.lastname = value;
@@ -181,6 +193,7 @@ Widget listWidget(context, _formKey, data, user, profile) {
         children: <Widget>[
           Expanded(
             child: InputText(
+              initialValue: data.email,
               icon: Icons.email,
               hintText: 'Email Address',
               isEmail: true,
@@ -190,6 +203,9 @@ Widget listWidget(context, _formKey, data, user, profile) {
                 }
                 return null;
               },
+              onChanged: (String value) {
+                data.updateEmail(value);
+              },
               onSaved: (String value) {
                 user.email = value;
               },
@@ -197,6 +213,7 @@ Widget listWidget(context, _formKey, data, user, profile) {
           ),
           Expanded(
             child: InputText(
+              initialValue: data.mobile,
               icon: Icons.mobile_screen_share,
               hintText: 'Mobile',
               validator: (String value) {
@@ -205,9 +222,54 @@ Widget listWidget(context, _formKey, data, user, profile) {
                 }
                 return null;
               },
+              onChanged: (String value) {
+                data.updateMobile(value);
+              },
               onSaved: (String value) {
                 profile.mobileNumber = value;
               },
+            ),
+          )
+        ],
+      ),
+      Row(
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.only(left: 5.0, right: 10.0, bottom: 10.0, top: 10.0),
+              padding: EdgeInsets.only(left: 5.0),
+              child: GestureDetector(
+                onTap: () => data.initialVariables(),
+                child: Dropdown(
+                  selectedTitle: 'Location',
+                  selected: data.locationDropdown,
+                  padding: true,
+                  data: data.locations,
+                  updateSelected: (val) {
+                    profile.location = val;
+                    data.updateLocationNumber(val);
+                  },
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.only(left: 5.0, right: 10.0, bottom: 10.0, top: 10.0),
+              padding: EdgeInsets.only(left: 5.0),
+              child: GestureDetector(
+                onTap: () => data.initialVariables(),
+                child: Dropdown(
+                  selectedTitle: 'Profession',
+                  selected: data.professionDropdown,
+                  padding: true,
+                  data: data.professions,
+                  updateSelected: (val) {
+                    profile.profession = val;
+                    data.updateProfessionNumber(val);
+                  },
+                ),
+              ),
             ),
           )
         ],
@@ -307,6 +369,27 @@ Widget listWidget(context, _formKey, data, user, profile) {
                     ),
               color: Color(primaryColour),
               onPressed: () {
+                // If missing location dropdown.
+                if (data.locationDropdown == 0) {
+                  Flushbar(
+                    title: 'Warning',
+                    message: 'You have not selected a location.',
+                    backgroundColor: Color(warningColour),
+                    duration: Duration(seconds: 5),
+                  )..show(context);
+                  return;
+                }
+                // If missing profession dropdwon.
+                if (data.professionDropdown == 0) {
+                  Flushbar(
+                    title: 'Warning',
+                    message: 'You have not selected a profession.',
+                    backgroundColor: Color(warningColour),
+                    duration: Duration(seconds: 5),
+                  )..show(context);
+                  return;
+                }
+
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
 

@@ -34,7 +34,7 @@ class MenuItemScreen extends StatelessWidget {
               child: Hero(
                 tag: 'image' + heroType.title,
                 child: Image.network(
-                  graphQLApi + '/storage/' + heroType.image,
+                  graphQLApiImg + heroType.image,
                   fit: BoxFit.fitWidth,
                 ),
               ),

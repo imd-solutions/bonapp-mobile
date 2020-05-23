@@ -1,23 +1,43 @@
 import 'package:flutter_bonapp/enums/viewstate.dart';
-import 'package:flutter_bonapp/models/application.dart';
+import 'package:flutter_bonapp/models/menu.dart';
+import 'package:flutter_bonapp/models/offer.dart';
+import 'package:flutter_bonapp/models/post.dart';
+import 'package:flutter_bonapp/models/user.dart';
 import 'package:flutter_bonapp/services/locator.dart';
-import 'package:flutter_bonapp/viewmodels/application/viewmodel.dart';
+import 'package:flutter_bonapp/services/menu_service.dart';
+import 'package:flutter_bonapp/services/offer_service.dart';
+import 'package:flutter_bonapp/services/post_service.dart';
+import 'package:flutter_bonapp/services/user_service.dart';
 import 'package:flutter_bonapp/viewmodels/base_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeViewModel extends BaseModel {
-  ApplicationViewModel applicationViewModel = locator<ApplicationViewModel>();
+  UserService userService = locator<UserService>();
+  PostService postService = locator<PostService>();
+  MenuService menuService = locator<MenuService>();
+  OfferService offerService = locator<OfferService>();
 
-  Application appInfo;
-  int counter = 0;
+  User user;
+  List<Post> latestPost;
+  List<Items> featuredItems;
+  Offer offer;
 
   void initialise() {
     setState(ViewState.Busy);
+    _updateUserInfo();
+    notifyListeners();
+  }
 
-    applicationViewModel.populateApplicaionData().then(
-      (_) {
-        this.appInfo = applicationViewModel.info;
-        setState(ViewState.Completed);
-      },
-    );
+  Future<void> _updateUserInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int id = prefs.getInt('userId');
+
+    user = await userService.getUser(id);
+    latestPost = await postService.getLatestPosts(2);
+    featuredItems = await menuService.getFeaturedItems();
+    offer = await offerService.getOffer(1);
+
+    setState(ViewState.Completed);
+    notifyListeners();
   }
 }

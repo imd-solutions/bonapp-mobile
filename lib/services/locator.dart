@@ -1,5 +1,7 @@
 import 'package:flutter_bonapp/services/application_service.dart';
 import 'package:flutter_bonapp/services/menu_service.dart';
+import 'package:flutter_bonapp/services/offer_service.dart';
+import 'package:flutter_bonapp/services/post_service.dart';
 import 'package:flutter_bonapp/services/user_service.dart';
 import 'package:flutter_bonapp/viewmodels/application/viewmodel.dart';
 import 'package:flutter_bonapp/viewmodels/login/viewmodel.dart';
@@ -15,6 +17,8 @@ void setupLocator() {
   locator.registerLazySingleton(() => ApplicationService());
   locator.registerLazySingleton(() => UserService());
   locator.registerLazySingleton(() => MenuService());
+  locator.registerLazySingleton(() => PostService());
+  locator.registerLazySingleton(() => OfferService());
 
   // Register view models
   locator.registerFactory<ApplicationViewModel>(() => ApplicationViewModel());

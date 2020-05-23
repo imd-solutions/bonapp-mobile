@@ -6,9 +6,11 @@ class MenuQuery {
               menucategories {
                 name
                 description
+                imgIcon   
                 imgUrl
                 items {
                   name
+                  subtitle
                   description
                   price
                   imgUrl
@@ -25,9 +27,11 @@ class MenuQuery {
                menucategory(id: \$id) {
                 name
                 description
+                imgIcon   
                 imgUrl
                 items {
                   name
+                  subtitle
                   description
                   price
                   imgUrl
@@ -43,6 +47,7 @@ class MenuQuery {
             query {
              menuitems {
                 name
+                subtitle
                 description
                 price
                 imgUrl    
@@ -57,8 +62,9 @@ class MenuQuery {
             query menuitem (\$id: ID!)  {
                menuitem (id: 1) {
                 name
+                subtitle
                 description
-                price
+                price 
                 imgUrl    
               }
             }
@@ -71,6 +77,22 @@ class MenuQuery {
             query {
              menuitemFeatured {
                 name
+                subtitle
+                description
+                price
+                imgUrl    
+              }
+            }
+      """;
+  }
+
+  // Get pick of the day items.
+  String getPickOfDayItems() {
+    return """
+            query {
+             menuitemPickOfDay {
+                name
+                subtitle
                 description
                 price
                 imgUrl    

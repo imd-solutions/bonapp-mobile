@@ -1,7 +1,7 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
-import './../models/application.dart';
-import './../config/graphql.dart';
-import './../api/queries/application_query.dart';
+import 'package:flutter_bonapp/models/application.dart';
+import 'package:flutter_bonapp/config/graphql.dart';
+import 'package:flutter_bonapp/api/queries/application_query.dart';
 
 GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
 

@@ -9,24 +9,20 @@ import 'mobile/orientation_layout.dart';
 class MenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Menu Screen'),
-      ),
-      body: Center(
-        child: BaseWidget<MenuViewModel>(
-            viewModel: MenuViewModel(),
-            onModelReady: (model) => model.initialise(),
-            builder: (context) => ScreenTypeLayout(
-                  mobile: OrientationLayout(
-                    portrait: (context) => MenuMobilePortrait(),
-                    landscape: (context) => MenuMobileLandscape(),
-                  ),
-                  tablet: OrientationLayout(
-                    portrait: (context) => MenuMobilePortrait(),
-                    landscape: (context) => MenuMobileLandscape(),
-                  ),
-                )),
+    return Center(
+      child: BaseWidget<MenuViewModel>(
+        viewModel: MenuViewModel(),
+        onModelReady: (model) => model.initialise(),
+        builder: (context) => ScreenTypeLayout(
+          mobile: OrientationLayout(
+            portrait: (context) => MenuMobilePortrait(),
+            landscape: (context) => MenuMobileLandscape(),
+          ),
+          tablet: OrientationLayout(
+            portrait: (context) => MenuMobilePortrait(),
+            landscape: (context) => MenuMobileLandscape(),
+          ),
+        ),
       ),
     );
   }

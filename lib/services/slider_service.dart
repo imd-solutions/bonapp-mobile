@@ -1,7 +1,7 @@
 import 'package:flutter_bonapp/models/sliders.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import './../config/graphql.dart';
-import './../api/queries/slider_query.dart';
+import 'package:flutter_bonapp/config/graphql.dart';
+import 'package:flutter_bonapp/api/queries/slider_query.dart';
 
 GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
 

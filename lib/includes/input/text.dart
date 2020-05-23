@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
 
 class InputText extends StatelessWidget {
+  final String initialValue;
   final IconData icon;
   final double iconSize;
   final String label;
@@ -9,10 +10,12 @@ class InputText extends StatelessWidget {
   final double hintTextSize;
   final Function validator;
   final Function onSaved;
+  final Function onChanged;
   final bool isPassword;
   final bool isEmail;
 
   InputText({
+    this.initialValue,
     this.icon,
     this.iconSize = 15.0,
     this.label,
@@ -20,6 +23,7 @@ class InputText extends StatelessWidget {
     this.hintTextSize = 12.0,
     this.validator,
     this.onSaved,
+    this.onChanged,
     this.isPassword = false,
     this.isEmail = false,
   });
@@ -29,6 +33,7 @@ class InputText extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(10.0),
       child: TextFormField(
+        initialValue: initialValue,
         decoration: InputDecoration(
           prefixIcon: Icon(
             this.icon,
@@ -51,6 +56,7 @@ class InputText extends StatelessWidget {
         obscureText: isPassword ? true : false,
         validator: validator,
         onSaved: onSaved,
+        onChanged: onChanged,
         keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
       ),
     );

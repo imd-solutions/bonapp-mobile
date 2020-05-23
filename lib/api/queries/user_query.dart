@@ -10,6 +10,28 @@ class UserQuery {
       }""";
   }
 
+  // Get all locations.
+  String getLocations() {
+    return """
+      query {
+        sites {
+          id
+          name  
+        }
+      }""";
+  }
+
+  // Get all professions.
+  String getProfessions() {
+    return """
+      query {
+        professions {
+          id
+          title
+        }
+      }""";
+  }
+
   // Get all users
   String getUsers() {
     return """
@@ -23,9 +45,18 @@ class UserQuery {
   // Get a single user from ID.
   String getUser() {
     return """
-      query user (\$userID: ID!){
-        user (id: \$userID) {
-          name  
+      query user (\$id: ID!){
+        user (id: \$id) {
+          name
+          profile {
+            firstname
+            lastname
+            alerts {
+               email
+               notification
+               text
+            }
+          }
         }
       }""";
   }

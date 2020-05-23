@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
 
 class Dropdown extends StatelessWidget {
+  final String selectedTitle;
   final int selected;
   final Function updateSelected;
+  final bool padding;
   final dynamic data;
 
-  Dropdown({this.selected, this.updateSelected, this.data});
+  Dropdown({this.selectedTitle, this.selected, this.updateSelected, this.padding = false, this.data});
 
   Widget _buildDropdown() {
     List<DropdownMenuItem<int>> items = [];
@@ -20,8 +22,10 @@ class Dropdown extends StatelessWidget {
       new DropdownMenuItem(
         value: 0,
         child: Text(
-          'Please Select',
-          style: TextStyle(fontSize: 9.0),
+          selectedTitle,
+          style: TextStyle(
+            fontSize: 9.0,
+          ),
         ),
       ),
     );
@@ -31,14 +35,16 @@ class Dropdown extends StatelessWidget {
       items.add(
         new DropdownMenuItem(
           value: int.parse(d.info.id),
-          child: new Text(
+          child: Text(
             d.info.name,
+            style: TextStyle(fontSize: 12.0),
           ),
         ),
       );
     }
 
     return Container(
+      padding: (this.padding) ? EdgeInsets.only(left: 10.0) : null,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(
           Radius.circular(2.0),

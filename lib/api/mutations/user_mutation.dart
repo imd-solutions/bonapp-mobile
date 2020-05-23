@@ -5,12 +5,18 @@ class UserMutation {
       mutation login (\$input: LoginInput) {
         login (input: \$input) {
           user {
+            id
             name
             email
             email_verified_at
             profile {
               firstname
               lastname
+              alerts {
+               email
+               notification
+               text
+              }
             }
           }   
         }

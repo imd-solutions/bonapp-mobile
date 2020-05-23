@@ -11,63 +11,63 @@ String menuToJson(Menu data) => json.encode(data.toJson());
 class Menu {
   String name;
   String description;
-  String imgUrl;
+  String imgIcon;
+  String image;
   List<Items> items;
 
   Menu({
     this.name,
     this.description,
-    this.imgUrl,
+    this.imgIcon,
+    this.image,
     this.items,
   });
 
   factory Menu.fromJson(Map<String, dynamic> json) => Menu(
         name: json["name"],
         description: json["description"],
-        imgUrl: json["imgUrl"],
+        imgIcon: json["imgIcon"],
+        image: json["imgUrl"],
         items: List<Items>.from(json["items"].map((x) => Items.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
         "description": description,
-        "imgUrl": imgUrl,
+        "imgIcon": imgIcon,
+        "image": image,
         "items": List<dynamic>.from(items.map((x) => x.toJson())),
       };
 }
 
 class Items {
   String name;
+  String subtitle;
   String description;
   double price;
-  String imgUrl;
+  String image;
 
   Items({
     this.name,
+    this.subtitle,
     this.description,
     this.price,
-    this.imgUrl,
+    this.image,
   });
 
   factory Items.fromJson(Map<String, dynamic> json) => Items(
         name: json["name"],
+        subtitle: json["subtitle"],
         description: json["description"],
         price: json["price"].toDouble(),
-        imgUrl: json["imgUrl"],
+        image: json["imgUrl"],
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
+        "subtitle": subtitle,
         "description": description,
         "price": price,
-        "imgUrl": imgUrl,
+        "image": image,
       };
 }
-
-final items = [
-  Items(name: "Burgers", imgUrl: "assets/images/no_image.jpg", description: 'This is for the Burgers'),
-  Items(name: "Drinks", imgUrl: "assets/images/no_image.jpg", description: 'This is for the Drinks'),
-  Items(name: "Keebabs", imgUrl: "assets/images/no_image.jpg", description: 'This is for the Keebabs'),
-  Items(name: "Salads", imgUrl: "assets/images/no_image.jpg", description: 'This is for the Salads'),
-  Items(name: "Wraps", imgUrl: "assets/images/no_image.jpg", description: 'This is for the Wraps'),
-];

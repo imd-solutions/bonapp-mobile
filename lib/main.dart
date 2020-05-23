@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bonapp/screens/application/initial/initial_screen.dart';
 import 'package:flutter_bonapp/screens/application/menu/menu_screen.dart';
+import 'package:flutter_bonapp/screens/auth/register/register_screen.dart';
 import 'package:flutter_bonapp/screens/intro_screen.dart';
 import 'package:flutter_bonapp/services/locator.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
       initialRoute: IntroScreenRoute,
 //      home: InitialScreen(),
       home: IntroScreen(),
+//      home: MenuScreen(),
     );
   }
 }

@@ -1,11 +1,13 @@
 import 'package:flutter_bonapp/api/mutations/user_mutation.dart';
+import 'package:flutter_bonapp/models/location.dart';
 import 'package:flutter_bonapp/models/message.dart';
+import 'package:flutter_bonapp/models/profession.dart';
 import 'package:flutter_bonapp/models/title.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import './../models/user.dart';
-import './../config/graphql.dart';
-import './../api/queries/user_query.dart';
+import 'package:flutter_bonapp/models/user.dart';
+import 'package:flutter_bonapp/config/graphql.dart';
+import 'package:flutter_bonapp/api/queries/user_query.dart';
 
 GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
 
@@ -33,6 +35,50 @@ class UserService {
     Iterable list = result['titles'];
 
     return list.map((titles) => Titles.fromJson(titles)).toList();
+  }
+
+  // Get the list of locations.
+  Future<List<Locations>> getLocations() async {
+    GraphQLClient _user = graphQLConfiguration.clientToQuery();
+    QueryResult response = await _user.query(
+      QueryOptions(
+        documentNode: gql(
+          userQuery.getLocations(),
+        ),
+      ),
+    );
+
+    if (response.hasException) {
+      throw new Exception('Could not get title data.');
+    }
+
+    final result = response.data;
+
+    Iterable list = result['sites'];
+
+    return list.map((sites) => Locations.fromJson(sites)).toList();
+  }
+
+  // Get the list of professions.
+  Future<List<Professions>> getProfessions() async {
+    GraphQLClient _user = graphQLConfiguration.clientToQuery();
+    QueryResult response = await _user.query(
+      QueryOptions(
+        documentNode: gql(
+          userQuery.getProfessions(),
+        ),
+      ),
+    );
+
+    if (response.hasException) {
+      throw new Exception('Could not get professions data.');
+    }
+
+    final result = response.data;
+
+    Iterable list = result['professions'];
+
+    return list.map((professions) => Professions.fromJson(professions)).toList();
   }
 
   // Get a list of users from the site.
@@ -83,6 +129,14 @@ class UserService {
       name: result['user']['name'],
       email: result['user']['email'],
       password: result['user']['password'],
+      profile: Profile(
+          firstname: result['user']['profile']['firstname'],
+          lastname: result['user']['profile']['lastname'],
+          alerts: Alert(
+            email: result['user']['profile']['alerts']['email'] == 1 ? true : false,
+            notification: result['user']['profile']['alerts']['notification'] == 1 ? true : false,
+            text: result['user']['profile']['alerts']['text'] == 1 ? true : false,
+          )),
     );
 
     return user;
@@ -136,11 +190,17 @@ class UserService {
         message: 'Logging you in...',
         colour: successColour,
         data: User(
+          id: int.parse(result['login']['user']['id']),
           name: result['login']['user']['name'],
           email: result['login']['user']['email'],
           profile: Profile(
             firstname: result['login']['user']['profile']['firstname'],
             lastname: result['login']['user']['profile']['lastname'],
+            alerts: Alert(
+              email: result['login']['user']['profile']['alerts']['email'] == 1 ? true : false,
+              notification: result['login']['user']['profile']['alerts']['notification'] == 1 ? true : false,
+              text: result['login']['user']['profile']['alerts']['text'] == 1 ? true : false,
+            ),
           ),
         ),
       );
@@ -157,6 +217,7 @@ class UserService {
 
   // Register the user.
   Future<Message> registerUser(User user, Profile profile, String token) async {
+
     try {
       GraphQLClient _user = graphQLConfiguration.clientToQuery();
       QueryResult response = await _user.mutate(
@@ -166,20 +227,21 @@ class UserService {
           ),
           variables: {
             "input": {
+              "title": profile.title,
               "firstname": profile.firstname,
               "lastname": profile.lastname,
-              "mobile_number": profile.mobileNumber,
               "email": user.email,
               "password": user.password,
-//              "mobile_token": token,
-              "title": profile.title,
+              "mobile_number": profile.mobileNumber,
+              "site": profile.location,
+              "job": profile.profession,
             }
           },
         ),
       );
 
       if (response.hasException && response.exception.graphqlErrors.first.extensions['validation'] != null) {
-        var message = response.exception.graphqlErrors.first.extensions['validation']['data.email'].toString();
+        var message = response.exception.graphqlErrors.first.toString();
         return Message(
           status: 301,
           title: 'Warning',

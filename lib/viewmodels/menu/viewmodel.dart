@@ -2,20 +2,22 @@ import 'package:flutter_bonapp/models/menu.dart';
 import 'package:flutter_bonapp/services/menu_service.dart';
 import 'package:flutter_bonapp/utils/enum.dart';
 import 'package:flutter_bonapp/viewmodels/base_model.dart';
-import '../../enums/viewstate.dart';
-import '../../services/locator.dart';
-import '../base_model.dart';
+import 'package:flutter_bonapp/enums/viewstate.dart';
+import 'package:flutter_bonapp/services/locator.dart';
 
 class MenuViewModel extends BaseModel {
   Menu _menu;
   Items _featuredItems;
+  Items _pickOfDayItems;
   MenuListViewModel menuListViewModel = locator<MenuListViewModel>();
   List<MenuViewModel> menus = List<MenuViewModel>();
   List<MenuViewModel> featuredItems = List<MenuViewModel>();
+  List<MenuViewModel> pickOfDayItems = List<MenuViewModel>();
 
   MenuViewModel({Menu menu, Items items})
       : _menu = menu,
-        _featuredItems = items;
+        _featuredItems = items,
+        _pickOfDayItems = items;
 
   var loadingStatus = LoadingStatus.loading;
 
@@ -32,6 +34,11 @@ class MenuViewModel extends BaseModel {
       this.featuredItems = menuListViewModel.featuredItems;
       setState(ViewState.Completed);
     });
+
+    menuListViewModel.getPickOfDayItems().then((_) {
+      this.pickOfDayItems = menuListViewModel.pickOfDayItems;
+      setState(ViewState.Completed);
+    });
     notifyListeners();
   }
 
@@ -39,7 +46,8 @@ class MenuViewModel extends BaseModel {
     return Menu(
       name: this._menu.name,
       description: this._menu.description,
-      imgUrl: this._menu.imgUrl,
+      imgIcon: this._menu.imgIcon,
+      image: this._menu.image,
       items: this._menu.items,
     );
   }
@@ -47,16 +55,29 @@ class MenuViewModel extends BaseModel {
   Items get itemInfo {
     return Items(
       name: this._featuredItems.name,
+      subtitle: this._featuredItems.subtitle,
       description: this._featuredItems.description,
-      imgUrl: this._featuredItems.imgUrl,
+      image: this._featuredItems.image,
       price: this._featuredItems.price,
     );
   }
+
+  Items get pickInfo {
+    return Items(
+      name: this._pickOfDayItems.name,
+      subtitle: this._pickOfDayItems.subtitle,
+      description: this._pickOfDayItems.description,
+      image: this._pickOfDayItems.image,
+      price: this._pickOfDayItems.price,
+    );
+  }
+
 }
 
 class MenuListViewModel extends BaseModel {
   List<MenuViewModel> menus = List<MenuViewModel>();
   List<MenuViewModel> featuredItems = List<MenuViewModel>();
+  List<MenuViewModel> pickOfDayItems = List<MenuViewModel>();
 
   Future<void> getAllMenus() async {
     setState(ViewState.Busy);
@@ -78,6 +99,19 @@ class MenuListViewModel extends BaseModel {
     List<Items> featuredItems = await MenuService().getFeaturedItems();
 
     this.featuredItems = featuredItems.map((json) => MenuViewModel(items: json)).toList();
+
+    setState(ViewState.Completed);
+
+    notifyListeners();
+  }
+
+  Future<void> getPickOfDayItems() async {
+    setState(ViewState.Busy);
+    notifyListeners();
+
+    List<Items> pickOfDayItems = await MenuService().getPickOfDayItems();
+
+    this.pickOfDayItems = pickOfDayItems.map((json) => MenuViewModel(items: json)).toList();
 
     setState(ViewState.Completed);
 
