@@ -9,20 +9,25 @@ import 'package:flutter_bonapp/utils/constants.dart';
 import 'package:flutter_bonapp/utils/routing_constants.dart';
 import 'package:flutter_bonapp/viewmodels/initial/viewmodel.dart';
 import 'package:flutter_bonapp/widgets/base_model_widget.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-final List _accountDrawList = [
+final List _accountDrawerList = [
   {'icon': Icons.person, 'title': 'My Acount', 'page': AccountScreenRoute},
   {'icon': Icons.shopping_basket, 'title': 'My Orders', 'page': OrdersScreenRoute},
   {'icon': Icons.favorite, 'title': 'Favourites', 'page': FavouritesScreenRoute},
 ];
 
-final List _settingsDrawList = [
+final List _settingsDrawerList = [
   {'icon': Icons.settings, 'title': 'Settings', 'page': SettingsScreenRoute},
 ];
 
-final List _informationDrawList = [
+final List _informationDrawerList = [
   {'icon': Icons.subject, 'title': 'FAQ'},
   {'icon': Icons.info, 'title': 'About'},
+];
+
+final List _logoutDrawerList = [
+  {'icon': FontAwesomeIcons.signOutAlt, 'title': 'Logout'},
 ];
 
 final List<Widget> _widgetOptions = <Widget>[
@@ -56,7 +61,7 @@ List<BottomNavigationBarItem> _bottomNavBarList = [
   )
 ];
 
-List<Widget> _drawerItems(User user, BuildContext context) {
+List<Widget> _drawerItems(User user, BuildContext context, InitialViewModel data) {
   return <Widget>[
     UserAccountsDrawerHeader(
       accountName: Text(user.name),
@@ -71,44 +76,59 @@ List<Widget> _drawerItems(User user, BuildContext context) {
         ),
       ),
     ),
-    for (var index = 0; index < _accountDrawList.length; index++)
+    for (var index = 0; index < _accountDrawerList.length; index++)
       InkWell(
         onTap: () {
-          Navigator.of(context).popAndPushNamed(_accountDrawList[index]['page']);
+          Navigator.of(context).popAndPushNamed(_accountDrawerList[index]['page']);
         },
         child: ListTile(
           leading: Icon(
-            _accountDrawList[index]['icon'],
+            _accountDrawerList[index]['icon'],
             color: Color(secondaryColour),
           ),
-          title: Text(_accountDrawList[index]['title']),
+          title: Text(_accountDrawerList[index]['title']),
           trailing: Icon(Icons.keyboard_arrow_right),
         ),
       ),
     Divider(),
-    for (var index = 0; index < _settingsDrawList.length; index++)
+    for (var index = 0; index < _settingsDrawerList.length; index++)
       InkWell(
         onTap: () {
-          Navigator.of(context).popAndPushNamed(_settingsDrawList[index]['page']);
+          Navigator.of(context).popAndPushNamed(_settingsDrawerList[index]['page']);
         },
         child: ListTile(
           leading: Icon(
-            _settingsDrawList[index]['icon'],
+            _settingsDrawerList[index]['icon'],
             color: Color(blueColour),
           ),
-          title: Text(_settingsDrawList[index]['title']),
+          title: Text(_settingsDrawerList[index]['title']),
           trailing: Icon(Icons.keyboard_arrow_right),
         ),
       ),
     Divider(),
-    for (var index = 0; index < _informationDrawList.length; index++)
+    for (var index = 0; index < _informationDrawerList.length; index++)
       InkWell(
         onTap: () => print('Tapped'),
         child: ListTile(
           leading: Icon(
-            _informationDrawList[index]['icon'],
+            _informationDrawerList[index]['icon'],
           ),
-          title: Text(_informationDrawList[index]['title']),
+          title: Text(_informationDrawerList[index]['title']),
+          trailing: Icon(Icons.keyboard_arrow_right),
+        ),
+      ),
+    Divider(),
+    for (var index = 0; index < _logoutDrawerList.length; index++)
+      InkWell(
+        onTap: () {
+          data.logUserOut(context);
+//          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context) => LoginScreen()), (route) => false);
+        },
+        child: ListTile(
+          leading: Icon(
+            _logoutDrawerList[index]['icon'],
+          ),
+          title: Text(_logoutDrawerList[index]['title']),
           trailing: Icon(Icons.keyboard_arrow_right),
         ),
       ),
@@ -133,7 +153,7 @@ class InitialMobilePortrait extends BaseModelWidget<InitialViewModel> {
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.all(0.0),
-          children: _drawerItems(user, context),
+          children: _drawerItems(user, context, data),
         ),
       ),
       body: SafeArea(
@@ -197,7 +217,7 @@ class InitialMobileLandscape extends BaseModelWidget<InitialViewModel> {
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.all(0.0),
-          children: _drawerItems(user, context),
+          children: _drawerItems(user, context, data),
         ),
       ),
       body: SafeArea(
