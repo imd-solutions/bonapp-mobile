@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bonapp/enums/viewstate.dart';
+import 'package:flutter_bonapp/models/menu.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
 import 'package:flutter_bonapp/utils/env.dart';
+import 'package:flutter_bonapp/utils/routing_constants.dart';
 import 'package:flutter_bonapp/viewmodels/menu/viewmodel.dart';
 import 'package:flutter_bonapp/widgets/base_model_widget.dart';
 import 'package:flutter_bonapp/widgets/busy_overlay.dart';
@@ -469,39 +471,46 @@ List<Widget> _topHalfScreen(MenuViewModel data) {
           scrollDirection: Axis.horizontal,
           itemCount: data.menus.length,
           itemBuilder: (BuildContext context, int index) {
-            return Stack(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: Container(
-                    height: 85.0,
-                    width: 100.0,
-                    decoration: BoxDecoration(
-                      color: Color(0xff7c94b6),
-                      image: DecorationImage(
-                        image: NetworkImage(graphQLApiImg + data.menus[index].info.imgIcon),
-                        fit: BoxFit.cover,
+            return GestureDetector(
+              onTap: () => _navigateToCategory(context, data.menus[index].info),
+              child: Stack(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Container(
+                      height: 85.0,
+                      width: 100.0,
+                      decoration: BoxDecoration(
+                        color: Color(0xff7c94b6),
+                        image: DecorationImage(
+                          image: NetworkImage(graphQLApiImg + data.menus[index].info.imgIcon),
+                          fit: BoxFit.cover,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
-                      borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
-                ),
-                Positioned(
-                  top: 90.0,
-                  left: 5.0,
-                  child: Text(
-                    data.menus[index].info.name,
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 12.0,
-                      fontWeight: FontWeight.bold,
+                  Positioned(
+                    top: 90.0,
+                    left: 5.0,
+                    child: Text(
+                      data.menus[index].info.name,
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 12.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             );
           }),
     ),
     SizedBox(height: 15.0),
   ];
+}
+
+void _navigateToCategory(BuildContext context, Menu menu) {
+  Navigator.pushNamed(context, CategoryScreenRoute, arguments: menu);
 }

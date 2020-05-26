@@ -9,6 +9,7 @@ Menu menuFromJson(String str) => Menu.fromJson(json.decode(str));
 String menuToJson(Menu data) => json.encode(data.toJson());
 
 class Menu {
+  int id;
   String name;
   String description;
   String imgIcon;
@@ -16,6 +17,7 @@ class Menu {
   List<Items> items;
 
   Menu({
+    this.id,
     this.name,
     this.description,
     this.imgIcon,
@@ -24,6 +26,7 @@ class Menu {
   });
 
   factory Menu.fromJson(Map<String, dynamic> json) => Menu(
+        id: json["id"],
         name: json["name"],
         description: json["description"],
         imgIcon: json["imgIcon"],
@@ -32,6 +35,7 @@ class Menu {
       );
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         "name": name,
         "description": description,
         "imgIcon": imgIcon,
@@ -41,6 +45,7 @@ class Menu {
 }
 
 class Items {
+  int id;
   String name;
   String subtitle;
   String description;
@@ -48,6 +53,7 @@ class Items {
   String image;
 
   Items({
+    this.id,
     this.name,
     this.subtitle,
     this.description,
@@ -56,6 +62,7 @@ class Items {
   });
 
   factory Items.fromJson(Map<String, dynamic> json) => Items(
+        id: json["id"],
         name: json["name"],
         subtitle: json["subtitle"],
         description: json["description"],
@@ -64,6 +71,7 @@ class Items {
       );
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         "name": name,
         "subtitle": subtitle,
         "description": description,

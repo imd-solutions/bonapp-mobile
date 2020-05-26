@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bonapp/screens/application/account/account_screen.dart';
+import 'package:flutter_bonapp/screens/application/category/category_screen.dart';
 import 'package:flutter_bonapp/screens/application/favourites/favourite_screen.dart';
 import 'package:flutter_bonapp/screens/application/initial/initial_screen.dart';
 import 'package:flutter_bonapp/screens/application/orders/orders_screen.dart';
@@ -29,6 +30,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => InitialScreen(
           user: arguments,
+        ),
+      );
+    case CategoryScreenRoute:
+      var arguments = settings.arguments;
+      return MaterialPageRoute(
+        builder: (context) => CategoryScreen(
+          category: arguments,
         ),
       );
     case SettingsScreenRoute:
