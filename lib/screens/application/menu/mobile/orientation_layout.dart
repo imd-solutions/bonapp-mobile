@@ -327,6 +327,8 @@ double _pickDaySize(int height) {
     return 380.0;
   } else if (height < 970) {
     return 400.0;
+  } else {
+    return 450.0;
   }
 }
 
@@ -341,6 +343,8 @@ double _imageSize(int height) {
     return 104.5;
   } else if (height < 970) {
     return 110.0;
+  } else {
+    return 120.0;
   }
 }
 
@@ -355,6 +359,8 @@ double _priceNameSize(int height) {
     return 18.0;
   } else if (height < 970) {
     return 20.0;
+  } else {
+    return 25.0;
   }
 }
 
@@ -369,6 +375,8 @@ double _cartSize(int height) {
     return 15.0;
   } else if (height < 970) {
     return 18.0;
+  } else {
+    return 20.0;
   }
 }
 
