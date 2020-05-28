@@ -64,7 +64,7 @@ class MenuService {
     );
 
     if (response.hasException) {
-      throw new Exception('Could not get setting data.');
+      throw new Exception('Could not get menu data.');
     }
 
     final result = response.data;

@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       initialRoute: IntroScreenRoute,
 //      home: InitialScreen(),
       home: IntroScreen(),
-//      home: MenuScreen(),
+//      home: AccountScreen(),
     );
   }
 }

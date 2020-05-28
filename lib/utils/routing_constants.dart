@@ -6,6 +6,7 @@ const String RegisterScreenRoute = 'register';
 // Application screen.
 const String InitialScreenRoute = '/application';
 const String CategoryScreenRoute = '/application/category';
+const String ItemScreenRoute = '/application/item';
 const String AccountScreenRoute = '/application/account';
 const String OrdersScreenRoute = '/application/orders';
 const String FavouritesScreenRoute = '/application/favourites';

@@ -3,6 +3,7 @@ import 'package:flutter_bonapp/screens/application/account/account_screen.dart';
 import 'package:flutter_bonapp/screens/application/category/category_screen.dart';
 import 'package:flutter_bonapp/screens/application/favourites/favourite_screen.dart';
 import 'package:flutter_bonapp/screens/application/initial/initial_screen.dart';
+import 'package:flutter_bonapp/screens/application/item/item_screen.dart';
 import 'package:flutter_bonapp/screens/application/orders/orders_screen.dart';
 import 'package:flutter_bonapp/screens/application/settings/settings_screen.dart';
 import 'package:flutter_bonapp/screens/auth/login/login_screen.dart';
@@ -39,6 +40,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           category: arguments,
         ),
       );
+    case ItemScreenRoute:
+      var arguments = settings.arguments;
+      return MaterialPageRoute(
+        builder: (context) => ItemScreen(
+          item: arguments,
+        ),
+      );
     case SettingsScreenRoute:
       return MaterialPageRoute(
         builder: (context) => SettingsScreen(),
@@ -52,8 +60,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         builder: (context) => FavouriteScreen(),
       );
     case AccountScreenRoute:
+      var arguments = settings.arguments;
       return MaterialPageRoute(
-        builder: (context) => AccountScreen(),
+        builder: (context) => AccountScreen(
+          user: arguments
+        ),
       );
     default:
       return MaterialPageRoute(
