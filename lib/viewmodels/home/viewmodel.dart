@@ -13,13 +13,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeViewModel extends BaseModel {
   UserService userService = locator<UserService>();
-  PostService postService = locator<PostService>();
   MenuService menuService = locator<MenuService>();
   OfferService offerService = locator<OfferService>();
 
   User user;
-  List<Post> allPosts;
-  List<Post> latestPost;
+
   List<Items> featuredItems;
   Offer offer;
 
@@ -34,8 +32,6 @@ class HomeViewModel extends BaseModel {
     int id = prefs.getInt('userId');
 
     user = await userService.getUser(id);
-    allPosts = await postService.getPosts();
-    latestPost = await postService.getLatestPosts(2);
     featuredItems = await menuService.getFeaturedItems();
     offer = await offerService.getOffer(1);
 

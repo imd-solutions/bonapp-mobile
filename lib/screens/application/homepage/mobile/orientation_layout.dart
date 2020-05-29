@@ -83,32 +83,23 @@ class HomeMobilePortrait extends BaseModelWidget<HomeViewModel> {
                   ),
                   _rowHeader(
                     context: context,
-                    title: 'Latest News',
-                    data: data.allPosts,
+                    title: 'Latest Offer',
+                    view: false,
                   ),
                   SizedBox(
-                    height: 5.0,
+                    height: 10.0,
                   ),
                   Row(
                     children: <Widget>[
                       _cardInformation(
-                        context: context,
-                        height: 190.0,
-                        title: data.latestPost[0].title,
-                        data: data.latestPost[0],
-                        item: false,
-                      ),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      _cardInformation(
-                        context: context,
-                        height: 190.0,
-                        title: data.latestPost[1].title,
-                        data: data.latestPost[1],
-                        item: false,
-                      ),
+                          context: context,
+                          title: data.offer.name,
+                          more: false,
+                          data: data.offer),
                     ],
+                  ),
+                  SizedBox(
+                    height: 15.0,
                   ),
                   _rowHeader(
                     context: context,
@@ -119,33 +110,38 @@ class HomeMobilePortrait extends BaseModelWidget<HomeViewModel> {
                   ),
                   Row(
                     children: <Widget>[
-                      _cardInformation(context: context, title: data.featuredItems[0].name, fontSize: 10.0, height: 150.0, data: data.featuredItems[0], more: false),
+                      _cardInformation(
+                          context: context,
+                          title: data.featuredItems[0].name,
+                          fontSize: 10.0,
+                          height: 150.0,
+                          data: data.featuredItems[0],
+                          more: false),
                       SizedBox(
                         width: 5.0,
                       ),
-                      _cardInformation(context: context, title: data.featuredItems[1].name, fontSize: 10.0, height: 150.0, data: data.featuredItems[1], more: false),
+                      _cardInformation(
+                          context: context,
+                          title: data.featuredItems[1].name,
+                          fontSize: 10.0,
+                          height: 150.0,
+                          data: data.featuredItems[1],
+                          more: false),
                       SizedBox(
                         width: 5.0,
                       ),
-                      _cardInformation(context: context, title: data.featuredItems[2].name, fontSize: 10.0, height: 150.0, data: data.featuredItems[2], more: false),
+                      _cardInformation(
+                          context: context,
+                          title: data.featuredItems[2].name,
+                          fontSize: 10.0,
+                          height: 150.0,
+                          data: data.featuredItems[2],
+                          more: false),
                     ],
                   ),
                   SizedBox(
                     height: 10.0,
                   ),
-                  _rowHeader(
-                    context: context,
-                    title: 'Latest Offer',
-                    view: false,
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      _cardInformation(context: context, title: data.offer.name, more: false, data: data.offer),
-                    ],
-                  )
                 ],
               ),
             ),
@@ -205,45 +201,6 @@ class HomeMobileLandscape extends BaseModelWidget<HomeViewModel> {
                     ),
                   ),
                   SizedBox(
-                    height: 15.0,
-                  ),
-                  _rowHeader(
-                    context: context,
-                    title: 'Latest News',
-                  ),
-                  SizedBox(
-                    height: 5.0,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      _cardInformation(context: context, height: 160.0, title: data.latestPost[0].title, data: data.latestPost[0]),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      _cardInformation(context: context, height: 160.0, title: data.latestPost[1].title, data: data.latestPost[1]),
-                    ],
-                  ),
-                  _rowHeader(
-                    context: context,
-                    title: 'Top Sellers',
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      _cardInformation(context: context, title: data.featuredItems[0].name, data: data.featuredItems[0], more: false),
-                      SizedBox(
-                        width: 5.0,
-                      ),
-                      _cardInformation(context: context, title: data.featuredItems[1].name, data: data.featuredItems[1], more: false),
-                      SizedBox(
-                        width: 5.0,
-                      ),
-                      _cardInformation(context: context, title: data.featuredItems[2].name, data: data.featuredItems[2], more: false),
-                    ],
-                  ),
-                  SizedBox(
                     height: 10.0,
                   ),
                   _rowHeader(
@@ -256,9 +213,48 @@ class HomeMobileLandscape extends BaseModelWidget<HomeViewModel> {
                   ),
                   Row(
                     children: <Widget>[
-                      _cardInformation(context: context, title: data.offer.name, more: false, data: data.offer),
+                      _cardInformation(
+                          context: context,
+                          title: data.offer.name,
+                          more: false,
+                          data: data.offer),
                     ],
-                  )
+                  ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  _rowHeader(
+                    context: context,
+                    title: 'Top Sellers',
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      _cardInformation(
+                          context: context,
+                          title: data.featuredItems[0].name,
+                          data: data.featuredItems[0],
+                          more: false),
+                      SizedBox(
+                        width: 5.0,
+                      ),
+                      _cardInformation(
+                          context: context,
+                          title: data.featuredItems[1].name,
+                          data: data.featuredItems[1],
+                          more: false),
+                      SizedBox(
+                        width: 5.0,
+                      ),
+                      _cardInformation(
+                          context: context,
+                          title: data.featuredItems[2].name,
+                          data: data.featuredItems[2],
+                          more: false),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -301,7 +297,8 @@ List<Widget> _topHeaderInformation(data) {
       children: <Widget>[
         Text(
           "What would you like to do today?",
-          style: TextStyle(fontSize: 15.0, color: Colors.black, fontFamily: primaryFont),
+          style: TextStyle(
+              fontSize: 15.0, color: Colors.black, fontFamily: primaryFont),
         ),
       ],
     ),
@@ -341,7 +338,16 @@ Widget _rowHeader({context, title, data, view = true}) {
   );
 }
 
-Widget _userInformation({landscape = false, height = 100.0, radius = 5.0, @required backgroundColour, @required icon, data = '10', iconColour = whiteColour, @required title, rotate = false}) {
+Widget _userInformation(
+    {landscape = false,
+    height = 100.0,
+    radius = 5.0,
+    @required backgroundColour,
+    @required icon,
+    data = '10',
+    iconColour = whiteColour,
+    @required title,
+    rotate = false}) {
   return Expanded(
     child: Padding(
       padding: const EdgeInsets.only(right: 5.0),
@@ -426,10 +432,21 @@ Widget _userInformation({landscape = false, height = 100.0, radius = 5.0, @requi
   );
 }
 
-Widget _cardInformation({context, height = 150.0, containerHeight = 100.0, radius = 5.0, data, sizedBox = 5.0, fontSize = 15.0, @required title, more = true, item = true}) {
+Widget _cardInformation(
+    {context,
+    height = 150.0,
+    containerHeight = 100.0,
+    radius = 5.0,
+    data,
+    sizedBox = 5.0,
+    fontSize = 15.0,
+    @required title,
+    more = true,
+    item = true}) {
   return Expanded(
     child: GestureDetector(
-      onTap: () => item == true ? _navigateToItem(context, data) : _navigateToUrl(data),
+      onTap: () =>
+          item == true ? _navigateToItem(context, data) : _navigateToUrl(data),
       child: Container(
         height: height,
         child: Column(

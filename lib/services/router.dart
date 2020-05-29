@@ -35,11 +35,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         ),
       );
     case PostsScreenRoute:
-      var arguments = settings.arguments;
       return MaterialPageRoute(
-        builder: (context) => PostsScreen(
-          posts: arguments,
-        ),
+        builder: (context) => PostsScreen(),
       );
     case CategoryScreenRoute:
       var arguments = settings.arguments;
@@ -70,9 +67,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case AccountScreenRoute:
       var arguments = settings.arguments;
       return MaterialPageRoute(
-        builder: (context) => AccountScreen(
-          user: arguments
-        ),
+        builder: (context) => AccountScreen(user: arguments),
       );
     default:
       return MaterialPageRoute(
