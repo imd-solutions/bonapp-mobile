@@ -18,6 +18,7 @@ class HomeViewModel extends BaseModel {
   OfferService offerService = locator<OfferService>();
 
   User user;
+  List<Post> allPosts;
   List<Post> latestPost;
   List<Items> featuredItems;
   Offer offer;
@@ -33,6 +34,7 @@ class HomeViewModel extends BaseModel {
     int id = prefs.getInt('userId');
 
     user = await userService.getUser(id);
+    allPosts = await postService.getPosts();
     latestPost = await postService.getLatestPosts(2);
     featuredItems = await menuService.getFeaturedItems();
     offer = await offerService.getOffer(1);

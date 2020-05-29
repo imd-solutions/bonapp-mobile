@@ -6,6 +6,7 @@ import 'package:flutter_bonapp/screens/application/menu/menu_screen.dart';
 import 'package:flutter_bonapp/screens/application/reward/reward_screen.dart';
 import 'package:flutter_bonapp/screens/application/scan/scan_screen.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
+import 'package:flutter_bonapp/utils/env.dart';
 import 'package:flutter_bonapp/utils/routing_constants.dart';
 import 'package:flutter_bonapp/viewmodels/initial/viewmodel.dart';
 import 'package:flutter_bonapp/widgets/base_model_widget.dart';
@@ -68,11 +69,9 @@ List<Widget> _drawerItems(User user, BuildContext context, InitialViewModel data
       accountEmail: Text(user.email),
       currentAccountPicture: GestureDetector(
         child: CircleAvatar(
-          backgroundColor: Color(secondaryColour),
-          child: Icon(
-            Icons.person,
-            color: Color(thirdColour),
-          ),
+          radius: 30.0,
+          backgroundImage: NetworkImage(graphQLApiImg + user.avatar),
+          backgroundColor: Colors.transparent,
         ),
       ),
     ),
@@ -172,7 +171,7 @@ class InitialMobilePortrait extends BaseModelWidget<InitialViewModel> {
                 ),
                 IconButton(
                   onPressed: () => print('Alert Bar'),
-                  icon: Icon(Icons.shopping_cart),
+                  icon: Icon(Icons.settings),
                 )
               ],
             ),
@@ -236,7 +235,7 @@ class InitialMobileLandscape extends BaseModelWidget<InitialViewModel> {
                 ),
                 IconButton(
                   onPressed: () => print('Alert Bar'),
-                  icon: Icon(Icons.shopping_cart),
+                  icon: Icon(Icons.settings),
                 )
               ],
             ),

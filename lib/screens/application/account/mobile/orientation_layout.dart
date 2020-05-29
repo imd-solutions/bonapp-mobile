@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bonapp/models/user.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
+import 'package:flutter_bonapp/utils/env.dart';
 import 'package:flutter_bonapp/viewmodels/account/viewmodel.dart';
 import 'package:flutter_bonapp/widgets/base_model_widget.dart';
 
@@ -48,7 +49,7 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
                   ),
                   IconButton(
                     onPressed: () => print('Alert Bar'),
-                    icon: Icon(Icons.shopping_cart),
+                    icon: Icon(Icons.settings),
                   )
                 ],
               ),
@@ -72,9 +73,7 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
                                 BoxShadow(blurRadius: 3.0, offset: Offset(0, 4.0), color: Colors.black38),
                               ],
                               image: DecorationImage(
-                                image: AssetImage(
-                                  "assets/images/logo.png",
-                                ),
+                                image: NetworkImage(graphQLApiImg + user.avatar),
                                 fit: BoxFit.cover,
                               ),
                             ),

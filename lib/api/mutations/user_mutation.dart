@@ -7,6 +7,7 @@ class UserMutation {
           user {
             id
             name
+            avatar
             email
             email_verified_at
             profile {

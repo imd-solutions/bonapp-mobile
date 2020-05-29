@@ -29,7 +29,7 @@ class OrdersScreen extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () => print('Alert Bar'),
-                  icon: Icon(Icons.shopping_cart),
+                  icon: Icon(Icons.settings),
                 )
               ],
             ),

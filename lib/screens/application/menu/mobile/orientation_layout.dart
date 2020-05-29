@@ -410,52 +410,55 @@ List<Widget> _topHalfScreen(MenuViewModel data) {
           scrollDirection: Axis.horizontal,
           itemCount: data.menus.length,
           itemBuilder: (BuildContext context, int index) {
-            return Stack(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: Container(
-                    height: 85.0,
-                    width: 150.0,
-                    decoration: BoxDecoration(
-                      color: Color(0xff7c94b6),
-                      image: DecorationImage(
-                        image: NetworkImage(graphQLApiImg + data.featuredItems[index].itemInfo.image),
-                        fit: BoxFit.cover,
+            return GestureDetector(
+              onTap: () => _navigateToItem(context, data.featuredItems[index].itemInfo),
+              child: Stack(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Container(
+                      height: 85.0,
+                      width: 150.0,
+                      decoration: BoxDecoration(
+                        color: Color(0xff7c94b6),
+                        image: DecorationImage(
+                          image: NetworkImage(graphQLApiImg + data.featuredItems[index].itemInfo.image),
+                          fit: BoxFit.cover,
+                        ),
+                        border: Border.all(
+                          color: Color(secondaryColour),
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
-                      border: Border.all(
-                        color: Color(secondaryColour),
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
-                ),
-                Positioned(
-                  top: 90.0,
-                  left: 5.0,
-                  child: Text(
-                    data.featuredItems[index].itemInfo.name,
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 10.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                if (data.featuredItems[index].itemInfo.subtitle != null)
                   Positioned(
-                    top: 105.0,
+                    top: 90.0,
                     left: 5.0,
                     child: Text(
-                      data.featuredItems[index].itemInfo.subtitle,
+                      data.featuredItems[index].itemInfo.name,
                       style: TextStyle(
-                        fontFamily: 'Raleway',
-                        fontSize: 8.0,
+                        fontFamily: 'Poppins',
+                        fontSize: 10.0,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  )
-              ],
+                  ),
+                  if (data.featuredItems[index].itemInfo.subtitle != null)
+                    Positioned(
+                      top: 105.0,
+                      left: 5.0,
+                      child: Text(
+                        data.featuredItems[index].itemInfo.subtitle,
+                        style: TextStyle(
+                          fontFamily: 'Raleway',
+                          fontSize: 8.0,
+                        ),
+                      ),
+                    )
+                ],
+              ),
             );
           }),
     ),
@@ -513,4 +516,8 @@ List<Widget> _topHalfScreen(MenuViewModel data) {
 
 void _navigateToCategory(BuildContext context, Menu menu) {
   Navigator.pushNamed(context, CategoryScreenRoute, arguments: menu);
+}
+
+void _navigateToItem(BuildContext context, Items item) {
+  Navigator.pushNamed(context, ItemScreenRoute, arguments: item);
 }

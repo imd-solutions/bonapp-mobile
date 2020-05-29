@@ -5,6 +5,7 @@ class PostQuery {
           posts  {
               id
               title
+              site_link
               excerpt
               body
               image
@@ -13,12 +14,14 @@ class PostQuery {
       }
     """;
   }
+
   String getLatestPosts() {
     return """
       query latestPosts (\$limit: Int){
           latestPosts (limit: \$limit) {
               id
               title
+              site_link
               excerpt
               body
               image
@@ -33,6 +36,7 @@ class PostQuery {
         query post (\$id: ID!) {
           post (id: \$id) {
               title
+              site_link
               excerpt
               body
               image

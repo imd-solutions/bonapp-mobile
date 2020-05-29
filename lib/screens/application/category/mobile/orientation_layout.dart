@@ -16,6 +16,18 @@ class CategoryMobilePortrait extends BaseModelWidget<CategoryViewModel> {
     var width = MediaQuery.of(context).size.width;
     var orientation = MediaQuery.of(context).orientation;
     return Scaffold(
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.all(5.0),
+        child: Container(
+          height: 50.0,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/banner_add.jpg'),
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
+      ),
       body: SafeArea(
         child: Column(
           children: <Widget>[
@@ -36,7 +48,7 @@ class CategoryMobilePortrait extends BaseModelWidget<CategoryViewModel> {
                 ),
                 IconButton(
                   onPressed: () => print('Alert Bar'),
-                  icon: Icon(Icons.shopping_cart),
+                  icon: Icon(Icons.settings),
                 )
               ],
             ),
@@ -142,7 +154,7 @@ class CategoryMobileLandscape extends BaseModelWidget<CategoryViewModel> {
                   ),
                   IconButton(
                     onPressed: () => print('Alert Bar'),
-                    icon: Icon(Icons.shopping_cart),
+                    icon: Icon(Icons.settings),
                   )
                 ],
               ),

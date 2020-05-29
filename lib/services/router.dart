@@ -5,6 +5,7 @@ import 'package:flutter_bonapp/screens/application/favourites/favourite_screen.d
 import 'package:flutter_bonapp/screens/application/initial/initial_screen.dart';
 import 'package:flutter_bonapp/screens/application/item/item_screen.dart';
 import 'package:flutter_bonapp/screens/application/orders/orders_screen.dart';
+import 'package:flutter_bonapp/screens/application/posts/posts_screen.dart';
 import 'package:flutter_bonapp/screens/application/settings/settings_screen.dart';
 import 'package:flutter_bonapp/screens/auth/login/login_screen.dart';
 import 'package:flutter_bonapp/screens/auth/register/register_screen.dart';
@@ -31,6 +32,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => InitialScreen(
           user: arguments,
+        ),
+      );
+    case PostsScreenRoute:
+      var arguments = settings.arguments;
+      return MaterialPageRoute(
+        builder: (context) => PostsScreen(
+          posts: arguments,
         ),
       );
     case CategoryScreenRoute:

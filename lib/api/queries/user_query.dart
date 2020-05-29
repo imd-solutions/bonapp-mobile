@@ -48,6 +48,7 @@ class UserQuery {
       query user (\$id: ID!){
         user (id: \$id) {
           name
+          avatar
           profile {
             firstname
             lastname

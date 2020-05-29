@@ -11,6 +11,7 @@ String userToJson(User data) => json.encode(data.toJson());
 class User {
   int id;
   String name;
+  String avatar;
   String email;
   String password;
   Profile profile;
@@ -18,6 +19,7 @@ class User {
   User({
     this.id,
     this.name,
+    this.avatar,
     this.email,
     this.password,
     this.profile,
@@ -26,18 +28,20 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         name: json["name"],
+        avatar: json["avatar"],
         email: json["email"],
         password: json["password"],
         profile: Profile.fromJson(json["profile"]),
       );
 
   Map<String, dynamic> toJson() => {
-      "id": id,
-      "name": name,
-      "email": email,
-      "password": password,
-      "profile": profile.toJson(),
-  };
+        "id": id,
+        "name": name,
+        "avatar": avatar,
+        "email": email,
+        "password": password,
+        "profile": profile.toJson(),
+      };
 }
 
 class Profile {
@@ -77,15 +81,15 @@ class Profile {
       );
 
   Map<String, dynamic> toJson() => {
-      "title": title,
-      "firstname": firstname,
-      "lastname": lastname,
-      "dob": "${dob.year.toString().padLeft(4, '0')}-${dob.month.toString().padLeft(2, '0')}-${dob.day.toString().padLeft(2, '0')}",
-      "phone_number": phoneNumber,
-      "mobile_number": mobileNumber,
-      "mobile_token": mobileToken,
-      "alerts": alerts.toJson(),
-  };
+        "title": title,
+        "firstname": firstname,
+        "lastname": lastname,
+        "dob": "${dob.year.toString().padLeft(4, '0')}-${dob.month.toString().padLeft(2, '0')}-${dob.day.toString().padLeft(2, '0')}",
+        "phone_number": phoneNumber,
+        "mobile_number": mobileNumber,
+        "mobile_token": mobileToken,
+        "alerts": alerts.toJson(),
+      };
 }
 
 class Alert {
@@ -96,16 +100,14 @@ class Alert {
   Alert({this.email, this.notification, this.text});
 
   factory Alert.fromJson(Map<String, dynamic> json) => Alert(
-    email: json["email"],
-    notification: json["notification"],
-    text: json["text"],
-  );
+        email: json["email"],
+        notification: json["notification"],
+        text: json["text"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "email": email,
-    "notification": notification,
-    "text": text,
-  };
-
-
+        "email": email,
+        "notification": notification,
+        "text": text,
+      };
 }

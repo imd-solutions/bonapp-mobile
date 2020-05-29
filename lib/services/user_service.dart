@@ -127,6 +127,7 @@ class UserService {
 
     User user = User(
       name: result['user']['name'],
+      avatar: result['user']['avatar'],
       email: result['user']['email'],
       password: result['user']['password'],
       profile: Profile(
@@ -192,6 +193,7 @@ class UserService {
         data: User(
           id: int.parse(result['login']['user']['id']),
           name: result['login']['user']['name'],
+          avatar: result['login']['user']['avatar'],
           email: result['login']['user']['email'],
           profile: Profile(
             firstname: result['login']['user']['profile']['firstname'],
@@ -217,7 +219,6 @@ class UserService {
 
   // Register the user.
   Future<Message> registerUser(User user, Profile profile, String token) async {
-
     try {
       GraphQLClient _user = graphQLConfiguration.clientToQuery();
       QueryResult response = await _user.mutate(

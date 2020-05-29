@@ -23,6 +23,7 @@ class LoginMobilePortrait extends BaseModelWidget<LoginViewModel> {
         left: true,
         top: true,
         right: true,
+        bottom: false,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
