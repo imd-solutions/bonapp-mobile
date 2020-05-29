@@ -93,7 +93,7 @@ class HomeMobilePortrait extends BaseModelWidget<HomeViewModel> {
                     children: <Widget>[
                       _cardInformation(
                         context: context,
-                        height: 180.0,
+                        height: 190.0,
                         title: data.latestPost[0].title,
                         data: data.latestPost[0],
                         item: false,
@@ -103,7 +103,7 @@ class HomeMobilePortrait extends BaseModelWidget<HomeViewModel> {
                       ),
                       _cardInformation(
                         context: context,
-                        height: 180.0,
+                        height: 190.0,
                         title: data.latestPost[1].title,
                         data: data.latestPost[1],
                         item: false,
