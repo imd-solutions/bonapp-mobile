@@ -116,7 +116,8 @@ Widget listWidget(context, _formKey, data, user, profile) {
         (_) {
           // Send the user to the Initial Application Screen on success.
           if (message.status == 200) {
-            Navigator.of(context).pushNamedAndRemoveUntil(LoginScreenRoute, (Route<dynamic> route) => false);
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                LoginScreenRoute, (Route<dynamic> route) => false);
           }
         },
       );
@@ -236,7 +237,8 @@ Widget listWidget(context, _formKey, data, user, profile) {
         children: <Widget>[
           Expanded(
             child: Container(
-              margin: EdgeInsets.only(left: 5.0, right: 10.0, bottom: 10.0, top: 10.0),
+              margin: EdgeInsets.only(
+                  left: 5.0, right: 10.0, bottom: 10.0, top: 10.0),
               padding: EdgeInsets.only(left: 5.0),
               child: GestureDetector(
                 onTap: () => data.initialVariables(),
@@ -246,7 +248,7 @@ Widget listWidget(context, _formKey, data, user, profile) {
                   padding: true,
                   data: data.locations,
                   updateSelected: (val) {
-                    profile.location = val;
+                    data.updateLocation(val);
                     data.updateLocationNumber(val);
                   },
                 ),
@@ -255,7 +257,8 @@ Widget listWidget(context, _formKey, data, user, profile) {
           ),
           Expanded(
             child: Container(
-              margin: EdgeInsets.only(left: 5.0, right: 10.0, bottom: 10.0, top: 10.0),
+              margin: EdgeInsets.only(
+                  left: 5.0, right: 10.0, bottom: 10.0, top: 10.0),
               padding: EdgeInsets.only(left: 5.0),
               child: GestureDetector(
                 onTap: () => data.initialVariables(),
@@ -265,7 +268,7 @@ Widget listWidget(context, _formKey, data, user, profile) {
                   padding: true,
                   data: data.professions,
                   updateSelected: (val) {
-                    profile.profession = val;
+                    data.updateProfession(val);
                     data.updateProfessionNumber(val);
                   },
                 ),
@@ -390,6 +393,9 @@ Widget listWidget(context, _formKey, data, user, profile) {
                   return;
                 }
 
+                profile.location = data.location;
+                profile.profession = data.profession;
+
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
 
@@ -419,7 +425,8 @@ Widget listWidget(context, _formKey, data, user, profile) {
             ),
           ),
           onTap: () {
-            Navigator.of(context).pushNamedAndRemoveUntil(LoginScreenRoute, (Route<dynamic> route) => false);
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                LoginScreenRoute, (Route<dynamic> route) => false);
           },
         ),
       ),

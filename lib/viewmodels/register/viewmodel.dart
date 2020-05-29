@@ -20,10 +20,13 @@ class RegisterViewModel extends BaseModel {
   int professionDropdown = 0;
   int locationDropdown = 0;
 
+  int title;
   String firstName;
   String lastName;
   String email;
   String mobile;
+  int location;
+  int profession;
 
   void initialise() {
     setState(ViewState.Busy);
@@ -50,6 +53,10 @@ class RegisterViewModel extends BaseModel {
     notifyListeners();
   }
 
+  void updateTitle(int value) {
+    title = value;
+  }
+
   void updateFirstName(String value) {
     firstName = value;
   }
@@ -64,6 +71,14 @@ class RegisterViewModel extends BaseModel {
 
   void updateMobile(String value) {
     mobile = value;
+  }
+
+  void updateLocation(int value) {
+    location = value;
+  }
+
+  void updateProfession(int value) {
+    profession = value;
   }
 
   void initialVariables() {
