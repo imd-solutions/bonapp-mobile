@@ -1,4 +1,5 @@
 import 'package:flutter_bonapp/services/application_service.dart';
+import 'package:flutter_bonapp/services/cart_service.dart';
 import 'package:flutter_bonapp/services/menu_service.dart';
 import 'package:flutter_bonapp/services/offer_service.dart';
 import 'package:flutter_bonapp/services/post_service.dart';
@@ -19,6 +20,7 @@ void setupLocator() {
   locator.registerLazySingleton(() => MenuService());
   locator.registerLazySingleton(() => PostService());
   locator.registerLazySingleton(() => OfferService());
+  locator.registerLazySingleton(() => CartService());
 
   // Register view models
   locator.registerFactory<ApplicationViewModel>(() => ApplicationViewModel());

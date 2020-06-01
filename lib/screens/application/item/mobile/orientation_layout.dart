@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bonapp/models/cart.dart';
 import 'package:flutter_bonapp/models/menu.dart';
+import 'package:flutter_bonapp/services/cart_service.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
 import 'package:flutter_bonapp/utils/env.dart';
+import 'package:flutter_bonapp/utils/routing_constants.dart';
+import 'package:flutter_bonapp/viewmodels/cart/viewmodel.dart';
 import 'package:flutter_bonapp/viewmodels/item/viewmodel.dart';
 import 'package:flutter_bonapp/widgets/base_model_widget.dart';
 
@@ -24,13 +28,10 @@ class ItemMobilePortrait extends BaseModelWidget<ItemViewModel> {
             ),
           ),
         ),
-//        child: Container(
-//          decoration: BoxDecoration(),
-//            child: Image.asset('assets/images/banner_add.jpg')),
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20),
+          padding: const EdgeInsets.only(left: 15.0, right: 15.0),
           child: Column(
             children: <Widget>[
               Row(
@@ -120,61 +121,75 @@ class ItemMobilePortrait extends BaseModelWidget<ItemViewModel> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 27),
-                      decoration: BoxDecoration(
-                        color: Color(primaryColour).withOpacity(.19),
-                        borderRadius: BorderRadius.circular(27),
-                      ),
-                      child: Row(
-                        children: <Widget>[
-                          Text(
-                            "Add to Cart",
-                            style: Theme.of(context).textTheme.button,
-                          ),
-                          SizedBox(width: 30),
-                          Icon(Icons.add),
-                        ],
+                    GestureDetector(
+                      onTap: () {
+                        data.addItemToCart(item.id, item.name, item.price);
+                      },
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 20, horizontal: 27),
+                        decoration: BoxDecoration(
+                          color: Color(primaryColour).withOpacity(.19),
+                          borderRadius: BorderRadius.circular(27),
+                        ),
+                        child: Row(
+                          children: <Widget>[
+                            Text(
+                              "Add to Cart",
+                              style: Theme.of(context).textTheme.button,
+                            ),
+                            SizedBox(width: 30),
+                            Icon(Icons.add),
+                          ],
+                        ),
                       ),
                     ),
-                    Container(
-                      height: 80,
-                      width: 80,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color(primaryColour).withOpacity(.26),
-                      ),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.all(15),
-                            height: 60,
-                            width: 60,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Color(primaryColour),
-                            ),
-                            child: Icon(Icons.shopping_basket),
-                          ),
-                          Positioned(
-                            right: 5,
-                            bottom: 5,
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 28,
-                              width: 28,
+                    GestureDetector(
+                      onTap: () => _navigateToCart(context),
+                      child: Container(
+                        height: 80,
+                        width: 80,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(primaryColour).withOpacity(.26),
+                        ),
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.all(15),
+                              height: 60,
+                              width: 60,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: Color(whiteColour),
+                                color: Color(primaryColour),
                               ),
-                              child: Text(
-                                "0",
-                                style: Theme.of(context).textTheme.button.copyWith(color: Color(primaryColour), fontSize: 16),
-                              ),
+                              child: Icon(Icons.shopping_basket),
                             ),
-                          )
-                        ],
+                            Positioned(
+                              right: 5,
+                              bottom: 5,
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: 28,
+                                width: 28,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Color(whiteColour),
+                                ),
+                                child: Text(
+                                  "0",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .button
+                                      .copyWith(
+                                          color: Color(primaryColour),
+                                          fontSize: 16),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -197,4 +212,8 @@ class ItemMobileLandscape extends BaseModelWidget<ItemViewModel> {
   Widget build(BuildContext context, ItemViewModel data) {
     return Scaffold();
   }
+}
+
+void _navigateToCart(BuildContext context) {
+  Navigator.pushNamed(context, CartScreenRoute);
 }

@@ -1,12 +1,10 @@
 import 'package:flutter_bonapp/enums/viewstate.dart';
 import 'package:flutter_bonapp/models/menu.dart';
 import 'package:flutter_bonapp/models/offer.dart';
-import 'package:flutter_bonapp/models/post.dart';
 import 'package:flutter_bonapp/models/user.dart';
 import 'package:flutter_bonapp/services/locator.dart';
 import 'package:flutter_bonapp/services/menu_service.dart';
 import 'package:flutter_bonapp/services/offer_service.dart';
-import 'package:flutter_bonapp/services/post_service.dart';
 import 'package:flutter_bonapp/services/user_service.dart';
 import 'package:flutter_bonapp/viewmodels/base_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';

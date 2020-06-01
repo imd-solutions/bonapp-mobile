@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bonapp/models/post.dart';
 import 'package:flutter_bonapp/responsive/orientation_layout.dart';
 import 'package:flutter_bonapp/responsive/screen_type_layout.dart';
 import 'package:flutter_bonapp/screens/application/posts/mobile/orientation_layout.dart';
