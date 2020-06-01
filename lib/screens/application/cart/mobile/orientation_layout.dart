@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bonapp/utils/constants.dart';
 import 'package:flutter_bonapp/viewmodels/cart/viewmodel.dart';
 import 'package:flutter_bonapp/widgets/base_model_widget.dart';
 import 'package:flutter_bonapp/widgets/cart/items.dart';
@@ -6,7 +7,7 @@ import 'package:flutter_bonapp/widgets/cart/items.dart';
 class CartMobilePortrait extends BaseModelWidget<CartViewModel> {
   @override
   Widget build(BuildContext context, CartViewModel data) {
-    print(data.itemCount);
+    var height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -35,10 +36,10 @@ class CartMobilePortrait extends BaseModelWidget<CartViewModel> {
                 ],
               ),
               Container(
-                height: 400.0,
+                padding: EdgeInsets.only(top: 20.0),
+                height: height * 0.85,
                 child: Column(
                   children: <Widget>[
-                    Text('ADD'),
                     Expanded(
                       child: ListView.builder(
                         itemCount: data.items.length,
@@ -54,7 +55,10 @@ class CartMobilePortrait extends BaseModelWidget<CartViewModel> {
                         onPressed: () => print('CHECKOUT'),
                         child: Text(
                           'Checkout',
-                          style: TextStyle(color: Colors.blue, fontSize: 20),
+                          style: TextStyle(
+                            color: Color(secondaryColour),
+                            fontSize: 20.0,
+                          ),
                         ))
                   ],
                 ),

@@ -20,7 +20,13 @@ class CartItems extends StatelessWidget {
       child: Card(
         child: ListTile(
           leading: CircleAvatar(
-            child: FittedBox(child: Text('£${price.toStringAsFixed(2)}')),
+            child: FittedBox(
+              child: Image.asset(
+                'assets/images/logo.png',
+                height: 100.0,
+                width: 100.0,
+              ),
+            ),
           ),
           title: Text(name),
           subtitle: Text('Total: £${(price * quantity).toStringAsFixed(2)}'),
