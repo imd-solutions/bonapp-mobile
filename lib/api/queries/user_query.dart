@@ -47,7 +47,9 @@ class UserQuery {
     return """
       query user (\$id: ID!){
         user (id: \$id) {
+          id
           name
+          email
           avatar
           profile {
             firstname

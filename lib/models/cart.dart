@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
-
 CartItem cartFromJson(String str) => CartItem.fromJson(json.decode(str));
 
 String cartToJson(CartItem data) => json.encode(data.toJson());

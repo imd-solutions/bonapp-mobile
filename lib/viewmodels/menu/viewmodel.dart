@@ -44,6 +44,7 @@ class MenuViewModel extends BaseModel {
 
   Menu get info {
     return Menu(
+      id: this._menu.id,
       name: this._menu.name,
       description: this._menu.description,
       imgIcon: this._menu.imgIcon,
@@ -54,6 +55,7 @@ class MenuViewModel extends BaseModel {
 
   Items get itemInfo {
     return Items(
+      id: this._featuredItems.id,
       name: this._featuredItems.name,
       subtitle: this._featuredItems.subtitle,
       description: this._featuredItems.description,
@@ -64,6 +66,7 @@ class MenuViewModel extends BaseModel {
 
   Items get pickInfo {
     return Items(
+      id: this._pickOfDayItems.id,
       name: this._pickOfDayItems.name,
       subtitle: this._pickOfDayItems.subtitle,
       description: this._pickOfDayItems.description,
@@ -71,7 +74,6 @@ class MenuViewModel extends BaseModel {
       price: this._pickOfDayItems.price,
     );
   }
-
 }
 
 class MenuListViewModel extends BaseModel {

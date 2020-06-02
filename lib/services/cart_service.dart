@@ -16,10 +16,11 @@ class CartService {
       _items.update(
         pid.toString(),
         (existingCartItem) => CartItem(
-            id: pid,
-            name: existingCartItem.name,
-            quantity: existingCartItem.quantity + 1,
-            price: existingCartItem.price),
+          id: pid,
+          name: existingCartItem.name,
+          quantity: existingCartItem.quantity + 1,
+          price: existingCartItem.price,
+        ),
       );
     } else {
       _items.putIfAbsent(
@@ -35,22 +36,26 @@ class CartService {
   }
 
   void removeItem(int id) {
-    _items.remove(id);
-
+    _items.remove(id.toString());
   }
 
   void removeSingleItem(int id) {
-    if (!_items.containsKey(id)) {
+    if (!_items.containsKey(id.toString())) {
       return;
     }
-    if (_items[id].quantity > 1) {
-      _items.update(
-          id.toString(),
-              (existingCartItem) => CartItem(
-              id: id,
-              name: existingCartItem.name,
-              quantity: existingCartItem.quantity - 1,
-              price: existingCartItem.price));
+    if (_items[id.toString()].quantity > 1) {
+      _items.update(id.toString(), (existingCartItem) => CartItem(id: id, name: existingCartItem.name, quantity: existingCartItem.quantity - 1, price: existingCartItem.price));
+    } else {
+      _items.update(id.toString(), (existingCartItem) => CartItem(id: id, name: existingCartItem.name, quantity: existingCartItem.quantity = 0, price: existingCartItem.price));
+      removeItem(id);
+    }
+  }
+
+  int itemAmount(int id) {
+    if (_items.containsKey(id.toString())) {
+      return _items[id.toString()].quantity;
+    } else {
+      return int.parse('0');
     }
   }
 

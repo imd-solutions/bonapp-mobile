@@ -4,13 +4,13 @@ class MenuQuery {
     return """
             query {
               menucategories {
-              id
+                id
                 name
                 description
                 imgIcon   
                 imgUrl
                 items {
-              id
+                  id
                   name
                   subtitle
                   description
@@ -27,13 +27,13 @@ class MenuQuery {
     return """
             query menucategory (\$id: ID!) {
                menucategory(id: \$id) {
-              id
+                id
                 name
                 description
                 imgIcon   
                 imgUrl
                 items {
-              id
+                  id
                   name
                   subtitle
                   description
@@ -50,7 +50,7 @@ class MenuQuery {
     return """
             query {
              menuitems {
-              id
+                id
                 name
                 subtitle
                 description
@@ -65,8 +65,8 @@ class MenuQuery {
   String getItem() {
     return """
             query menuitem (\$id: ID!)  {
-               menuitem (id: 1) {
-              id
+               menuitem (id: \$id) {
+                id
                 name
                 subtitle
                 description
@@ -82,7 +82,7 @@ class MenuQuery {
     return """
             query {
              menuitemFeatured {
-              id
+                id
                 name
                 subtitle
                 description

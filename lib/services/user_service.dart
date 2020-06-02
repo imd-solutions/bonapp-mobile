@@ -78,9 +78,7 @@ class UserService {
 
     Iterable list = result['professions'];
 
-    return list
-        .map((professions) => Professions.fromJson(professions))
-        .toList();
+    return list.map((professions) => Professions.fromJson(professions)).toList();
   }
 
   // Get a list of users from the site.
@@ -128,6 +126,7 @@ class UserService {
     final result = response.data;
 
     User user = User(
+      id: int.parse(result['user']['id']),
       name: result['user']['name'],
       avatar: result['user']['avatar'],
       email: result['user']['email'],
@@ -136,15 +135,9 @@ class UserService {
           firstname: result['user']['profile']['firstname'],
           lastname: result['user']['profile']['lastname'],
           alerts: Alert(
-            email: result['user']['profile']['alerts']['email'] == 1
-                ? true
-                : false,
-            notification:
-                result['user']['profile']['alerts']['notification'] == 1
-                    ? true
-                    : false,
-            text:
-                result['user']['profile']['alerts']['text'] == 1 ? true : false,
+            email: result['user']['profile']['alerts']['email'] == 1 ? true : false,
+            notification: result['user']['profile']['alerts']['notification'] == 1 ? true : false,
+            text: result['user']['profile']['alerts']['text'] == 1 ? true : false,
           )),
     );
 
@@ -207,17 +200,9 @@ class UserService {
             firstname: result['login']['user']['profile']['firstname'],
             lastname: result['login']['user']['profile']['lastname'],
             alerts: Alert(
-              email: result['login']['user']['profile']['alerts']['email'] == 1
-                  ? true
-                  : false,
-              notification: result['login']['user']['profile']['alerts']
-                          ['notification'] ==
-                      1
-                  ? true
-                  : false,
-              text: result['login']['user']['profile']['alerts']['text'] == 1
-                  ? true
-                  : false,
+              email: result['login']['user']['profile']['alerts']['email'] == 1 ? true : false,
+              notification: result['login']['user']['profile']['alerts']['notification'] == 1 ? true : false,
+              text: result['login']['user']['profile']['alerts']['text'] == 1 ? true : false,
             ),
           ),
         ),
@@ -257,12 +242,8 @@ class UserService {
         ),
       );
 
-      if (response.hasException &&
-          response.exception.graphqlErrors.first.extensions['validation'] !=
-              null) {
-        var message = response
-            .exception.graphqlErrors.first.extensions['validation']
-            .toString();
+      if (response.hasException && response.exception.graphqlErrors.first.extensions['validation'] != null) {
+        var message = response.exception.graphqlErrors.first.extensions['validation'].toString();
         return Message(
           status: 301,
           title: 'Warning',
@@ -278,8 +259,7 @@ class UserService {
       return Message(
         status: 200,
         title: 'Success',
-        message:
-            'You have been registered successfully. Please check your email.',
+        message: 'You have been registered successfully. Please check your email.',
         colour: successColour,
       );
     } catch (e) {
@@ -310,8 +290,7 @@ class UserService {
       );
 
       if (response.hasException) {
-        throw new Exception(
-            'There seems to be a problem. Please contact the system admin.');
+        throw new Exception('There seems to be a problem. Please contact the system admin.');
       }
 
       final result = response.data;

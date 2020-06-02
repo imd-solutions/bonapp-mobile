@@ -113,7 +113,15 @@ class CategoryMobilePortrait extends BaseModelWidget<CategoryViewModel> {
               child: ListView(
                 shrinkWrap: true,
                 children: <Widget>[
-                  for (var i = 0; i < category.items.length; i++) _buildListItem(category.items[i], 4.0, width, orientation, context),
+                  for (var i = 0; i < category.items.length; i++)
+                    _buildListItem(
+                      category.items[i],
+                      4.0,
+                      width,
+                      orientation,
+                      context,
+                      data,
+                    ),
                 ],
               ),
             ),
@@ -209,7 +217,7 @@ class CategoryMobileLandscape extends BaseModelWidget<CategoryViewModel> {
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[
-                    for (var i = 0; i < category.items.length; i++) _buildListItem(category.items[i], 4.0, width, orientation, context),
+                    for (var i = 0; i < category.items.length; i++) _buildListItem(category.items[i], 4.0, width, orientation, context, data),
                   ],
                 ),
               )
@@ -273,7 +281,7 @@ class ColumnHeader extends StatelessWidget {
   }
 }
 
-_buildListItem(Items item, double rating, double width, Orientation orientation, BuildContext context) {
+_buildListItem(Items item, double rating, double width, Orientation orientation, BuildContext context, CategoryViewModel data) {
   return Padding(
     padding: EdgeInsets.all(15.0),
     child: orientation == Orientation.portrait
@@ -335,6 +343,26 @@ _buildListItem(Items item, double rating, double width, Orientation orientation,
                                   '£${item.price.toStringAsFixed(2)}',
                                   style: TextStyle(fontFamily: 'Raleway'),
                                 ),
+                                SizedBox(
+                                  width: 5.0,
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    _navigateToItem(context, item);
+                                  },
+                                  child: Icon(
+                                    Icons.info,
+                                    size: 18.0,
+                                    color: Color(thirdColour),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 20.0,
+                                ),
+                                if (data.itemAmount(item.id) > 0)
+                                  Text(
+                                    'QTY: ${data.itemAmount(item.id)}',
+                                  )
                               ],
                             )
                           ],
@@ -349,9 +377,7 @@ _buildListItem(Items item, double rating, double width, Orientation orientation,
                     children: <Widget>[
                       Container(
                         child: InkResponse(
-                          onTap: () {
-                            _navigateToItem(context, item);
-                          },
+                          onTap: () => data.removeItemFromCart(item.id),
                           child: Container(
                             width: 30.0,
                             height: 30.0,
@@ -360,7 +386,7 @@ _buildListItem(Items item, double rating, double width, Orientation orientation,
                               shape: BoxShape.circle,
                             ),
                             child: Icon(
-                              Icons.info,
+                              Icons.remove,
                               color: Color(whiteColour),
                               size: 30.0,
                             ),
@@ -372,7 +398,7 @@ _buildListItem(Items item, double rating, double width, Orientation orientation,
                       ),
                       Container(
                         child: InkResponse(
-                          onTap: () {},
+                          onTap: () => data.addItemToCart(item.id, item.name, item.price),
                           child: Container(
                             width: 30.0,
                             height: 30.0,

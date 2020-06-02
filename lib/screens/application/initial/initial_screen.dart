@@ -20,10 +20,10 @@ class InitialScreen extends StatelessWidget {
         builder: (context) => ScreenTypeLayout(
           mobile: OrientationLayout(
             portrait: (context) => InitialMobilePortrait(
-              user: user,
+              user: this.user,
             ),
             landscape: (context) => InitialMobileLandscape(
-              user: user,
+              user: this.user,
             ),
           ),
           tablet: OrientationLayout(

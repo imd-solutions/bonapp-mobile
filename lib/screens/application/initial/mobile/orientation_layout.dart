@@ -63,8 +63,7 @@ List<BottomNavigationBarItem> _bottomNavBarList = [
   )
 ];
 
-List<Widget> _drawerItems(
-    User user, BuildContext context, InitialViewModel data) {
+List<Widget> _drawerItems(User user, BuildContext context, InitialViewModel data) {
   return <Widget>[
     UserAccountsDrawerHeader(
       accountName: Text(user.name),
@@ -80,9 +79,7 @@ List<Widget> _drawerItems(
     for (var index = 0; index < _accountDrawerList.length; index++)
       InkWell(
         onTap: () {
-          Navigator.of(context).popAndPushNamed(
-              _accountDrawerList[index]['page'],
-              arguments: user);
+          Navigator.of(context).popAndPushNamed(_accountDrawerList[index]['page'], arguments: user);
         },
         child: ListTile(
           leading: Icon(
@@ -97,8 +94,7 @@ List<Widget> _drawerItems(
     for (var index = 0; index < _settingsDrawerList.length; index++)
       InkWell(
         onTap: () {
-          Navigator.of(context)
-              .pushNamed(_settingsDrawerList[index]['page'], arguments: user);
+          Navigator.of(context).pushNamed(_settingsDrawerList[index]['page'], arguments: user);
         },
         child: ListTile(
           leading: Icon(
@@ -196,8 +192,7 @@ class InitialMobilePortrait extends BaseModelWidget<InitialViewModel> {
         onTap: bottomNavOnTap,
         selectedItemColor: Color(primaryColour),
         unselectedItemColor: Color(accentThirdColour),
-        currentIndex:
-            data.bottomNavIndex, // this will be set when a new tab is tapped
+        currentIndex: data.bottomNavIndex, // this will be set when a new tab is tapped
         items: _bottomNavBarList,
       ),
     );
@@ -260,8 +255,7 @@ class InitialMobileLandscape extends BaseModelWidget<InitialViewModel> {
         onTap: bottomNavOnTap,
         selectedItemColor: Color(primaryColour),
         unselectedItemColor: Color(accentThirdColour),
-        currentIndex:
-            data.bottomNavIndex, // this will be set when a new tab is tapped
+        currentIndex: data.bottomNavIndex, // this will be set when a new tab is tapped
         items: _bottomNavBarList,
       ),
     );

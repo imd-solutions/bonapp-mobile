@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bonapp/models/cart.dart';
 import 'package:flutter_bonapp/models/menu.dart';
-import 'package:flutter_bonapp/services/cart_service.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
 import 'package:flutter_bonapp/utils/env.dart';
 import 'package:flutter_bonapp/utils/routing_constants.dart';
-import 'package:flutter_bonapp/viewmodels/cart/viewmodel.dart';
 import 'package:flutter_bonapp/viewmodels/item/viewmodel.dart';
 import 'package:flutter_bonapp/widgets/base_model_widget.dart';
 
@@ -121,29 +118,52 @@ class ItemMobilePortrait extends BaseModelWidget<ItemViewModel> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    GestureDetector(
-                      onTap: () {
-                        data.addItemToCart(item.id, item.name, item.price);
-                      },
-                      child: Container(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 20, horizontal: 27),
-                        decoration: BoxDecoration(
-                          color: Color(primaryColour).withOpacity(.19),
-                          borderRadius: BorderRadius.circular(27),
-                        ),
-                        child: Row(
-                          children: <Widget>[
-                            Text(
-                              "Add to Cart",
-                              style: Theme.of(context).textTheme.button,
+                    data.itemAmount(item.id) > 0
+                        ? Container(
+                            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 27),
+                            decoration: BoxDecoration(
+                              color: Color(primaryColour).withOpacity(.19),
+                              borderRadius: BorderRadius.circular(27),
                             ),
-                            SizedBox(width: 30),
-                            Icon(Icons.add),
-                          ],
-                        ),
-                      ),
-                    ),
+                            child: Row(
+                              children: <Widget>[
+                                GestureDetector(
+                                  onTap: () => data.removeSingleItemFromCart(item.id), //removeItemFromCart
+                                  child: Icon(Icons.remove),
+                                ),
+                                SizedBox(width: 30),
+                                Text(
+                                  data.itemAmount(item.id).toString(),
+                                  style: Theme.of(context).textTheme.button,
+                                ),
+                                SizedBox(width: 30),
+                                GestureDetector(
+                                  onTap: () => data.addItemToCart(item.id, item.name, item.price),
+                                  child: Icon(Icons.add),
+                                ),
+                              ],
+                            ),
+                          )
+                        : GestureDetector(
+                            onTap: () => data.addItemToCart(item.id, item.name, item.price),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 27),
+                              decoration: BoxDecoration(
+                                color: Color(primaryColour).withOpacity(.19),
+                                borderRadius: BorderRadius.circular(27),
+                              ),
+                              child: Row(
+                                children: <Widget>[
+                                  Text(
+                                    "Add to Cart",
+                                    style: Theme.of(context).textTheme.button,
+                                  ),
+                                  SizedBox(width: 30),
+                                  Icon(Icons.add),
+                                ],
+                              ),
+                            ),
+                          ),
                     GestureDetector(
                       onTap: () => _navigateToCart(context),
                       child: Container(
@@ -178,13 +198,8 @@ class ItemMobilePortrait extends BaseModelWidget<ItemViewModel> {
                                   color: Color(whiteColour),
                                 ),
                                 child: Text(
-                                  "0",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .button
-                                      .copyWith(
-                                          color: Color(primaryColour),
-                                          fontSize: 16),
+                                  data.cartItemCount.toString(),
+                                  style: Theme.of(context).textTheme.button.copyWith(color: Color(primaryColour), fontSize: 16),
                                 ),
                               ),
                             )
