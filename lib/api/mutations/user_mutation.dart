@@ -10,6 +10,13 @@ class UserMutation {
             avatar
             email
             email_verified_at
+            messages {
+              id 
+              title 
+              body
+              read 
+              created_at
+            }
             profile {
               firstname
               lastname

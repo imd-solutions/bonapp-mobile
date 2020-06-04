@@ -51,9 +51,17 @@ class UserQuery {
           name
           email
           avatar
+          messages {
+            id 
+            title 
+            body
+            read 
+            created_at
+          }
           profile {
             firstname
             lastname
+            points
             alerts {
                email
                notification

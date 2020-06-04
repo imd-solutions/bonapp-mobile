@@ -15,6 +15,7 @@ class User {
   String email;
   String password;
   Profile profile;
+  List<Messages> messages;
 
   User({
     this.id,
@@ -23,15 +24,17 @@ class User {
     this.email,
     this.password,
     this.profile,
+    this.messages,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json["id"],
+        id: int.parse(json["id"]),
         name: json["name"],
         avatar: json["avatar"],
         email: json["email"],
         password: json["password"],
         profile: Profile.fromJson(json["profile"]),
+        messages: json["messages"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -41,6 +44,7 @@ class User {
         "email": email,
         "password": password,
         "profile": profile.toJson(),
+        "messages": messages.toList()
       };
 }
 
@@ -51,6 +55,7 @@ class Profile {
   DateTime dob;
   int profession;
   int location;
+  int points;
   String phoneNumber;
   String mobileNumber;
   String mobileToken;
@@ -63,6 +68,7 @@ class Profile {
     this.dob,
     this.profession,
     this.location,
+    this.points,
     this.phoneNumber,
     this.mobileNumber,
     this.mobileToken,
@@ -76,6 +82,7 @@ class Profile {
         dob: DateTime.parse(json["dob"]),
         profession: int.parse(json["profession"]),
         location: int.parse(json["location"]),
+        points: int.parse(json["points"]),
         phoneNumber: json["phone_number"],
         mobileNumber: json["mobile_number"],
         mobileToken: json["mobile_token"],
@@ -90,6 +97,7 @@ class Profile {
             "${dob.year.toString().padLeft(4, '0')}-${dob.month.toString().padLeft(2, '0')}-${dob.day.toString().padLeft(2, '0')}",
         "location": location,
         "profession": profession,
+        "points": points,
         "phone_number": phoneNumber,
         "mobile_number": mobileNumber,
         "mobile_token": mobileToken,
@@ -114,5 +122,37 @@ class Alert {
         "email": email,
         "notification": notification,
         "text": text,
+      };
+}
+
+class Messages {
+  int id;
+  String title;
+  String body;
+  String read;
+  DateTime createdAt;
+
+  Messages({
+    this.id,
+    this.title,
+    this.body,
+    this.read,
+    this.createdAt,
+  });
+
+  factory Messages.fromJson(Map<String, dynamic> json) => Messages(
+        id: json["id"],
+        title: json["title"],
+        body: json["body"],
+        read: json["read"],
+        createdAt: DateTime.parse(json["created_at"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "title": title,
+        "body": body,
+        "read": read,
+        "created_at": createdAt.toIso8601String(),
       };
 }

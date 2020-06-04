@@ -39,7 +39,9 @@ class HomeMobilePortrait extends BaseModelWidget<HomeViewModel> {
                             _userInformation(
                               landscape: true,
                               icon: FontAwesomeIcons.trophy,
-                              data: '20',
+                              data: data.user.profile.points != null
+                                  ? data.user.profile.points
+                                  : '0',
                               title: 'Points',
                               backgroundColour: 0xFFFD7384,
                             ),
@@ -65,7 +67,9 @@ class HomeMobilePortrait extends BaseModelWidget<HomeViewModel> {
                                     _userInformation(
                                       landscape: false,
                                       icon: FontAwesomeIcons.envelope,
-                                      data: '4',
+                                      data: data.user.messages.length > 0
+                                          ? '${data.user.messages.length}'
+                                          : '0',
                                       title: 'Messages',
                                       backgroundColour: 0XFFFC7B4D,
                                     ),
@@ -172,7 +176,9 @@ class HomeMobileLandscape extends BaseModelWidget<HomeViewModel> {
                         _userInformation(
                           landscape: true,
                           icon: FontAwesomeIcons.trophy,
-                          data: '20',
+                          data: data.user.profile.points != null
+                              ? data.user.profile.points
+                              : '0',
                           title: 'Points',
                           backgroundColour: 0xFFFD7384,
                         ),
@@ -193,7 +199,9 @@ class HomeMobileLandscape extends BaseModelWidget<HomeViewModel> {
                         _userInformation(
                           landscape: true,
                           icon: FontAwesomeIcons.envelope,
-                          data: '4',
+                          data: data.user.messages.length > 0
+                              ? '${data.user.messages.length}'
+                              : '0',
                           title: 'Messages',
                           backgroundColour: 0XFFFC7B4D,
                         ),
