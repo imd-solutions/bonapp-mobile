@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bonapp/models/menu.dart';
+import 'package:flutter_bonapp/partials/application_header.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
 import 'package:flutter_bonapp/utils/env.dart';
 import 'package:flutter_bonapp/utils/routing_constants.dart';
@@ -31,27 +32,7 @@ class CategoryMobilePortrait extends BaseModelWidget<CategoryViewModel> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                IconButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  icon: Icon(Icons.arrow_back),
-                ),
-                Column(
-                  children: <Widget>[
-                    Image.asset(
-                      'assets/images/logo.png',
-                      height: 35.0,
-                    ),
-                  ],
-                ),
-                IconButton(
-                  onPressed: () => print('Alert Bar'),
-                  icon: Icon(Icons.settings),
-                )
-              ],
-            ),
+            ApplicationHeader(),
             Stack(
               children: <Widget>[
                 Container(
@@ -61,7 +42,7 @@ class CategoryMobilePortrait extends BaseModelWidget<CategoryViewModel> {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       colorFilter: ColorFilter.mode(
-                        Colors.black.withOpacity(0.2),
+                        Color(blackColour).withOpacity(0.2),
                         BlendMode.dstATop,
                       ),
                       image: NetworkImage(graphQLApiImg + category.image),
@@ -76,7 +57,7 @@ class CategoryMobilePortrait extends BaseModelWidget<CategoryViewModel> {
                     category.name,
                     style: TextStyle(
                       fontSize: 25.0,
-                      fontFamily: 'Poppins',
+                      fontFamily: primaryFont,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -91,7 +72,7 @@ class CategoryMobilePortrait extends BaseModelWidget<CategoryViewModel> {
                       children: <Widget>[
                         Text(
                           category.description,
-                          style: TextStyle(fontFamily: 'Raleway', fontSize: 15.0),
+                          style: TextStyle(fontFamily: secondaryFont, fontSize: 15.0),
                         )
                       ],
                     ),
@@ -145,27 +126,7 @@ class CategoryMobileLandscape extends BaseModelWidget<CategoryViewModel> {
         child: SafeArea(
           child: Column(
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  IconButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    icon: Icon(Icons.arrow_back),
-                  ),
-                  Column(
-                    children: <Widget>[
-                      Image.asset(
-                        'assets/images/logo.png',
-                        height: 35.0,
-                      ),
-                    ],
-                  ),
-                  IconButton(
-                    onPressed: () => print('Alert Bar'),
-                    icon: Icon(Icons.settings),
-                  )
-                ],
-              ),
+              ApplicationHeader(),
               Stack(
                 children: <Widget>[
                   Container(
@@ -175,7 +136,7 @@ class CategoryMobileLandscape extends BaseModelWidget<CategoryViewModel> {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         colorFilter: ColorFilter.mode(
-                          Colors.black.withOpacity(0.2),
+                          Color(blackColour).withOpacity(0.2),
                           BlendMode.dstATop,
                         ),
                         image: NetworkImage(graphQLApiImg + category.image),
@@ -188,7 +149,7 @@ class CategoryMobileLandscape extends BaseModelWidget<CategoryViewModel> {
                     left: 10.0,
                     child: Text(
                       category.name,
-                      style: TextStyle(fontSize: 25.0, fontFamily: 'Poppins', fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 25.0, fontFamily: primaryFont, fontWeight: FontWeight.bold),
                     ),
                   ),
                   Positioned(
@@ -196,7 +157,7 @@ class CategoryMobileLandscape extends BaseModelWidget<CategoryViewModel> {
                     left: 10.0,
                     child: Text(
                       category.description,
-                      style: TextStyle(fontFamily: 'Raleway', fontSize: 15.0),
+                      style: TextStyle(fontFamily: secondaryFont, fontSize: 15.0),
                     ),
                   )
                 ],
@@ -313,7 +274,7 @@ _buildListItem(Items item, double rating, double width, Orientation orientation,
                             Text(
                               item.name,
                               style: TextStyle(
-                                fontFamily: 'Poppins',
+                                fontFamily: primaryFont,
                                 fontSize: 14.0,
                                 fontWeight: FontWeight.w400,
                               ),
@@ -341,7 +302,7 @@ _buildListItem(Items item, double rating, double width, Orientation orientation,
                               children: <Widget>[
                                 Text(
                                   '£${item.price.toStringAsFixed(2)}',
-                                  style: TextStyle(fontFamily: 'Raleway'),
+                                  style: TextStyle(fontFamily: secondaryFont),
                                 ),
                                 SizedBox(
                                   width: 5.0,
@@ -398,7 +359,7 @@ _buildListItem(Items item, double rating, double width, Orientation orientation,
                       ),
                       Container(
                         child: InkResponse(
-                          onTap: () => data.addItemToCart(item.id, item.name, item.price),
+                          onTap: () => data.addItemToCart(item.id, item.name, item.subtitle, item.price),
                           child: Container(
                             width: 30.0,
                             height: 30.0,
@@ -443,7 +404,7 @@ _buildListItem(Items item, double rating, double width, Orientation orientation,
                         Text(
                           item.name,
                           style: TextStyle(
-                            fontFamily: 'Poppins',
+                            fontFamily: primaryFont,
                             fontSize: 14.0,
                             fontWeight: FontWeight.w400,
                           ),
@@ -471,7 +432,7 @@ _buildListItem(Items item, double rating, double width, Orientation orientation,
                           children: <Widget>[
                             Text(
                               '£${item.price.toStringAsFixed(2)}',
-                              style: TextStyle(fontFamily: 'Raleway'),
+                              style: TextStyle(fontFamily: secondaryFont),
                             ),
                           ],
                         )

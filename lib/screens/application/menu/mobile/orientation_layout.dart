@@ -186,7 +186,7 @@ class ColumnFooter extends StatelessWidget {
       title,
       style: TextStyle(
         fontWeight: FontWeight.bold,
-        fontFamily: 'Poppins',
+        fontFamily: primaryFont,
         fontSize: fontSize,
       ),
     );
@@ -208,12 +208,12 @@ Widget _buildCard(String name, String price, String imgPath, bool added, bool is
           borderRadius: BorderRadius.circular(15.0),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              color: Color(greyColour).withOpacity(0.2),
               spreadRadius: 3.0,
               blurRadius: 5.0,
             )
           ],
-          color: Colors.white,
+          color: Color(whiteColour),
         ),
         child: Column(
           children: [
@@ -222,15 +222,20 @@ Widget _buildCard(String name, String price, String imgPath, bool added, bool is
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
+                  Icon(
+                    Icons.info_outline,
+                    color: Color(0xFFEF7532),
+                  ),
+                  Spacer(),
                   isFavorite
-                      ? Icon(
-                          Icons.favorite,
-                          color: Color(0xFFEF7532),
-                        )
-                      : Icon(
-                          Icons.favorite_border,
-                          color: Color(0xFFEF7532),
-                        ),
+                  ? Icon(
+                      Icons.favorite,
+                      color: Color(0xFFEF7532),
+                    )
+                  : Icon(
+                      Icons.favorite_border,
+                      color: Color(0xFFEF7532),
+                    ),
                 ],
               ),
             ),
@@ -254,7 +259,7 @@ Widget _buildCard(String name, String price, String imgPath, bool added, bool is
               price,
               style: TextStyle(
                 color: Color(primaryColour),
-                fontFamily: 'Poppins',
+                fontFamily: primaryFont,
                 fontSize: _priceNameSize(screenHeight.toInt()),
               ),
             ),
@@ -262,53 +267,13 @@ Widget _buildCard(String name, String price, String imgPath, bool added, bool is
               name,
               style: TextStyle(
                 color: Color(accentColour),
-                fontFamily: 'Raleway',
+                fontFamily: secondaryFont,
                 fontSize: _priceNameSize(screenHeight.toInt()),
               ),
             ),
             Padding(
               padding: EdgeInsets.only(bottom: 10.0),
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 5.0, right: 5.0, bottom: 4.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  if (!added) ...[
-                    Icon(
-                      Icons.shopping_basket,
-                      color: Color(0xFFD17E50),
-                      size: _cartSize(screenHeight.toInt()),
-                    ),
-                    Text(
-                      'Add to cart',
-                      style: TextStyle(
-                        fontFamily: 'Varela',
-                        color: Color(0xFFD17E50),
-                        fontSize: _cartSize(screenHeight.toInt()),
-                      ),
-                    )
-                  ],
-                  if (added) ...[
-                    Icon(Icons.remove_circle_outline, color: Color(0xFFD17E50), size: 12.0),
-                    Text(
-                      '3',
-                      style: TextStyle(
-                        fontFamily: 'Varela',
-                        color: Color(0xFFD17E50),
-                        fontWeight: FontWeight.bold,
-                        fontSize: _cartSize(screenHeight.toInt()),
-                      ),
-                    ),
-                    Icon(
-                      Icons.add_circle_outline,
-                      color: Color(0xFFD17E50),
-                      size: _cartSize(screenHeight.toInt()),
-                    ),
-                  ]
-                ],
-              ),
-            )
           ],
         ),
       ),
@@ -391,7 +356,7 @@ List<Widget> _topHalfScreen(MenuViewModel data) {
       children: <Widget>[
         Text(
           "What would you like to have today?",
-          style: TextStyle(fontSize: 15.0, color: Colors.black, fontFamily: primaryFont),
+          style: TextStyle(fontSize: 15.0, color: Color(blackColour), fontFamily: primaryFont),
         ),
       ],
     ),
@@ -439,7 +404,7 @@ List<Widget> _topHalfScreen(MenuViewModel data) {
                     child: Text(
                       data.featuredItems[index].itemInfo.name,
                       style: TextStyle(
-                        fontFamily: 'Poppins',
+                        fontFamily: primaryFont,
                         fontSize: 10.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -452,7 +417,7 @@ List<Widget> _topHalfScreen(MenuViewModel data) {
                       child: Text(
                         data.featuredItems[index].itemInfo.subtitle,
                         style: TextStyle(
-                          fontFamily: 'Raleway',
+                          fontFamily: secondaryFont,
                           fontSize: 8.0,
                         ),
                       ),
@@ -499,7 +464,7 @@ List<Widget> _topHalfScreen(MenuViewModel data) {
                     child: Text(
                       data.menus[index].info.name,
                       style: TextStyle(
-                        fontFamily: 'Poppins',
+                        fontFamily: primaryFont,
                         fontSize: 12.0,
                         fontWeight: FontWeight.bold,
                       ),

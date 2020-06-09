@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bonapp/models/user.dart';
+import 'package:flutter_bonapp/partials/application_header.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
 import 'package:flutter_bonapp/utils/env.dart';
 import 'package:flutter_bonapp/viewmodels/account/viewmodel.dart';
@@ -16,43 +17,23 @@ List switchers = [
   {"icon": Icons.phone_android, "text": "Text Notification", "divider": false},
 ];
 
+final bool turnOnNotification = true;
+
 class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
   final User user;
 
   AccountMobilePortrait({this.user});
 
-  final bool turnOnNotification = true;
-
   @override
   Widget build(BuildContext context, AccountViewModel data) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(whiteColour),
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  IconButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    icon: Icon(Icons.arrow_back),
-                  ),
-                  Column(
-                    children: <Widget>[
-                      Image.asset(
-                        'assets/images/logo.png',
-                        height: 35.0,
-                      ),
-                    ],
-                  ),
-                  IconButton(
-                    onPressed: () => print('Alert Bar'),
-                    icon: Icon(Icons.settings),
-                  )
-                ],
-              ),
+              ApplicationHeader(),
               SizedBox(
                 height: 20.0,
               ),
@@ -70,7 +51,7 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(60.0),
                               boxShadow: [
-                                BoxShadow(blurRadius: 3.0, offset: Offset(0, 4.0), color: Colors.black38),
+                                BoxShadow(blurRadius: 3.0, offset: Offset(0, 4.0), color: Color(blackColour)),
                               ],
                               image: DecorationImage(
                                 image: NetworkImage(graphQLApiImg + user.avatar),
@@ -95,7 +76,7 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
                               ),
                               Text(
                                 user.email,
-                                style: TextStyle(color: Colors.grey),
+                                style: TextStyle(color: Color(greyColour)),
                               ),
                               SizedBox(
                                 height: 20.0,
@@ -111,7 +92,7 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
                       Text(
                         "Account",
                         style: TextStyle(
-                          fontFamily: 'Poppins',
+                          fontFamily: primaryFont,
                           fontSize: 20.0,
                           fontWeight: FontWeight.w500,
                         ),
@@ -141,7 +122,7 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
                       Text(
                         "Notifications",
                         style: TextStyle(
-                          fontFamily: 'Poppins',
+                          fontFamily: primaryFont,
                           fontSize: 20.0,
                           fontWeight: FontWeight.w500,
                         ),
@@ -187,8 +168,138 @@ class AccountMobileLandscape extends BaseModelWidget<AccountViewModel> {
   AccountMobileLandscape({this.user});
   @override
   Widget build(BuildContext context, AccountViewModel data) {
-    return Container(
-      child: Text('Account Page.'),
+    return Scaffold(
+      backgroundColor: Color(whiteColour),
+      body: SafeArea(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            children: <Widget>[
+              ApplicationHeader(),
+              SizedBox(
+                height: 20.0,
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                            height: 100.0,
+                            width: 100.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(60.0),
+                              boxShadow: [
+                                BoxShadow(blurRadius: 3.0, offset: Offset(0, 4.0), color: Color(blackColour)),
+                              ],
+                              image: DecorationImage(
+                                image: NetworkImage(graphQLApiImg + user.avatar),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20.0,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                user.name,
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              Text(
+                                user.email,
+                                style: TextStyle(color: Color(greyColour)),
+                              ),
+                              SizedBox(
+                                height: 20.0,
+                              ),
+                              SmallButton(btnText: "Edit"),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30.0,
+                      ),
+                      Text(
+                        "Account",
+                        style: TextStyle(
+                          fontFamily: primaryFont,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Card(
+                        elevation: 3.0,
+                        child: Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Column(
+                            children: <Widget>[
+                              for (var i = 0; i < cards.length; i++)
+                                BuildAccountList(
+                                  icon: cards[i]['icon'],
+                                  text: cards[i]['text'],
+                                  divider: cards[i]['divider'],
+                                ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30.0,
+                      ),
+                      Text(
+                        "Notifications",
+                        style: TextStyle(
+                          fontFamily: primaryFont,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Card(
+                        elevation: 3.0,
+                        child: Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Column(
+                            children: <Widget>[
+                              for (var i = 0; i < switchers.length; i++)
+                                BuildNotificationList(
+                                  icon: switchers[i]['icon'],
+                                  text: switchers[i]['text'],
+                                  divider: switchers[i]['divider'],
+                                  turnOnNotification: turnOnNotification,
+                                ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30.0,
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -252,7 +363,7 @@ class BuildNotificationList extends StatelessWidget {
         if (divider)
           Divider(
             height: 10.0,
-            color: Colors.grey,
+            color: Color(greyColour),
           ),
       ],
     );
@@ -296,7 +407,7 @@ class BuildAccountList extends StatelessWidget {
           if (divider)
             Divider(
               height: 15.0,
-              color: Colors.grey,
+              color: Color(greyColour),
             ),
         ],
       ),

@@ -181,7 +181,7 @@ Widget loginBtn(BuildContext context, User user, _formKey, LoginViewModel data) 
               : Text(
                   'Login',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Color(whiteColour),
                     fontFamily: secondaryFont,
                   ),
                 ),

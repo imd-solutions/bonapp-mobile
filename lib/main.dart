@@ -31,9 +31,7 @@ class MyApp extends StatelessWidget {
       ),
       onGenerateRoute: router.generateRoute,
       initialRoute: IntroScreenRoute,
-//      home: InitialScreen(),
       home: IntroScreen(),
-//      home: AccountScreen(),
     );
   }
 }

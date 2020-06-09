@@ -1,39 +1,31 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bonapp/models/user.dart';
+import 'package:flutter_bonapp/responsive/orientation_layout.dart';
+import 'package:flutter_bonapp/responsive/screen_type_layout.dart';
+import 'package:flutter_bonapp/screens/application/orders/mobile/orientation_layout.dart';
+import 'package:flutter_bonapp/viewmodels/order/viewmodel.dart';
+import 'package:flutter_bonapp/widgets/base_widget.dart';
 
-class OrdersScreen extends StatelessWidget {
+class OrderScreen extends StatelessWidget {
+  final User user;
+
+  OrderScreen({this.user});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                IconButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  icon: Icon(Icons.arrow_back),
-                ),
-                Column(
-                  children: <Widget>[
-                    Image.asset(
-                      'assets/images/logo.png',
-                      height: 35.0,
-                    ),
-                    Text(
-                      'My Orders',
-                      style: TextStyle(fontFamily: 'Poppins'),
-                    )
-                  ],
-                ),
-                IconButton(
-                  onPressed: () => print('Alert Bar'),
-                  icon: Icon(Icons.settings),
-                )
-              ],
-            ),
-          ],
+    return Center(
+      child: BaseWidget<OrderViewModel>(
+        viewModel: OrderViewModel(),
+        onModelReady: (model) => model.initialise(),
+        builder: (context) => ScreenTypeLayout(
+          mobile: OrientationLayout(
+            portrait: (context) => OrderMobilePortrait(),
+            landscape: (context) => OrderMobileLandscape(),
+          ),
+          tablet: OrientationLayout(
+            portrait: (context) => OrderMobilePortrait(),
+            landscape: (context) => OrderMobileLandscape(),
+          ),
         ),
       ),
     );

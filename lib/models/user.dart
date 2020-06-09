@@ -16,6 +16,7 @@ class User {
   String password;
   Profile profile;
   List<Messages> messages;
+  List<Order> orders;
 
   User({
     this.id,
@@ -25,6 +26,7 @@ class User {
     this.password,
     this.profile,
     this.messages,
+    this.orders,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -37,15 +39,7 @@ class User {
         messages: json["messages"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "avatar": avatar,
-        "email": email,
-        "password": password,
-        "profile": profile.toJson(),
-        "messages": messages.toList()
-      };
+  Map<String, dynamic> toJson() => {"id": id, "name": name, "avatar": avatar, "email": email, "password": password, "profile": profile.toJson(), "messages": messages.toList()};
 }
 
 class Profile {
@@ -93,8 +87,7 @@ class Profile {
         "title": title,
         "firstname": firstname,
         "lastname": lastname,
-        "dob":
-            "${dob.year.toString().padLeft(4, '0')}-${dob.month.toString().padLeft(2, '0')}-${dob.day.toString().padLeft(2, '0')}",
+        "dob": "${dob.year.toString().padLeft(4, '0')}-${dob.month.toString().padLeft(2, '0')}-${dob.day.toString().padLeft(2, '0')}",
         "location": location,
         "profession": profession,
         "points": points,
@@ -141,7 +134,7 @@ class Messages {
   });
 
   factory Messages.fromJson(Map<String, dynamic> json) => Messages(
-        id: json["id"],
+        id: int.parse(json["id"]),
         title: json["title"],
         body: json["body"],
         read: json["read"],
@@ -154,5 +147,117 @@ class Messages {
         "body": body,
         "read": read,
         "created_at": createdAt.toIso8601String(),
+      };
+}
+
+class Order {
+  Order({
+    this.id,
+    this.status,
+    this.billingSubtotal,
+    this.billingTax,
+    this.billingTotal,
+    this.paymentMethod,
+    this.paymentStatus,
+    this.items,
+    this.createdAt,
+  });
+
+  String id;
+  String status;
+  double billingSubtotal;
+  double billingTax;
+  double billingTotal;
+  String paymentMethod;
+  String paymentStatus;
+  List<OrderItems> items;
+  DateTime createdAt;
+
+  factory Order.fromJson(Map<String, dynamic> json) => Order(
+        id: json["id"],
+        status: json["status"],
+        billingSubtotal: json["billing_subtotal"].toDouble(),
+        billingTax: json["billing_tax"].toDouble(),
+        billingTotal: json["billing_total"].toDouble(),
+        paymentMethod: json["payment_method"],
+        paymentStatus: json["payment_status"],
+        items: List<OrderItems>.from(json["items"].map((x) => OrderItems.fromJson(x))),
+        createdAt: DateTime.parse(json["created_at"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "status": status,
+        "billing_subtotal": billingSubtotal,
+        "billing_tax": billingTax,
+        "billing_total": billingTotal,
+        "payment_method": paymentMethod,
+        "payment_status": paymentStatus,
+        "items": List<dynamic>.from(items.map((x) => x.toJson())),
+        "created_at": createdAt,
+      };
+}
+
+class OrderItems {
+  int id;
+  String name;
+  String subtitle;
+  String description;
+  double price;
+  String image;
+  Pivot pivot;
+
+  OrderItems({
+    this.id,
+    this.name,
+    this.subtitle,
+    this.description,
+    this.price,
+    this.image,
+    this.pivot,
+  });
+
+  factory OrderItems.fromJson(Map<String, dynamic> json) => OrderItems(
+        id: json["id"],
+        name: json["name"],
+        subtitle: json["subtitle"],
+        description: json["description"],
+        price: json["price"].toDouble(),
+        image: json["imgUrl"],
+        pivot: Pivot.fromJson(json["pivot"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "subtitle": subtitle,
+        "description": description,
+        "price": price,
+        "image": image,
+        "pivot": pivot.toJson(),
+      };
+}
+
+class Pivot {
+  Pivot({
+    this.quantity,
+    this.price,
+    this.totalPrice,
+  });
+
+  int quantity;
+  double price;
+  double totalPrice;
+
+  factory Pivot.fromJson(Map<String, dynamic> json) => Pivot(
+        quantity: json["quantity"],
+        price: json["price"].toDouble(),
+        totalPrice: json["total_price"].toDouble(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "quantity": quantity,
+        "price": price,
+        "total_price": totalPrice,
       };
 }

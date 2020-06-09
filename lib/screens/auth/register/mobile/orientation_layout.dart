@@ -359,14 +359,14 @@ Widget listWidget(context, _formKey, data, user, profile) {
                       height: 15.0,
                       width: 15.0,
                       child: CircularProgressIndicator(
-                        backgroundColor: Colors.white,
+                        backgroundColor: Color(whiteColour),
                         strokeWidth: 2,
                       ),
                     )
                   : Text(
                       'Register',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Color(whiteColour),
                         fontFamily: secondaryFont,
                       ),
                     ),

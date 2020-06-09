@@ -144,7 +144,7 @@ class RegisterBtn extends StatelessWidget {
         'Get Started',
         style: TextStyle(
           fontSize: 18.0,
-          color: Colors.white,
+          color: Color(whiteColour),
           fontFamily: secondaryFont,
         ),
       ),

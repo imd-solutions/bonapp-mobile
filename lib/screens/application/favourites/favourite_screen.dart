@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bonapp/utils/constants.dart';
 
 class FavouriteScreen extends StatelessWidget {
   @override
@@ -21,7 +22,7 @@ class FavouriteScreen extends StatelessWidget {
                       height: 35.0,
                     ),
                     Text('Favourites Page',
-                      style: TextStyle(fontFamily: 'Poppins'),
+                      style: TextStyle(fontFamily: primaryFont),
                     )
                   ],
                 ),

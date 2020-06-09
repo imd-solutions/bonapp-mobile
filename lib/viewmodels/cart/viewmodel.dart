@@ -12,11 +12,16 @@ class CartViewModel extends BaseModel {
 
   void initialise() {
     getUserInfo();
+    _cartService.amount();
   }
 
   Map<String, CartItem> get items => _cartService.items;
 
   int get itemCount => _cartService.itemCount;
+
+  double get cartSubTotal => _cartService.cartSubTotal;
+  double get cartTax => _cartService.cartTax;
+  double get cartTotal => _cartService.cartTotal;
 
   User user;
 

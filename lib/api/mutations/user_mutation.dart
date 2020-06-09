@@ -17,6 +17,9 @@ class UserMutation {
               read 
               created_at
             }
+            orders {
+              id
+            }
             profile {
               firstname
               lastname

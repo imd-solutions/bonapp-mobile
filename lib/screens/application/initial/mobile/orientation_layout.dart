@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bonapp/models/user.dart';
+import 'package:flutter_bonapp/partials/application_header.dart';
 import 'package:flutter_bonapp/screens/application/homepage/home_screen.dart';
 import 'package:flutter_bonapp/screens/application/loyalty/loyalty_screen.dart';
 import 'package:flutter_bonapp/screens/application/menu/menu_screen.dart';
@@ -15,8 +16,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 final List _accountDrawerList = [
   {'icon': Icons.person, 'title': 'My Acount', 'page': AccountScreenRoute},
   {'icon': Icons.insert_comment, 'title': 'News', 'page': PostsScreenRoute},
-//  {'icon': Icons.shopping_basket, 'title': 'My Orders', 'page': OrdersScreenRoute},
-//  {'icon': Icons.favorite, 'title': 'Favourites', 'page': FavouritesScreenRoute},
+  {'icon': Icons.mail_outline, 'title': 'My Messages', 'page': MessagesScreenRoute},
+  {'icon': Icons.shopping_basket, 'title': 'My Orders', 'page': OrdersScreenRoute},
 ];
 
 final List _settingsDrawerList = [
@@ -24,8 +25,8 @@ final List _settingsDrawerList = [
 ];
 
 final List _informationDrawerList = [
-  {'icon': Icons.subject, 'title': 'FAQ'},
-  {'icon': Icons.info, 'title': 'About'},
+  {'icon': Icons.subject, 'title': 'FAQ', 'page': FaqScreenRoute},
+  {'icon': Icons.info, 'title': 'About', 'page': AboutScreenRoute},
 ];
 
 final List _logoutDrawerList = [
@@ -86,16 +87,28 @@ List<Widget> _drawerItems(User user, BuildContext context, InitialViewModel data
             _accountDrawerList[index]['icon'],
             color: Color(secondaryColour),
           ),
-          title: Text(_accountDrawerList[index]['title']),
+          title: Row(
+            children: <Widget>[
+              Text('${_accountDrawerList[index]['title']}'),
+              Spacer(),
+              _accountDrawerList[index]['page'] == OrdersScreenRoute && user.orders.length > 0
+                  ? CircleNotification(
+                      notification: user.orders.length,
+                    )
+                  : _accountDrawerList[index]['page'] == MessagesScreenRoute && user.messages.length > 0
+                      ? CircleNotification(
+                          notification: user.messages.length,
+                        )
+                      : Text(''),
+            ],
+          ),
           trailing: Icon(Icons.keyboard_arrow_right),
         ),
       ),
     Divider(),
     for (var index = 0; index < _settingsDrawerList.length; index++)
       InkWell(
-        onTap: () {
-          Navigator.of(context).pushNamed(_settingsDrawerList[index]['page'], arguments: user);
-        },
+        onTap: () => Navigator.of(context).pushNamed(_settingsDrawerList[index]['page'], arguments: user),
         child: ListTile(
           leading: Icon(
             _settingsDrawerList[index]['icon'],
@@ -108,7 +121,7 @@ List<Widget> _drawerItems(User user, BuildContext context, InitialViewModel data
     Divider(),
     for (var index = 0; index < _informationDrawerList.length; index++)
       InkWell(
-        onTap: () => print('Tapped'),
+        onTap: () => Navigator.of(context).pushNamed(_informationDrawerList[index]['page']),
         child: ListTile(
           leading: Icon(
             _informationDrawerList[index]['icon'],
@@ -159,23 +172,7 @@ class InitialMobilePortrait extends BaseModelWidget<InitialViewModel> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                IconButton(
-                  onPressed: () => _scaffoldKey.currentState.openDrawer(),
-                  icon: Icon(Icons.menu),
-                ),
-                Image.asset(
-                  'assets/images/logo.png',
-                  height: 50.0,
-                ),
-                IconButton(
-                  onPressed: () => print('Alert Bar'),
-                  icon: Icon(Icons.settings),
-                )
-              ],
-            ),
+            HomeApplicationHeader(scaffoldKey: _scaffoldKey),
             Expanded(
               child: ListView(
                 shrinkWrap: true,
@@ -223,23 +220,7 @@ class InitialMobileLandscape extends BaseModelWidget<InitialViewModel> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                IconButton(
-                  onPressed: () => _scaffoldKey.currentState.openDrawer(),
-                  icon: Icon(Icons.menu),
-                ),
-                Image.asset(
-                  'assets/images/logo.png',
-                  height: 50.0,
-                ),
-                IconButton(
-                  onPressed: () => print('Alert Bar'),
-                  icon: Icon(Icons.settings),
-                )
-              ],
-            ),
+            HomeApplicationHeader(scaffoldKey: _scaffoldKey),
             Expanded(
               child: ListView(
                 shrinkWrap: true,
@@ -257,6 +238,32 @@ class InitialMobileLandscape extends BaseModelWidget<InitialViewModel> {
         unselectedItemColor: Color(accentThirdColour),
         currentIndex: data.bottomNavIndex, // this will be set when a new tab is tapped
         items: _bottomNavBarList,
+      ),
+    );
+  }
+}
+
+class CircleNotification extends StatelessWidget {
+  final int notification;
+
+  CircleNotification({this.notification});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 25.0,
+      width: 25.0,
+      decoration: BoxDecoration(
+        color: Color(secondaryColour),
+        shape: BoxShape.circle,
+      ),
+      child: Center(
+        child: Text(
+          '$notification',
+          style: TextStyle(
+            color: Color(whiteColour),
+          ),
+        ),
       ),
     );
   }

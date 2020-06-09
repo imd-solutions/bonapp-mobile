@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bonapp/screens/application/about/about_screen.dart';
 import 'package:flutter_bonapp/screens/application/account/account_screen.dart';
 import 'package:flutter_bonapp/screens/application/cart/cart_screen.dart';
 import 'package:flutter_bonapp/screens/application/category/category_screen.dart';
+import 'package:flutter_bonapp/screens/application/checkout/checkout_screen.dart';
+import 'package:flutter_bonapp/screens/application/faq/faq_screen.dart';
 import 'package:flutter_bonapp/screens/application/favourites/favourite_screen.dart';
 import 'package:flutter_bonapp/screens/application/initial/initial_screen.dart';
 import 'package:flutter_bonapp/screens/application/item/item_screen.dart';
+import 'package:flutter_bonapp/screens/application/messages/messages_screen.dart';
 import 'package:flutter_bonapp/screens/application/orders/orders_screen.dart';
 import 'package:flutter_bonapp/screens/application/posts/posts_screen.dart';
 import 'package:flutter_bonapp/screens/application/settings/settings_screen.dart';
@@ -57,17 +61,33 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (context) => CartScreen(),
       );
+    case CheckoutScreenRoute:
+      return MaterialPageRoute(
+        builder: (context) => CheckoutScreen(),
+      );
     case SettingsScreenRoute:
       return MaterialPageRoute(
         builder: (context) => SettingsScreen(),
       );
     case OrdersScreenRoute:
       return MaterialPageRoute(
-        builder: (context) => OrdersScreen(),
+        builder: (context) => OrderScreen(),
+      );
+    case FaqScreenRoute:
+      return MaterialPageRoute(
+        builder: (context) => FaqScreen(),
+      );
+    case AboutScreenRoute:
+      return MaterialPageRoute(
+        builder: (context) => AboutScreen(),
       );
     case FavouritesScreenRoute:
       return MaterialPageRoute(
         builder: (context) => FavouriteScreen(),
+      );
+    case MessagesScreenRoute:
+      return MaterialPageRoute(
+        builder: (context) => MessagesScreen(),
       );
     case AccountScreenRoute:
       var arguments = settings.arguments;

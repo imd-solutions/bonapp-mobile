@@ -13,8 +13,8 @@ class CategoryViewModel extends BaseModel {
     return _cartService.itemAmount(id);
   }
 
-  void addItemToCart(int pid, String name, double price) {
-    _cartService.addItem(pid, name, price);
+  void addItemToCart(int pid, String name, String subtitle, double price) {
+    _cartService.addItem(pid, name, subtitle, price);
     notifyListeners();
   }
 

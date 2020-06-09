@@ -58,6 +58,9 @@ class UserQuery {
             read 
             created_at
           }
+          orders {
+            id
+          }
           profile {
             firstname
             lastname

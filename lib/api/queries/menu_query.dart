@@ -16,6 +16,11 @@ class MenuQuery {
                   description
                   price
                   imgUrl
+                  pivot {
+                      quantity
+                      price
+                      total_price
+                    }
                 }
               }
             }
@@ -39,6 +44,11 @@ class MenuQuery {
                   description
                   price
                   imgUrl
+                  pivot {
+                      quantity
+                      price
+                      total_price
+                    }
                 }
               }
             }
@@ -55,7 +65,12 @@ class MenuQuery {
                 subtitle
                 description
                 price
-                imgUrl    
+                imgUrl 
+                pivot {
+                  quantity
+                  price
+                  total_price
+                }   
               }
             }
       """;
@@ -71,7 +86,12 @@ class MenuQuery {
                 subtitle
                 description
                 price 
-                imgUrl    
+                imgUrl   
+                pivot {
+                  quantity
+                  price
+                  total_price
+                } 
               }
             }
       """;
@@ -87,7 +107,12 @@ class MenuQuery {
                 subtitle
                 description
                 price
-                imgUrl    
+                imgUrl 
+                pivot {
+                  quantity
+                  price
+                  total_price
+                }   
               }
             }
       """;
@@ -103,7 +128,12 @@ class MenuQuery {
                 subtitle
                 description
                 price
-                imgUrl    
+                imgUrl
+                pivot {
+                  quantity
+                  price
+                  total_price
+                }    
               }
             }
       """;

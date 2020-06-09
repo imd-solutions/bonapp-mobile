@@ -281,7 +281,7 @@ List<Widget> _topHeaderInformation(data) {
           "Hello",
           style: TextStyle(
             fontSize: 20.0,
-            color: Colors.black,
+            color: Color(blackColour),
             fontFamily: primaryFont,
           ),
         ),
@@ -290,7 +290,7 @@ List<Widget> _topHeaderInformation(data) {
                 data.user.profile.firstname,
                 style: TextStyle(
                   fontSize: 25.0,
-                  color: Colors.black,
+                  color: Color(blackColour),
                   fontWeight: FontWeight.w800,
                   fontFamily: secondaryFont,
                 ),
@@ -306,7 +306,7 @@ List<Widget> _topHeaderInformation(data) {
         Text(
           "What would you like to do today?",
           style: TextStyle(
-              fontSize: 15.0, color: Colors.black, fontFamily: primaryFont),
+              fontSize: 15.0, color: Color(blackColour), fontFamily: primaryFont),
         ),
       ],
     ),
