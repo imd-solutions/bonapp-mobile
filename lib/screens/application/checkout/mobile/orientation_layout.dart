@@ -25,7 +25,7 @@ class CheckoutMobilePortrait extends BaseModelWidget<CheckoutViewModel> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  ApplicationHeader(),
+                  CheckoutApplicationHeader(),
                   SizedBox(
                     height: 15.0,
                   ),
@@ -265,7 +265,7 @@ class CheckoutMobileLandscape extends BaseModelWidget<CheckoutViewModel> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  ApplicationHeader(),
+                  CheckoutApplicationHeader(),
                   SizedBox(
                     height: 15.0,
                   ),

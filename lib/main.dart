@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Bon Appetit App',
+      debugShowCheckedModeBanner: false,
       locale: DevicePreview.of(context)?.locale,
       builder: DevicePreview.appBuilder,
       theme: ThemeData(

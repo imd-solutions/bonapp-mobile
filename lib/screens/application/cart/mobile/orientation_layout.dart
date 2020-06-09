@@ -18,7 +18,7 @@ class CartMobilePortrait extends BaseModelWidget<CartViewModel> {
           child: data.itemCount > 0
               ? Column(
                   children: <Widget>[
-                    ApplicationHeader(),
+                    CheckoutApplicationHeader(),
                     Text(
                       'Cart Items.',
                       style: TextStyle(
@@ -84,27 +84,7 @@ class CartMobilePortrait extends BaseModelWidget<CartViewModel> {
               : Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        IconButton(
-                          onPressed: () => Navigator.of(context).pushNamedAndRemoveUntil(InitialScreenRoute, (Route<dynamic> route) => false, arguments: data.user),
-                          icon: Icon(Icons.home),
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/logo.png',
-                              height: 35.0,
-                            ),
-                          ],
-                        ),
-                        IconButton(
-                          onPressed: () => print('Alert Bar'),
-                          icon: Icon(Icons.settings),
-                        )
-                      ],
-                    ),
+                    CheckoutApplicationHeader(),
                     Center(
                       child: Text(
                         'There are no items in your cart.',
@@ -137,7 +117,7 @@ class CartMobileLandscape extends BaseModelWidget<CartViewModel> {
           child: data.itemCount > 0
               ? Column(
                   children: <Widget>[
-                    ApplicationHeader(),
+                    CheckoutApplicationHeader(),
                     Text(
                       'Cart Items.',
                       style: TextStyle(
@@ -203,27 +183,7 @@ class CartMobileLandscape extends BaseModelWidget<CartViewModel> {
               : Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        IconButton(
-                          onPressed: () => Navigator.of(context).pushNamedAndRemoveUntil(InitialScreenRoute, (Route<dynamic> route) => false, arguments: data.user),
-                          icon: Icon(Icons.home),
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Image.asset(
-                              'assets/images/logo.png',
-                              height: 35.0,
-                            ),
-                          ],
-                        ),
-                        IconButton(
-                          onPressed: () => print('Alert Bar'),
-                          icon: Icon(Icons.settings),
-                        )
-                      ],
-                    ),
+                    CheckoutApplicationHeader(),
                     Center(
                       child: Text(
                         'There are no items in your cart.',
