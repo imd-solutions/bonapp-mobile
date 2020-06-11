@@ -228,14 +228,14 @@ Widget _buildCard(String name, String price, String imgPath, bool added, bool is
                   ),
                   Spacer(),
                   isFavorite
-                  ? Icon(
-                      Icons.favorite,
-                      color: Color(0xFFEF7532),
-                    )
-                  : Icon(
-                      Icons.favorite_border,
-                      color: Color(0xFFEF7532),
-                    ),
+                      ? Icon(
+                          Icons.favorite,
+                          color: Color(0xFFEF7532),
+                        )
+                      : Icon(
+                          Icons.favorite_border,
+                          color: Color(0xFFEF7532),
+                        ),
                 ],
               ),
             ),

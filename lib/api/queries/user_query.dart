@@ -32,6 +32,15 @@ class UserQuery {
       }""";
   }
 
+  String getNationalities() {
+    return """ query {
+            nationalities {
+              id
+              name
+            }
+        }""";
+  }
+
   // Get all users
   String getUsers() {
     return """

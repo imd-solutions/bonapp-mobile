@@ -1,6 +1,7 @@
 import 'package:flutter_bonapp/api/mutations/user_mutation.dart';
 import 'package:flutter_bonapp/models/location.dart';
 import 'package:flutter_bonapp/models/message.dart';
+import 'package:flutter_bonapp/models/nationality.dart';
 import 'package:flutter_bonapp/models/profession.dart';
 import 'package:flutter_bonapp/models/title.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
@@ -79,6 +80,28 @@ class UserService {
     Iterable list = result['professions'];
 
     return list.map((professions) => Professions.fromJson(professions)).toList();
+  }
+
+  // Get the list of nationalities.
+  Future<List<Nationality>> getNationalites() async {
+    GraphQLClient _user = graphQLConfiguration.clientToQuery();
+    QueryResult response = await _user.query(
+      QueryOptions(
+        documentNode: gql(
+          userQuery.getNationalities(),
+        ),
+      ),
+    );
+
+    if (response.hasException) {
+      throw new Exception('Could not get nationalities data.');
+    }
+
+    final result = response.data;
+
+    Iterable list = result['nationalities'];
+
+    return list.map((nationalities) => Nationality.fromJson(nationalities)).toList();
   }
 
   // Get a list of users from the site.
