@@ -74,6 +74,18 @@ class UserQuery {
             firstname
             lastname
             points
+            profession {
+              id
+              title
+            }
+            nationality {
+              id
+              name
+            }
+            site {
+              id
+              name
+            }
             alerts {
                email
                notification

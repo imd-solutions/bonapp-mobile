@@ -23,6 +23,18 @@ class UserMutation {
             profile {
               firstname
               lastname
+              profession {
+                id
+                title
+              }
+              nationality {
+                id
+                name
+              }
+              site {
+                id
+                name
+              }
               alerts {
                email
                notification

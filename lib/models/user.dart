@@ -4,6 +4,10 @@
 
 import 'dart:convert';
 
+import 'package:flutter_bonapp/models/location.dart';
+import 'package:flutter_bonapp/models/nationality.dart';
+import 'package:flutter_bonapp/models/profession.dart';
+
 User userFromJson(String str) => User.fromJson(json.decode(str));
 
 String userToJson(User data) => json.encode(data.toJson());
@@ -39,7 +43,15 @@ class User {
         messages: json["messages"],
       );
 
-  Map<String, dynamic> toJson() => {"id": id, "name": name, "avatar": avatar, "email": email, "password": password, "profile": profile.toJson(), "messages": messages.toList()};
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "avatar": avatar,
+        "email": email,
+        "password": password,
+        "profile": profile.toJson(),
+        "messages": messages.toList(),
+      };
 }
 
 class Profile {
@@ -47,8 +59,9 @@ class Profile {
   String firstname;
   String lastname;
   DateTime dob;
-  int profession;
-  int location;
+  Professions profession;
+  Locations location;
+  Nationality nationality;
   int points;
   String phoneNumber;
   String mobileNumber;
@@ -62,6 +75,7 @@ class Profile {
     this.dob,
     this.profession,
     this.location,
+    this.nationality,
     this.points,
     this.phoneNumber,
     this.mobileNumber,
@@ -74,8 +88,9 @@ class Profile {
         firstname: json["firstname"],
         lastname: json["lastname"],
         dob: DateTime.parse(json["dob"]),
-        profession: int.parse(json["profession"]),
-        location: int.parse(json["location"]),
+        profession: json["profession"],
+        location: json["site"],
+        nationality: json["nationality"],
         points: int.parse(json["points"]),
         phoneNumber: json["phone_number"],
         mobileNumber: json["mobile_number"],
@@ -90,6 +105,7 @@ class Profile {
         "dob": "${dob.year.toString().padLeft(4, '0')}-${dob.month.toString().padLeft(2, '0')}-${dob.day.toString().padLeft(2, '0')}",
         "location": location,
         "profession": profession,
+        "nationality": nationality,
         "points": points,
         "phone_number": phoneNumber,
         "mobile_number": mobileNumber,

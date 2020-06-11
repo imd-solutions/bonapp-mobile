@@ -8,14 +8,6 @@ import 'package:flutter_bonapp/viewmodels/account/viewmodel.dart';
 import 'package:flutter_bonapp/widgets/base_model_widget.dart';
 import 'package:flutter_bonapp/widgets/full_busy_overlay.dart';
 
-final bool turnOnNotification = true;
-
-List switchers = [
-  {"icon": Icons.mail_outline, "text": "Email Notification", "divider": true},
-  {"icon": Icons.notifications, "text": "App Notification", "divider": true},
-  {"icon": Icons.phone_android, "text": "Text Notification", "divider": false},
-];
-
 class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
   final User user;
 
@@ -24,9 +16,42 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
   @override
   Widget build(BuildContext context, AccountViewModel data) {
     List cards = [
-      {"icon": Icons.work, "text": "Profession", "divider": true, "data": data.professions},
-      {"icon": Icons.flag, "text": "Nationality", "divider": true, "data": data.nationality},
-      {"icon": Icons.location_on, "text": "Site", "divider": false, "data": data.locations},
+      {
+        "icon": Icons.work,
+        "text": "Profession",
+        "divider": true,
+        "account": data.professions,
+        "selected": data.selectedProfession,
+        "selectedName": data.selectedProfessionName,
+        "profile": user.profile.profession,
+        "data": data
+      },
+      {
+        "icon": Icons.flag,
+        "text": "Nationality",
+        "divider": true,
+        "account": data.nationality,
+        "selected": data.selectedNationality,
+        "selectedName": data.selectedNationalityName,
+        "profile": user.profile.nationality,
+        "data": data
+      },
+      {
+        "icon": Icons.location_on,
+        "text": "Site",
+        "divider": false,
+        "account": data.locations,
+        "selected": data.selectedLocation,
+        "selectedName": data.selectedLocationName,
+        "profile": user.profile.location,
+        "data": data
+      },
+    ];
+
+    List switchers = [
+      {"icon": Icons.mail_outline, "text": "Email Notification", "divider": true, "type": "email", "alert": data.emailNotification},
+      {"icon": Icons.notifications, "text": "App Notification", "divider": true, "type": "app", "alert": data.appNotification},
+      {"icon": Icons.phone_android, "text": "Text Notification", "divider": false, "type": "text", "alert": data.textNotification},
     ];
 
     return Scaffold(
@@ -86,10 +111,21 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
                                 SizedBox(
                                   height: 20.0,
                                 ),
-                                SmallButton(
-                                  btnText: "Edit",
-                                  user: user,
-                                ),
+                                Row(
+                                  children: <Widget>[
+                                    SmallButton(
+                                      btnText: "Edit",
+                                      user: user,
+                                    ),
+                                    SizedBox(
+                                      width: 10.0,
+                                    ),
+                                    SmallButton(
+                                      btnText: "Save",
+                                      user: user,
+                                    ),
+                                  ],
+                                )
                               ],
                             ),
                           ],
@@ -119,7 +155,10 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
                                     icon: cards[i]['icon'],
                                     text: cards[i]['text'],
                                     divider: cards[i]['divider'],
-                                    user: user,
+                                    user: cards[i]['profile'],
+                                    account: cards[i]['account'],
+                                    selected: cards[i]['selected'],
+                                    selectedName: cards[i]['selectedName'],
                                     data: cards[i]['data'],
                                   ),
                               ],
@@ -150,8 +189,10 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
                                   BuildNotificationList(
                                     icon: switchers[i]['icon'],
                                     text: switchers[i]['text'],
+                                    type: switchers[i]['type'],
                                     divider: switchers[i]['divider'],
-                                    turnOnNotification: turnOnNotification,
+                                    turnOnNotification: switchers[i]['alert'],
+                                    data: data,
                                   ),
                               ],
                             ),
@@ -180,9 +221,42 @@ class AccountMobileLandscape extends BaseModelWidget<AccountViewModel> {
   @override
   Widget build(BuildContext context, AccountViewModel data) {
     List cards = [
-      {"icon": Icons.work, "text": "Profession", "divider": true, "data": data.professions},
-      {"icon": Icons.flag, "text": "Nationality", "divider": true, "data": data.nationality},
-      {"icon": Icons.location_on, "text": "Site", "divider": false, "data": data.locations},
+      {
+        "icon": Icons.work,
+        "text": "Profession",
+        "divider": true,
+        "account": data.professions,
+        "selected": data.selectedProfession,
+        "selectedName": data.selectedProfessionName,
+        "profile": user.profile.profession,
+        "data": data
+      },
+      {
+        "icon": Icons.flag,
+        "text": "Nationality",
+        "divider": true,
+        "account": data.nationality,
+        "selected": data.selectedNationality,
+        "selectedName": data.selectedNationalityName,
+        "profile": user.profile.nationality,
+        "data": data
+      },
+      {
+        "icon": Icons.location_on,
+        "text": "Site",
+        "divider": false,
+        "account": data.locations,
+        "selected": data.selectedLocation,
+        "selectedName": data.selectedLocationName,
+        "profile": user.profile.location,
+        "data": data
+      },
+    ];
+
+    List switchers = [
+      {"icon": Icons.mail_outline, "text": "Email Notification", "divider": true, "type": "email", "alert": data.emailNotification},
+      {"icon": Icons.notifications, "text": "App Notification", "divider": true, "type": "app", "alert": data.appNotification},
+      {"icon": Icons.phone_android, "text": "Text Notification", "divider": false, "type": "text", "alert": data.textNotification},
     ];
 
     return Scaffold(
@@ -242,7 +316,21 @@ class AccountMobileLandscape extends BaseModelWidget<AccountViewModel> {
                                 SizedBox(
                                   height: 20.0,
                                 ),
-                                SmallButton(btnText: "Edit", user: user),
+                                Row(
+                                  children: <Widget>[
+                                    SmallButton(
+                                      btnText: "Edit",
+                                      user: user,
+                                    ),
+                                    SizedBox(
+                                      width: 10.0,
+                                    ),
+                                    SmallButton(
+                                      btnText: "Save",
+                                      user: user,
+                                    ),
+                                  ],
+                                )
                               ],
                             ),
                           ],
@@ -272,7 +360,10 @@ class AccountMobileLandscape extends BaseModelWidget<AccountViewModel> {
                                     icon: cards[i]['icon'],
                                     text: cards[i]['text'],
                                     divider: cards[i]['divider'],
-                                    user: user,
+                                    user: cards[i]['profile'],
+                                    account: cards[i]['account'],
+                                    selected: cards[i]['selected'],
+                                    selectedName: cards[i]['selectedName'],
                                     data: cards[i]['data'],
                                   ),
                               ],
@@ -303,8 +394,10 @@ class AccountMobileLandscape extends BaseModelWidget<AccountViewModel> {
                                   BuildNotificationList(
                                     icon: switchers[i]['icon'],
                                     text: switchers[i]['text'],
+                                    type: switchers[i]['type'],
                                     divider: switchers[i]['divider'],
-                                    turnOnNotification: turnOnNotification,
+                                    turnOnNotification: switchers[i]['alert'],
+                                    data: data,
                                   ),
                               ],
                             ),
@@ -358,10 +451,16 @@ class SmallButton extends StatelessWidget {
 class BuildNotificationList extends StatelessWidget {
   final IconData icon;
   final String text;
+  final String type;
   final bool divider;
   final bool turnOnNotification;
+  final AccountViewModel data;
 
-  BuildNotificationList({this.icon, this.text, this.divider, this.turnOnNotification});
+  BuildNotificationList({this.icon, this.text, this.type, this.divider, this.turnOnNotification, this.data});
+
+  void _updateNotification(String type, bool value) {
+    data.updateNotification(type, value);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -382,7 +481,9 @@ class BuildNotificationList extends StatelessWidget {
             ),
             Switch(
               value: turnOnNotification,
-              onChanged: (bool value) {},
+              onChanged: (bool value) {
+                _updateNotification(type, value);
+              },
             ),
           ],
         ),
@@ -400,10 +501,13 @@ class BuildAccountList extends StatelessWidget {
   final IconData icon;
   final String text;
   final bool divider;
-  final User user;
-  final dynamic data;
+  final dynamic user;
+  final dynamic account;
+  final int selected;
+  final String selectedName;
+  final AccountViewModel data;
 
-  BuildAccountList({this.icon, this.text, this.divider, this.user, this.data});
+  BuildAccountList({this.icon, this.text, this.divider, this.user, this.account, this.selected, this.selectedName, this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -420,14 +524,24 @@ class BuildAccountList extends StatelessWidget {
               SizedBox(
                 width: 15.0,
               ),
-              Text(
-                text,
-                style: TextStyle(fontSize: 15.0, fontFamily: secondaryFont),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    text,
+                    style: TextStyle(fontSize: 15.0, fontFamily: secondaryFont, fontWeight: FontWeight.bold),
+                  ),
+                  Text(selectedName,
+                      style: TextStyle(
+                        fontSize: 12.0,
+                        fontFamily: secondaryFont,
+                      )),
+                ],
               ),
               Spacer(),
               InkWell(
 //                onTap: () => print(data[0].id),
-                onTap: () => _showEditAccount(context, user, data),
+                onTap: () => _showEditAccount(context, user, account, text, selected, selectedName, data),
                 child: Icon(
                   Icons.create,
                   color: Color(accentSecondColour),
@@ -508,13 +622,25 @@ void _showEditUser(BuildContext context, User user) {
               getTextField("Surname", 'Your firstname', teLastName),
               getTextField("Email", 'Your email address', teEmail),
               getTextField("Mobile", 'Your mobile phone number', teMobile),
-              GestureDetector(
-                onTap: () => print(teFirstName.text),
+              FlatButton(
+                onPressed: () => Navigator.pop(context),
                 child: Container(
-                  margin: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-                  child: getAppBorderButton(
-                    "Edit",
-                    EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+                  height: 25.0,
+                  width: 70.0,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color(primaryColour),
+                    ),
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(
+                        color: Color(primaryColour),
+                        fontSize: 16.0,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -526,15 +652,27 @@ void _showEditUser(BuildContext context, User user) {
   );
 }
 
-void _showEditAccount(BuildContext context, User user, data) {
+void _showEditAccount(BuildContext context, dynamic user, account, String title, int selected, String selectedName, AccountViewModel data) {
   List<DropdownMenuItem<int>> items = [];
 
-  void _changedDropDownItem(int selected) {
-//    updateSelected(selected);
+  void _changedDropDownItem(String type, int index, String name) {
+    data.updateSelected(type, index, name);
   }
 
+  items.add(
+    new DropdownMenuItem(
+      value: selected,
+      child: Text(
+        selectedName,
+        style: TextStyle(
+          fontSize: 9.0,
+        ),
+      ),
+    ),
+  );
+
   // Additional select items.
-  for (dynamic d in data) {
+  for (dynamic d in account) {
     items.add(
       new DropdownMenuItem(
         value: int.parse(d.id),
@@ -547,7 +685,7 @@ void _showEditAccount(BuildContext context, User user, data) {
   }
 
   var alert = new AlertDialog(
-    title: Text("Edit"),
+    title: Text("Edit $title"),
     content: Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -555,24 +693,28 @@ void _showEditAccount(BuildContext context, User user, data) {
           width: 10.0,
         ),
         DropdownButton<int>(
-          hint: new Text(
-            'Select',
+          hint: Text(
+            selectedName,
             style: TextStyle(fontFamily: "Gotham"),
           ),
           items: items,
-          onChanged: (int index) {},
-          // value: selectedPurpose,
+          onChanged: (int index) {
+            var idx = index - 1;
+            _changedDropDownItem(title, idx, account[idx].name);
+            Navigator.pop(context);
+          },
         )
       ],
     ),
     actions: <Widget>[
       FlatButton(
-        onPressed: () => debugPrint("Save button"),
-        child: Text('Save'),
-      ),
-      FlatButton(
         onPressed: () => Navigator.pop(context),
-        child: Text('Cancel'),
+        child: Text(
+          'Cancel',
+          style: TextStyle(
+            color: Color(primaryColour),
+          ),
+        ),
       ),
     ],
   );

@@ -14,12 +14,12 @@ class Professions {
   });
 
   factory Professions.fromJson(Map<String, dynamic> json) => Professions(
-    id: json["id"],
-    name: json["title"],
-  );
+        id: json["id"],
+        name: json["title"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-  };
+        "id": id,
+        "name": name,
+      };
 }

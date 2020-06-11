@@ -171,14 +171,27 @@ class UserService {
         ),
       ),
       profile: Profile(
-          firstname: result['user']['profile']['firstname'],
-          lastname: result['user']['profile']['lastname'],
-          points: result['user']['profile']['points'],
-          alerts: Alert(
-            email: result['user']['profile']['alerts']['email'] == 1 ? true : false,
-            notification: result['user']['profile']['alerts']['notification'] == 1 ? true : false,
-            text: result['user']['profile']['alerts']['text'] == 1 ? true : false,
-          )),
+        firstname: result['user']['profile']['firstname'],
+        lastname: result['user']['profile']['lastname'],
+        points: result['user']['profile']['points'],
+        profession: Professions(
+          id: result['user']['profile']['profession']['id'].toString(),
+          name: result['user']['profile']['profession']['title'],
+        ),
+        nationality: Nationality(
+          id: result['user']['profile']['nationality']['id'].toString(),
+          name: result['user']['profile']['nationality']['name'],
+        ),
+        location: Locations(
+          id: result['user']['profile']['site']['id'].toString(),
+          name: result['user']['profile']['site']['name'],
+        ),
+        alerts: Alert(
+          email: result['user']['profile']['alerts']['email'] == 1 ? true : false,
+          notification: result['user']['profile']['alerts']['notification'] == 1 ? true : false,
+          text: result['user']['profile']['alerts']['text'] == 1 ? true : false,
+        ),
+      ),
     );
 
     return user;
@@ -256,6 +269,18 @@ class UserService {
             firstname: result['login']['user']['profile']['firstname'],
             lastname: result['login']['user']['profile']['lastname'],
             points: result['login']['user']['profile']['points'],
+            profession: Professions(
+              id: result['login']['user']['profile']['profession']['id'].toString(),
+              name: result['login']['user']['profile']['profession']['title'],
+            ),
+            nationality: Nationality(
+              id: result['login']['user']['profile']['nationality']['id'].toString(),
+              name: result['login']['user']['profile']['nationality']['name'],
+            ),
+            location: Locations(
+              id: result['login']['user']['profile']['site']['id'].toString(),
+              name: result['login']['user']['profile']['site']['name'],
+            ),
             alerts: Alert(
               email: result['login']['user']['profile']['alerts']['email'] == 1 ? true : false,
               notification: result['login']['user']['profile']['alerts']['notification'] == 1 ? true : false,
