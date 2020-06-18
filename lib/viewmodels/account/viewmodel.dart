@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bonapp/enums/viewstate.dart';
 import 'package:flutter_bonapp/models/location.dart';
 import 'package:flutter_bonapp/models/nationality.dart';

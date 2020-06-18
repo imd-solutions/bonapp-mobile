@@ -16,7 +16,7 @@ class UserMutation {
               body
               read 
               created_at
-            }
+            }            
             orders {
               id
             }

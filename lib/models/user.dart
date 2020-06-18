@@ -21,6 +21,7 @@ class User {
   Profile profile;
   List<Messages> messages;
   List<Order> orders;
+  List<Voucher> vouchers;
 
   User({
     this.id,
@@ -31,6 +32,7 @@ class User {
     this.profile,
     this.messages,
     this.orders,
+    this.vouchers,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -41,6 +43,8 @@ class User {
         password: json["password"],
         profile: Profile.fromJson(json["profile"]),
         messages: json["messages"],
+        orders: json["orders"],
+        vouchers: json["vouchers"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -51,6 +55,8 @@ class User {
         "password": password,
         "profile": profile.toJson(),
         "messages": messages.toList(),
+        "orders": orders.toList(),
+        "vouchers": vouchers.toList(),
       };
 }
 
@@ -63,6 +69,8 @@ class Profile {
   Locations location;
   Nationality nationality;
   int points;
+  int foodStamp;
+  int drinkStamp;
   String phoneNumber;
   String mobileNumber;
   String mobileToken;
@@ -77,6 +85,8 @@ class Profile {
     this.location,
     this.nationality,
     this.points,
+    this.drinkStamp,
+    this.foodStamp,
     this.phoneNumber,
     this.mobileNumber,
     this.mobileToken,
@@ -92,6 +102,8 @@ class Profile {
         location: json["site"],
         nationality: json["nationality"],
         points: int.parse(json["points"]),
+        foodStamp: int.parse(json["food_stamp"]),
+        drinkStamp: int.parse(json["drink_stamp"]),
         phoneNumber: json["phone_number"],
         mobileNumber: json["mobile_number"],
         mobileToken: json["mobile_token"],
@@ -107,6 +119,8 @@ class Profile {
         "profession": profession,
         "nationality": nationality,
         "points": points,
+        "food_stamp": foodStamp,
+        "drink_stamp": drinkStamp,
         "phone_number": phoneNumber,
         "mobile_number": mobileNumber,
         "mobile_token": mobileToken,
@@ -275,5 +289,33 @@ class Pivot {
         "quantity": quantity,
         "price": price,
         "total_price": totalPrice,
+      };
+}
+
+class Voucher {
+  Voucher({
+    this.id,
+    this.name,
+    this.subTitle,
+    this.code,
+  });
+
+  String id;
+  String name;
+  String subTitle;
+  String code;
+
+  factory Voucher.fromJson(Map<String, dynamic> json) => Voucher(
+        id: json["id"],
+    name: json["name"],
+    subTitle: json["sub_title"],
+    code: json["code"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+    "name": name,
+    "sub_title": subTitle,
+    "code": code,
       };
 }

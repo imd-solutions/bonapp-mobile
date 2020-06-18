@@ -6,6 +6,9 @@ import 'package:flutter_bonapp/viewmodels/home/viewmodel.dart';
 import 'package:flutter_bonapp/widgets/base_widget.dart';
 
 class HomeScreen extends StatelessWidget {
+  final Function changePage;
+
+  HomeScreen(this.changePage);
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +18,12 @@ class HomeScreen extends StatelessWidget {
         onModelReady: (model) => model.initialise(),
         builder: (context) => ScreenTypeLayout(
           mobile: OrientationLayout(
-            portrait: (context) => HomeMobilePortrait(),
-            landscape: (context) => HomeMobileLandscape(),
+            portrait: (context) => HomeMobilePortrait(changePage),
+            landscape: (context) => HomeMobileLandscape(changePage),
           ),
           tablet: OrientationLayout(
-            portrait: (context) => HomeMobilePortrait(),
-            landscape: (context) => HomeMobileLandscape(),
+            portrait: (context) => HomeMobilePortrait(changePage),
+            landscape: (context) => HomeMobileLandscape(changePage),
           ),
         ),
       ),

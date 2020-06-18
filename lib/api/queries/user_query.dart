@@ -67,6 +67,12 @@ class UserQuery {
             read 
             created_at
           }
+          vouchers {
+            id
+            name
+            sub_title
+            code
+          }
           orders {
             id
           }
@@ -74,6 +80,8 @@ class UserQuery {
             firstname
             lastname
             points
+            food_stamp
+            drink_stamp
             profession {
               id
               title

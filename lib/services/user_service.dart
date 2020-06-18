@@ -143,7 +143,7 @@ class UserService {
     );
 
     if (response.hasException) {
-      throw new Exception('Could not get user data.');
+      throw new Exception('Could not get user data for ID: $id. ${response.exception.graphqlErrors.first}');
     }
 
     final result = response.data;
@@ -170,21 +170,33 @@ class UserService {
           ),
         ),
       ),
+      vouchers: List<Voucher>.from(
+        result['user']['vouchers'].map(
+          (i) => Voucher(
+            id: i['id'],
+            name: i['name'],
+            subTitle: i['sub_title'],
+            code: i['code'],
+          ),
+        ),
+      ),
       profile: Profile(
         firstname: result['user']['profile']['firstname'],
         lastname: result['user']['profile']['lastname'],
         points: result['user']['profile']['points'],
+        foodStamp: result['user']['profile']['food_stamp'],
+        drinkStamp: result['user']['profile']['drink_stamp'],
         profession: Professions(
-          id: result['user']['profile']['profession']['id'].toString(),
-          name: result['user']['profile']['profession']['title'],
+          id: result['user']['profile']['profession'] != null ? result['user']['profile']['profession']['id'].toString() : '',
+          name: result['user']['profile']['profession'] != null ? result['user']['profile']['profession']['title'] : '',
         ),
         nationality: Nationality(
-          id: result['user']['profile']['nationality']['id'].toString(),
-          name: result['user']['profile']['nationality']['name'],
+          id: result['user']['profile']['nationality'] != null ? result['user']['profile']['nationality']['id'].toString() : '',
+          name: result['user']['profile']['nationality'] != null ? result['user']['profile']['nationality']['name'] : '',
         ),
         location: Locations(
-          id: result['user']['profile']['site']['id'].toString(),
-          name: result['user']['profile']['site']['name'],
+          id: result['user']['profile']['site'] != null ? result['user']['profile']['site']['id'].toString() : '',
+          name: result['user']['profile']['site'] != null ? result['user']['profile']['site']['name'] : '',
         ),
         alerts: Alert(
           email: result['user']['profile']['alerts']['email'] == 1 ? true : false,
@@ -270,16 +282,16 @@ class UserService {
             lastname: result['login']['user']['profile']['lastname'],
             points: result['login']['user']['profile']['points'],
             profession: Professions(
-              id: result['login']['user']['profile']['profession']['id'].toString(),
-              name: result['login']['user']['profile']['profession']['title'],
+              id: result['login']['user']['profile']['profession'] != null ? result['login']['user']['profile']['profession']['id'].toString() : '',
+              name: result['login']['user']['profile']['profession'] != null ? result['login']['user']['profile']['profession']['title'] : '',
             ),
             nationality: Nationality(
-              id: result['login']['user']['profile']['nationality']['id'].toString(),
-              name: result['login']['user']['profile']['nationality']['name'],
+              id: result['login']['user']['profile']['nationality'] != null ? result['login']['user']['profile']['nationality']['id'].toString() : '',
+              name: result['login']['user']['profile']['nationality'] != null ? result['login']['user']['profile']['nationality']['name'] : '',
             ),
             location: Locations(
-              id: result['login']['user']['profile']['site']['id'].toString(),
-              name: result['login']['user']['profile']['site']['name'],
+              id: result['login']['user']['profile']['site'] != null ? result['login']['user']['profile']['site']['id'].toString() : '',
+              name: result['login']['user']['profile']['site'] != null ? result['login']['user']['profile']['site']['name'] : '',
             ),
             alerts: Alert(
               email: result['login']['user']['profile']['alerts']['email'] == 1 ? true : false,

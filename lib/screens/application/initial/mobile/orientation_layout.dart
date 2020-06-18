@@ -33,14 +33,6 @@ final List _logoutDrawerList = [
   {'icon': FontAwesomeIcons.signOutAlt, 'title': 'Logout'},
 ];
 
-final List<Widget> _widgetOptions = <Widget>[
-  HomeScreen(),
-  ScanScreen(),
-  LoyaltyScreen(),
-  RewardScreen(),
-  MenuScreen(),
-];
-
 List<BottomNavigationBarItem> _bottomNavBarList = [
   BottomNavigationBarItem(
     icon: Icon(Icons.home),
@@ -161,6 +153,14 @@ class InitialMobilePortrait extends BaseModelWidget<InitialViewModel> {
       data.updateBottomNavIndex(index);
     }
 
+    final List<Widget> _widgetOptions = <Widget>[
+      HomeScreen(bottomNavOnTap),
+      ScanScreen(),
+      LoyaltyScreen(),
+      RewardScreen(),
+      MenuScreen(),
+    ];
+
     return Scaffold(
       key: _scaffoldKey,
       drawer: Drawer(
@@ -208,6 +208,14 @@ class InitialMobileLandscape extends BaseModelWidget<InitialViewModel> {
     void bottomNavOnTap(int index) {
       data.updateBottomNavIndex(index);
     }
+
+    final List<Widget> _widgetOptions = <Widget>[
+      HomeScreen(bottomNavOnTap),
+      ScanScreen(),
+      LoyaltyScreen(),
+      RewardScreen(),
+      MenuScreen(),
+    ];
 
     return Scaffold(
       key: _scaffoldKey,
