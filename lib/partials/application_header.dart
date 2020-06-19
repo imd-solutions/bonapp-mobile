@@ -126,7 +126,7 @@ class CheckoutApplicationHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         IconButton(
-          onPressed: () => count > 0 ? Navigator.of(context).pop() : Navigator.of(context).pushNamed(InitialScreenRoute, arguments: user),
+          onPressed: () => count > 0 ? Navigator.of(context).pop() : Navigator.of(context).pushNamedAndRemoveUntil(InitialScreenRoute, (Route<dynamic> route) => false, arguments: user),
           icon: Icon(Icons.arrow_back),
         ),
         Column(
