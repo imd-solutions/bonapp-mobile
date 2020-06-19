@@ -331,22 +331,6 @@ double _priceNameSize(int height) {
   }
 }
 
-double _cartSize(int height) {
-  if (height < 570) {
-    return 10.0;
-  } else if (height < 745) {
-    return 12.0;
-  } else if (height < 879) {
-    return 12.5;
-  } else if (height < 900) {
-    return 15.0;
-  } else if (height < 970) {
-    return 18.0;
-  } else {
-    return 20.0;
-  }
-}
-
 List<Widget> _topHalfScreen(MenuViewModel data) {
   return [
     SizedBox(
