@@ -6,7 +6,7 @@ final int settingsBackground = 0xFFFFFFFF;
 final int settingsSliderStatus = 0;
 final int settingsSliderFull = 0;
 
-final String url = 'd32088a40845';
+final String url = '6c4a2a88c48c';
 
 final String graphQLApi = "https://$url.ngrok.io";
 

@@ -5,7 +5,7 @@ import 'package:flutter_bonapp/screens/auth/register/register_screen.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
 import 'package:flutter_bonapp/viewmodels/sliders/viewmodel.dart';
 import 'package:flutter_bonapp/widgets/base_model_widget.dart';
-import 'package:flutter_bonapp/widgets/busy_overlay.dart';
+import 'package:flutter_bonapp/widgets/full_busy_overlay.dart';
 import 'package:flutter_bonapp/widgets/sliders/dots.dart';
 import 'package:flutter_bonapp/widgets/sliders/build.dart';
 
@@ -18,7 +18,7 @@ class SlidersMobilePortrait extends BaseModelWidget<SlidersViewModel> {
     var height = MediaQuery.of(context).size.height;
     var regNumber = 125.0;
 
-    return BusyOverlay(
+    return FullBusyOverlay(
       show: data.state != ViewState.Completed,
       child: Scaffold(
         body: Container(
@@ -80,7 +80,7 @@ class SlidersMobileLandscape extends BaseModelWidget<SlidersViewModel> {
     var height = MediaQuery.of(context).size.height;
     var regNumber = 65.0;
 
-    return BusyOverlay(
+    return FullBusyOverlay(
       show: data.state != ViewState.Completed,
       child: Scaffold(
         body: Container(

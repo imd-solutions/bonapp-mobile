@@ -84,7 +84,7 @@ class CartMobilePortrait extends BaseModelWidget<CartViewModel> {
               : Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    CheckoutApplicationHeader(),
+                    CheckoutApplicationHeader(count: data.itemCount, user: data.user    ),
                     Center(
                       child: Text(
                         'There are no items in your cart.',

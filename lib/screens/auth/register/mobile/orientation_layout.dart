@@ -11,7 +11,7 @@ import 'package:flutter_bonapp/utils/routing_constants.dart';
 import 'package:flutter_bonapp/viewmodels/register/viewmodel.dart';
 import 'package:flutter_bonapp/widgets/base_model_widget.dart';
 import 'package:flutter_bonapp/enums/viewstate.dart';
-import 'package:flutter_bonapp/widgets/busy_overlay.dart';
+import 'package:flutter_bonapp/widgets/full_busy_overlay.dart';
 import 'package:validators/validators.dart' as validator;
 
 class RegisterMobilePortrait extends BaseModelWidget<RegisterViewModel> {
@@ -22,7 +22,7 @@ class RegisterMobilePortrait extends BaseModelWidget<RegisterViewModel> {
 
   @override
   Widget build(BuildContext context, RegisterViewModel data) {
-    return BusyOverlay(
+    return FullBusyOverlay(
       show: data.state == ViewState.Busy,
       child: Scaffold(
         body: SingleChildScrollView(
@@ -64,7 +64,7 @@ class RegisterMobileLandscape extends BaseModelWidget<RegisterViewModel> {
   final Profile profile = Profile();
   @override
   Widget build(BuildContext context, RegisterViewModel data) {
-    return BusyOverlay(
+    return FullBusyOverlay(
       show: data.state == ViewState.Busy,
       child: Scaffold(
         body: SingleChildScrollView(
@@ -116,8 +116,7 @@ Widget listWidget(context, _formKey, data, user, profile) {
         (_) {
           // Send the user to the Initial Application Screen on success.
           if (message.status == 200) {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-                LoginScreenRoute, (Route<dynamic> route) => false);
+            Navigator.of(context).pushNamedAndRemoveUntil(LoginScreenRoute, (Route<dynamic> route) => false);
           }
         },
       );
@@ -237,8 +236,7 @@ Widget listWidget(context, _formKey, data, user, profile) {
         children: <Widget>[
           Expanded(
             child: Container(
-              margin: EdgeInsets.only(
-                  left: 5.0, right: 10.0, bottom: 10.0, top: 10.0),
+              margin: EdgeInsets.only(left: 5.0, right: 10.0, bottom: 10.0, top: 10.0),
               padding: EdgeInsets.only(left: 5.0),
               child: GestureDetector(
                 onTap: () => data.initialVariables(),
@@ -257,8 +255,7 @@ Widget listWidget(context, _formKey, data, user, profile) {
           ),
           Expanded(
             child: Container(
-              margin: EdgeInsets.only(
-                  left: 5.0, right: 10.0, bottom: 10.0, top: 10.0),
+              margin: EdgeInsets.only(left: 5.0, right: 10.0, bottom: 10.0, top: 10.0),
               padding: EdgeInsets.only(left: 5.0),
               child: GestureDetector(
                 onTap: () => data.initialVariables(),
@@ -425,8 +422,7 @@ Widget listWidget(context, _formKey, data, user, profile) {
             ),
           ),
           onTap: () {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-                LoginScreenRoute, (Route<dynamic> route) => false);
+            Navigator.of(context).pushNamedAndRemoveUntil(LoginScreenRoute, (Route<dynamic> route) => false);
           },
         ),
       ),

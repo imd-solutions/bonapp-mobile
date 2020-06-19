@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bonapp/models/user.dart';
 import 'package:flutter_bonapp/services/cart_service.dart';
 import 'package:flutter_bonapp/services/locator.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
@@ -115,9 +116,9 @@ class ApplicationHeader extends StatelessWidget {
 }
 
 class CheckoutApplicationHeader extends StatelessWidget {
-  const CheckoutApplicationHeader({
-    Key key,
-  }) : super(key: key);
+  final int count;
+  final User user;
+  CheckoutApplicationHeader({this.count, this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +126,7 @@ class CheckoutApplicationHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         IconButton(
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => count > 0 ? Navigator.of(context).pop() : Navigator.of(context).pushNamed(InitialScreenRoute, arguments: user),
           icon: Icon(Icons.arrow_back),
         ),
         Column(
