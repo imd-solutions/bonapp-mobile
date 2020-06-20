@@ -14,6 +14,7 @@ const String AccountScreenRoute = '/application/account';
 const String AboutScreenRoute = '/application/about';
 const String OrdersScreenRoute = '/application/orders';
 const String MessagesScreenRoute = '/application/messages';
+const String MessageScreenRoute = '/application/message';
 const String PostsScreenRoute = '/application/posts';
 const String FavouritesScreenRoute = '/application/favourites';
 const String FaqScreenRoute = '/application/faq';

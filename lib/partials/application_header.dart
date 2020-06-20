@@ -4,6 +4,9 @@ import 'package:flutter_bonapp/services/cart_service.dart';
 import 'package:flutter_bonapp/services/locator.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
 import 'package:flutter_bonapp/utils/routing_constants.dart';
+import 'package:flutter_bonapp/viewmodels/cart/viewmodel.dart';
+import 'package:flutter_bonapp/viewmodels/checkout/viewmodel.dart';
+import 'package:flutter_bonapp/widgets/base_model_widget.dart';
 
 class HomeApplicationHeader extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey;
@@ -31,25 +34,7 @@ class HomeApplicationHeader extends StatelessWidget {
               onPressed: () => _navigateToCart(context),
               icon: Icon(Icons.shopping_cart),
             ),
-            if (_cartService.itemCount > 0)
-              Positioned(
-                top: 5.0,
-                left: 20.0,
-                child: Container(
-                  width: 20.0,
-                  height: 20.0,
-                  child: Center(
-                    child: Text(
-                      '${_cartService.itemCount}',
-                      style: TextStyle(color: Color(whiteColour)),
-                    ),
-                  ),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color(primaryColour),
-                  ),
-                ),
-              )
+            if (_cartService.itemCount > 0) HeaderCartIcon(cartService: _cartService)
           ],
         )
       ],
@@ -87,27 +72,7 @@ class ApplicationHeader extends StatelessWidget {
               onPressed: () => _navigateToCart(context),
               icon: Icon(Icons.shopping_cart),
             ),
-            if (_cartService.itemCount > 0)
-              Positioned(
-                top: 5.0,
-                left: 20.0,
-                child: Container(
-                  width: 20.0,
-                  height: 20.0,
-                  child: Center(
-                    child: Text(
-                      '${_cartService.itemCount}',
-                      style: TextStyle(
-                        color: Color(whiteColour),
-                      ),
-                    ),
-                  ),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color(primaryColour),
-                  ),
-                ),
-              )
+            if (_cartService.itemCount > 0) HeaderCartIcon(cartService: _cartService)
           ],
         )
       ],
@@ -115,18 +80,82 @@ class ApplicationHeader extends StatelessWidget {
   }
 }
 
-class CheckoutApplicationHeader extends StatelessWidget {
-  final int count;
-  final User user;
-  CheckoutApplicationHeader({this.count, this.user});
+class HeaderCartIcon extends StatelessWidget {
+  const HeaderCartIcon({
+    Key key,
+    @required CartService cartService,
+  })  : _cartService = cartService,
+        super(key: key);
+
+  final CartService _cartService;
 
   @override
   Widget build(BuildContext context) {
+    return Positioned(
+      top: 5.0,
+      left: 28.5,
+      child: Container(
+        width: 15.0,
+        height: 15.0,
+        child: Center(
+          child: Text(
+            '${_cartService.itemCount}',
+            style: TextStyle(color: Color(whiteColour), fontSize: 10.0),
+          ),
+        ),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Color(primaryColour),
+        ),
+      ),
+    );
+  }
+}
+
+class CartApplicationHeader extends BaseModelWidget<CartViewModel> {
+  final User user;
+  CartApplicationHeader({this.user});
+
+  @override
+  Widget build(BuildContext context, CartViewModel data) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         IconButton(
-          onPressed: () => count > 0 ? Navigator.of(context).pop() : Navigator.of(context).pushNamedAndRemoveUntil(InitialScreenRoute, (Route<dynamic> route) => false, arguments: user),
+          onPressed: () => data.itemCount > 0
+              ? Navigator.of(context).pop()
+              : Navigator.of(context).pushNamedAndRemoveUntil(
+                  InitialScreenRoute,
+                  (Route<dynamic> route) => false,
+                  arguments: user,
+                ),
+          icon: Icon(Icons.arrow_back),
+        ),
+        Column(
+          children: <Widget>[
+            Image.asset(
+              'assets/images/logo.png',
+              height: 50.0,
+            ),
+          ],
+        ),
+        Text('')
+      ],
+    );
+  }
+}
+
+class CheckoutApplicationHeader extends BaseModelWidget<CheckoutViewModel> {
+  final User user;
+  CheckoutApplicationHeader({this.user});
+
+  @override
+  Widget build(BuildContext context, CheckoutViewModel data) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        IconButton(
+          onPressed: () => data.itemCount > 0 ? Navigator.of(context).pop() : Navigator.of(context).pushNamedAndRemoveUntil(InitialScreenRoute, (Route<dynamic> route) => false, arguments: user),
           icon: Icon(Icons.arrow_back),
         ),
         Column(

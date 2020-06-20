@@ -8,6 +8,7 @@ import 'package:flutter_bonapp/screens/application/faq/faq_screen.dart';
 import 'package:flutter_bonapp/screens/application/favourites/favourite_screen.dart';
 import 'package:flutter_bonapp/screens/application/initial/initial_screen.dart';
 import 'package:flutter_bonapp/screens/application/item/item_screen.dart';
+import 'package:flutter_bonapp/screens/application/message/message_screen.dart';
 import 'package:flutter_bonapp/screens/application/messages/messages_screen.dart';
 import 'package:flutter_bonapp/screens/application/orders/orders_screen.dart';
 import 'package:flutter_bonapp/screens/application/posts/posts_screen.dart';
@@ -88,6 +89,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case MessagesScreenRoute:
       return MaterialPageRoute(
         builder: (context) => MessagesScreen(),
+      );
+    case MessageScreenRoute:
+      var arguments = settings.arguments;
+      return MaterialPageRoute(
+        builder: (context) => MessageScreen(message: arguments),
       );
     case AccountScreenRoute:
       var arguments = settings.arguments;

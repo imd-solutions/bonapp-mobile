@@ -11,6 +11,7 @@ class CheckoutViewModel extends BaseModel {
   double get cartSubTotal => _cartService.cartSubTotal;
   double get cartTax => _cartService.cartTax;
   double get cartTotal => _cartService.cartTotal;
+  int get itemCount => _cartService.itemCount;
 
 
   void initialise() {}

@@ -12,7 +12,9 @@ class CartViewModel extends BaseModel {
 
   void initialise() {
     getUserInfo();
+    _cartService.itemCount;
     _cartService.amount();
+    notifyListeners();
   }
 
   Map<String, CartItem> get items => _cartService.items;
@@ -27,6 +29,13 @@ class CartViewModel extends BaseModel {
 
   void clearCartItems() {
     _cartService.clear();
+    notifyListeners();
+  }
+
+  removeItem(int id) {
+    _cartService.removeItem(id);
+    _cartService.itemCount;
+    _cartService.cartTotal;
     notifyListeners();
   }
 

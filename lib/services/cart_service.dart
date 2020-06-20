@@ -51,8 +51,11 @@ class CartService {
   }
 
   void removeItem(int id) {
-    _cartSubTotal = 0.00;
     _items.remove(id.toString());
+    _cartSubTotal = 0.00;
+    _items.forEach((key, value) {
+      _cartSubTotal += (value.price * value.quantity);
+    });
   }
 
   void removeSingleItem(int id) {

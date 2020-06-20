@@ -10,7 +10,6 @@ class CartMobilePortrait extends BaseModelWidget<CartViewModel> {
   @override
   Widget build(BuildContext context, CartViewModel data) {
     var height = MediaQuery.of(context).size.height;
-
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -18,7 +17,7 @@ class CartMobilePortrait extends BaseModelWidget<CartViewModel> {
           child: data.itemCount > 0
               ? Column(
                   children: <Widget>[
-                    CheckoutApplicationHeader(),
+                    CartApplicationHeader(),
                     Text(
                       'Cart Items.',
                       style: TextStyle(
@@ -34,12 +33,23 @@ class CartMobilePortrait extends BaseModelWidget<CartViewModel> {
                           Expanded(
                             child: ListView.builder(
                               itemCount: data.items.length,
-                              itemBuilder: (ctx, i) => CartItems(
-                                data.items.values.toList()[i].id.toString(),
-                                data.items.keys.toList()[i],
-                                data.items.values.toList()[i].price,
-                                data.items.values.toList()[i].quantity,
-                                data.items.values.toList()[i].name,
+                              itemBuilder: (ctx, i) => Dismissible(
+                                key: ValueKey(data.items.values.toList()[i].id),
+                                direction: DismissDirection.endToStart,
+                                background: Container(
+                                  color: Colors.red,
+                                ),
+                                onDismissed: (direction) {
+//        print("WTF!!!");
+                                  data.removeItem(data.items.values.toList()[i].id);
+                                },
+                                child: CartItems(
+                                  data.items.values.toList()[i].id.toString(),
+                                  data.items.keys.toList()[i],
+                                  data.items.values.toList()[i].price,
+                                  data.items.values.toList()[i].quantity,
+                                  data.items.values.toList()[i].name,
+                                ),
                               ),
                             ),
                           ),
@@ -84,7 +94,7 @@ class CartMobilePortrait extends BaseModelWidget<CartViewModel> {
               : Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    CheckoutApplicationHeader(count: data.itemCount, user: data.user    ),
+                    CartApplicationHeader(user: data.user),
                     Center(
                       child: Text(
                         'There are no items in your cart.',
@@ -117,7 +127,8 @@ class CartMobileLandscape extends BaseModelWidget<CartViewModel> {
           child: data.itemCount > 0
               ? Column(
                   children: <Widget>[
-                    CheckoutApplicationHeader(),
+                    // TEST!
+                    CartApplicationHeader(user: data.user),
                     Text(
                       'Cart Items.',
                       style: TextStyle(
@@ -183,7 +194,7 @@ class CartMobileLandscape extends BaseModelWidget<CartViewModel> {
               : Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    CheckoutApplicationHeader(),
+                    CartApplicationHeader(),
                     Center(
                       child: Text(
                         'There are no items in your cart.',

@@ -4,6 +4,7 @@ import 'package:flutter_bonapp/models/offer.dart';
 import 'package:flutter_bonapp/models/user.dart';
 import 'package:flutter_bonapp/services/locator.dart';
 import 'package:flutter_bonapp/services/menu_service.dart';
+import 'package:flutter_bonapp/services/message_service.dart';
 import 'package:flutter_bonapp/services/offer_service.dart';
 import 'package:flutter_bonapp/services/user_service.dart';
 import 'package:flutter_bonapp/viewmodels/base_model.dart';
@@ -13,10 +14,12 @@ class HomeViewModel extends BaseModel {
   UserService userService = locator<UserService>();
   MenuService menuService = locator<MenuService>();
   OfferService offerService = locator<OfferService>();
+  MessagesService messagesService = locator<MessagesService>();
 
   User user;
 
   List<Items> featuredItems;
+  List<Messages> userUnreadMessages;
   Offer offer;
 
   void initialise() {
@@ -30,6 +33,7 @@ class HomeViewModel extends BaseModel {
     int id = prefs.getInt('userId');
 
     user = await userService.getUser(id);
+    userUnreadMessages = await messagesService.getUnreadUserMessages(id);
     featuredItems = await menuService.getFeaturedItems();
     offer = await offerService.getOffer(1);
 

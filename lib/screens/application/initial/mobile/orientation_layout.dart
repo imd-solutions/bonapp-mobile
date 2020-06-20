@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bonapp/enums/viewstate.dart';
 import 'package:flutter_bonapp/models/user.dart';
 import 'package:flutter_bonapp/partials/application_header.dart';
 import 'package:flutter_bonapp/screens/application/homepage/home_screen.dart';
@@ -87,9 +88,9 @@ List<Widget> _drawerItems(User user, BuildContext context, InitialViewModel data
                   ? CircleNotification(
                       notification: user.orders.length,
                     )
-                  : _accountDrawerList[index]['page'] == MessagesScreenRoute && user.messages.length > 0
+                  : _accountDrawerList[index]['page'] == MessagesScreenRoute && data.userUnreadMessages.length > 0
                       ? CircleNotification(
-                          notification: user.messages.length,
+                          notification: data.userUnreadMessages.length,
                         )
                       : Text(''),
             ],
@@ -164,10 +165,12 @@ class InitialMobilePortrait extends BaseModelWidget<InitialViewModel> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.all(0.0),
-          children: _drawerItems(user, context, data),
-        ),
+        child: data.state != ViewState.Busy
+            ? ListView(
+                padding: EdgeInsets.all(0.0),
+                children: _drawerItems(user, context, data),
+              )
+            : null,
       ),
       body: SafeArea(
         child: Column(
@@ -180,8 +183,7 @@ class InitialMobilePortrait extends BaseModelWidget<InitialViewModel> {
                   _widgetOptions.elementAt(data.bottomNavIndex),
                 ],
               ),
-            )
-//
+            ) //
           ],
         ),
       ),

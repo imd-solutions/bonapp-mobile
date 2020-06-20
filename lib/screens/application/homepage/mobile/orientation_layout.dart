@@ -72,7 +72,7 @@ class HomeMobilePortrait extends BaseModelWidget<HomeViewModel> {
                                     _userInformation(
                                       landscape: false,
                                       icon: FontAwesomeIcons.envelope,
-                                      data: data.user.messages.length > 0 ? '${data.user.messages.length}' : '0',
+                                      data: data.userUnreadMessages.length,
                                       title: 'Messages',
                                       backgroundColour: 0XFFFC7B4D,
                                       context: context,
@@ -213,7 +213,7 @@ class HomeMobileLandscape extends BaseModelWidget<HomeViewModel> {
                         _userInformation(
                           landscape: true,
                           icon: FontAwesomeIcons.envelope,
-                          data: data.user.messages.length > 0 ? '${data.user.messages.length}' : '0',
+                          data: data.userUnreadMessages.length,
                           title: 'Messages',
                           backgroundColour: 0XFFFC7B4D,
                           context: context,
