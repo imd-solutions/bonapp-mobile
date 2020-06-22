@@ -43,9 +43,10 @@ class HomeApplicationHeader extends StatelessWidget {
 }
 
 class ApplicationHeader extends StatelessWidget {
-  const ApplicationHeader({
-    Key key,
-  }) : super(key: key);
+  final User user;
+  final String message;
+
+  const ApplicationHeader({Key key, this.user, this.message}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +56,7 @@ class ApplicationHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         IconButton(
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => message == 'messageDelete' ? Navigator.pushNamed(context, InitialScreenRoute, arguments: user) : Navigator.of(context).pop(),
           icon: Icon(Icons.arrow_back),
         ),
         Column(

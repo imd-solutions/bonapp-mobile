@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bonapp/enums/viewstate.dart';
+import 'package:flutter_bonapp/models/application.dart';
 import 'package:flutter_bonapp/models/user.dart';
 import 'package:flutter_bonapp/screens/auth/login/login_screen.dart';
+import 'package:flutter_bonapp/services/application_service.dart';
 import 'package:flutter_bonapp/services/locator.dart';
 import 'package:flutter_bonapp/services/message_service.dart';
 import 'package:flutter_bonapp/services/user_service.dart';
@@ -12,8 +14,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 class InitialViewModel extends BaseModel {
   UserService userService = locator<UserService>();
   MessagesService messagesService = locator<MessagesService>();
+  ApplicationService applicationService = locator<ApplicationService>();
 
   User user;
+  Application application;
   List<Messages> userUnreadMessages;
 
   int bottomNavIndex = 0;
@@ -32,6 +36,7 @@ class InitialViewModel extends BaseModel {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     prefs.setInt('userId', id);
+    application = await applicationService.getApplication();
     userUnreadMessages = await messagesService.getUnreadUserMessages(id);
 
     setState(ViewState.Completed);

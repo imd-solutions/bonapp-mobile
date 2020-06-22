@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bonapp/screens/sliders/sliders_screen.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
-import 'package:flutter_bonapp/partials/application_footer.dart';
 
 class IntroScreen extends StatelessWidget {
   @override
@@ -40,13 +39,13 @@ class IntroScreen extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(
-          flex: 1,
-          child: ApplicationFooter(
-            name: 'Bon Appetit',
-            version: '0.0.1',
-          ),
-        )
+//        Expanded(
+//          flex: 1,
+//          child: ApplicationFooter(
+//            name: 'Bon Appetit',
+//            version: '0.0.1',
+//          ),
+//        )
       ],
     );
   }

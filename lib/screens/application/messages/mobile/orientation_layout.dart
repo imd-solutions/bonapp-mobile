@@ -9,6 +9,9 @@ import 'package:flutter_bonapp/widgets/base_model_widget.dart';
 import 'package:flutter_bonapp/widgets/full_busy_overlay.dart';
 
 class MessagesMobilePortrait extends BaseModelWidget<MessagesViewModel> {
+  final String message;
+  MessagesMobilePortrait({this.message});
+
   @override
   Widget build(BuildContext context, MessagesViewModel data) {
     return FullBusyOverlay(
@@ -18,7 +21,7 @@ class MessagesMobilePortrait extends BaseModelWidget<MessagesViewModel> {
           padding: EdgeInsets.symmetric(horizontal: 15.0),
           child: Column(
             children: <Widget>[
-              ApplicationHeader(),
+              ApplicationHeader(user: data.user, message: message),
               SizedBox(
                 height: 20.0,
               ),
@@ -87,6 +90,10 @@ class MessagesMobilePortrait extends BaseModelWidget<MessagesViewModel> {
 }
 
 class MessagesMobileLandscape extends BaseModelWidget<MessagesViewModel> {
+
+  final String message;
+  MessagesMobileLandscape({this.message});
+
   @override
   Widget build(BuildContext context, MessagesViewModel data) {
     return FullBusyOverlay(
@@ -96,7 +103,7 @@ class MessagesMobileLandscape extends BaseModelWidget<MessagesViewModel> {
           padding: EdgeInsets.symmetric(horizontal: 15.0),
           child: Column(
             children: <Widget>[
-              ApplicationHeader(),
+              ApplicationHeader(user: data.user, message: message),
               SizedBox(
                 height: 20.0,
               ),

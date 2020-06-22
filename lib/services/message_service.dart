@@ -117,7 +117,7 @@ class MessagesService {
         throw new Exception(message);
       }
 
-      final result = response.data['delete'];
+      final result = response.data['deleteMessage'];
 
       return Message(
         status: 200,

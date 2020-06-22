@@ -21,10 +21,6 @@ final List _accountDrawerList = [
   {'icon': Icons.shopping_basket, 'title': 'My Orders', 'page': OrdersScreenRoute},
 ];
 
-final List _settingsDrawerList = [
-  {'icon': Icons.settings, 'title': 'Settings', 'page': SettingsScreenRoute},
-];
-
 final List _informationDrawerList = [
   {'icon': Icons.subject, 'title': 'FAQ', 'page': FaqScreenRoute},
   {'icon': Icons.info, 'title': 'About', 'page': AboutScreenRoute},
@@ -73,7 +69,9 @@ List<Widget> _drawerItems(User user, BuildContext context, InitialViewModel data
     for (var index = 0; index < _accountDrawerList.length; index++)
       InkWell(
         onTap: () {
-          Navigator.of(context).popAndPushNamed(_accountDrawerList[index]['page'], arguments: user);
+          _accountDrawerList[index]['page'] == MessagesScreenRoute
+              ? Navigator.of(context).popAndPushNamed(_accountDrawerList[index]['page'])
+              : Navigator.of(context).popAndPushNamed(_accountDrawerList[index]['page'], arguments: user);
         },
         child: ListTile(
           leading: Icon(
@@ -95,19 +93,6 @@ List<Widget> _drawerItems(User user, BuildContext context, InitialViewModel data
                       : Text(''),
             ],
           ),
-          trailing: Icon(Icons.keyboard_arrow_right),
-        ),
-      ),
-    Divider(),
-    for (var index = 0; index < _settingsDrawerList.length; index++)
-      InkWell(
-        onTap: () => Navigator.of(context).pushNamed(_settingsDrawerList[index]['page'], arguments: user),
-        child: ListTile(
-          leading: Icon(
-            _settingsDrawerList[index]['icon'],
-            color: Color(blueColour),
-          ),
-          title: Text(_settingsDrawerList[index]['title']),
           trailing: Icon(Icons.keyboard_arrow_right),
         ),
       ),
@@ -138,6 +123,28 @@ List<Widget> _drawerItems(User user, BuildContext context, InitialViewModel data
           trailing: Icon(Icons.keyboard_arrow_right),
         ),
       ),
+    Divider(),
+    ListTile(
+      title: Row(
+        children: <Widget>[
+          Text(
+            data.application.name,
+            style: TextStyle(
+              fontFamily: secondaryFont,
+              fontSize: 12.0,
+            ),
+          ),
+          Spacer(),
+          Text(
+            'Version: ${data.application.version}',
+            style: TextStyle(
+              fontFamily: secondaryFont,
+              fontSize: 12.0,
+            ),
+          ),
+        ],
+      ),
+    )
   ];
 }
 

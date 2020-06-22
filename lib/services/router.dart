@@ -87,8 +87,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         builder: (context) => FavouriteScreen(),
       );
     case MessagesScreenRoute:
+      var arguments = settings.arguments;
       return MaterialPageRoute(
-        builder: (context) => MessagesScreen(),
+        builder: (context) => MessagesScreen(message: arguments),
       );
     case MessageScreenRoute:
       var arguments = settings.arguments;
