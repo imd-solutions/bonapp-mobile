@@ -74,4 +74,16 @@ class UserMutation {
       }
       """;
   }
+
+  // Update the user information
+  String updateUserDetails() {
+    return """ 
+      mutation updateUserDetails(\$input: UserDetailsInput) {
+        updateUserDetails(input: \$input) {
+           status
+           message 
+        }
+      }
+    """;
+  }
 }

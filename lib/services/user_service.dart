@@ -413,4 +413,46 @@ class UserService {
       );
     }
   }
+
+  // Update the user information
+  Future<Message> updateUserDetails(int id, User user) async {
+    try {
+      GraphQLClient _user = graphQLConfiguration.clientToQuery();
+      QueryResult response = await _user.mutate(
+        MutationOptions(
+          documentNode: gql(
+            userMutation.updateUserDetails(),
+          ),
+          variables: {
+            "input": {
+              "id": id,
+              "firstname": user.profile.firstname,
+              "lastname": user.profile.lastname,
+            }
+          },
+        ),
+      );
+
+      if (response.hasException) {
+        String message = response.exception.graphqlErrors.first.message;
+        throw new Exception(message);
+      }
+
+      final result = response.data;
+
+      return Message(
+        status: 200,
+        title: 'Success',
+        message: result['updateUserDetails']['message'],
+        colour: successColour,
+      );
+    } catch (e) {
+      return Message(
+        status: 400,
+        title: 'Error',
+        message: e.toString(),
+        colour: errorColour,
+      );
+    }
+  }
 }

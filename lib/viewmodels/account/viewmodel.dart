@@ -1,5 +1,6 @@
 import 'package:flutter_bonapp/enums/viewstate.dart';
 import 'package:flutter_bonapp/models/location.dart';
+import 'package:flutter_bonapp/models/message.dart';
 import 'package:flutter_bonapp/models/nationality.dart';
 import 'package:flutter_bonapp/models/profession.dart';
 import 'package:flutter_bonapp/models/user.dart';
@@ -64,23 +65,33 @@ class AccountViewModel extends BaseModel {
     notifyListeners();
   }
 
+  void updateUserDetails(String firstname, String lastname, String email, String mobile) {
+    user.profile.firstname = firstname;
+    user.profile.lastname = lastname;
+    user.email = email;
+    user.profile.mobileNumber = mobile;
+  }
+
   void updateSelected(String type, int index, String name) {
     switch (type) {
       case 'Site':
         {
           selectedLocation = index;
+          user.profile.location.id = index.toString();
           selectedLocationName = name;
         }
         break;
       case 'Profession':
         {
           selectedProfession = index;
+          user.profile.profession.id = index.toString();
           selectedProfessionName = name;
         }
         break;
       default:
         {
           selectedNationality = index;
+          user.profile.nationality.id = index.toString();
           selectedNationalityName = name;
         }
         break;
@@ -93,19 +104,37 @@ class AccountViewModel extends BaseModel {
       case 'email':
         {
           emailNotification = value;
+          user.profile.alerts.email = value;
         }
         break;
       case 'app':
         {
           appNotification = value;
+          user.profile.alerts.notification = value;
         }
         break;
       default:
         {
           textNotification = value;
+          user.profile.alerts.text = value;
         }
         break;
     }
     notifyListeners();
+  }
+
+  Future<Message> saveUserDetails() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int uid = prefs.getInt('userId');
+
+    setState(ViewState.Processing);
+    notifyListeners();
+
+    Message response = await userService.updateUserDetails(uid, user);
+
+    setState(ViewState.Completed);
+    notifyListeners();
+
+    return response;
   }
 }

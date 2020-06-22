@@ -1,5 +1,7 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bonapp/enums/viewstate.dart';
+import 'package:flutter_bonapp/models/message.dart';
 import 'package:flutter_bonapp/models/user.dart';
 import 'package:flutter_bonapp/partials/application_header.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
@@ -81,7 +83,11 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(60.0),
                                 boxShadow: [
-                                  BoxShadow(blurRadius: 3.0, offset: Offset(0, 4.0), color: Color(blackColour)),
+                                  BoxShadow(
+                                    blurRadius: 3.0,
+                                    offset: Offset(0, 4.0),
+                                    color: Color(blackColour),
+                                  ),
                                 ],
                                 image: DecorationImage(
                                   image: NetworkImage(graphQLApiImg + user.avatar),
@@ -106,7 +112,9 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
                                 ),
                                 Text(
                                   user.email,
-                                  style: TextStyle(color: Color(greyColour)),
+                                  style: TextStyle(
+                                    color: Color(greyColour),
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 20.0,
@@ -115,14 +123,16 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
                                   children: <Widget>[
                                     SmallButton(
                                       btnText: "Edit",
-                                      user: user,
+                                      onTap: _showEditUser,
+                                      data: data,
                                     ),
                                     SizedBox(
                                       width: 10.0,
                                     ),
                                     SmallButton(
                                       btnText: "Save",
-                                      user: user,
+                                      onTap: _processUserUpdate,
+                                      data: data,
                                     ),
                                   ],
                                 )
@@ -320,14 +330,14 @@ class AccountMobileLandscape extends BaseModelWidget<AccountViewModel> {
                                   children: <Widget>[
                                     SmallButton(
                                       btnText: "Edit",
-                                      user: user,
+                                      onTap: _showEditUser,
                                     ),
                                     SizedBox(
                                       width: 10.0,
                                     ),
                                     SmallButton(
                                       btnText: "Save",
-                                      user: user,
+                                      onTap: _showEditUser,
                                     ),
                                   ],
                                 )
@@ -422,13 +432,15 @@ class AccountMobileLandscape extends BaseModelWidget<AccountViewModel> {
 class SmallButton extends StatelessWidget {
   final String btnText;
   final User user;
+  final Function onTap;
+  final AccountViewModel data;
 
-  SmallButton({this.btnText, this.user});
+  SmallButton({this.btnText, this.user, this.onTap, this.data});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => _showEditUser(context, user),
+      onTap: () => onTap(context, user, data),
       child: Container(
         height: 25.0,
         width: 60.0,
@@ -438,10 +450,21 @@ class SmallButton extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(20.0)),
         child: Center(
-          child: Text(
-            "$btnText",
-            style: TextStyle(color: Color(primaryColour), fontSize: 16.0),
-          ),
+          child: data.state == ViewState.Processing && btnText == 'Save'
+              ? SizedBox(
+                  height: 10.0,
+                  width: 10.0,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2.0,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      Color(primaryColour),
+                    ),
+                  ),
+                )
+              : Text(
+                  "$btnText",
+                  style: TextStyle(color: Color(primaryColour), fontSize: 16.0),
+                ),
         ),
       ),
     );
@@ -595,17 +618,17 @@ Widget getAppBorderButton(String buttonLabel, EdgeInsets margin) {
   );
 }
 
-void _showEditUser(BuildContext context, User user) {
+void _showEditUser(BuildContext context, User user, AccountViewModel data) {
   final teFirstName = TextEditingController();
   final teLastName = TextEditingController();
   final teEmail = TextEditingController();
   final teMobile = TextEditingController();
 
-  if (user != null) {
-    teFirstName.text = user.profile.firstname;
-    teLastName.text = user.profile.lastname;
-    teEmail.text = user.email;
-    teMobile.text = user.profile.mobileNumber;
+  if (data.user != null) {
+    teFirstName.text = data.user.profile.firstname;
+    teLastName.text = data.user.profile.lastname;
+    teEmail.text = data.user.email;
+    teMobile.text = data.user.profile.mobileNumber;
   }
 
   showDialog(
@@ -622,28 +645,61 @@ void _showEditUser(BuildContext context, User user) {
               getTextField("Surname", 'Your firstname', teLastName),
               getTextField("Email", 'Your email address', teEmail),
               getTextField("Mobile", 'Your mobile phone number', teMobile),
-              FlatButton(
-                onPressed: () => Navigator.pop(context),
-                child: Container(
-                  height: 25.0,
-                  width: 70.0,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Color(primaryColour),
-                    ),
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Cancel',
-                      style: TextStyle(
-                        color: Color(primaryColour),
-                        fontSize: 16.0,
+              SizedBox(
+                height: 15.0,
+              ),
+              Row(
+                children: <Widget>[
+                  FlatButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Container(
+                      height: 25.0,
+                      width: 70.0,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Color(primaryColour),
+                        ),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Cancel',
+                          style: TextStyle(
+                            color: Color(primaryColour),
+                            fontSize: 16.0,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
+                  Spacer(),
+                  FlatButton(
+                    onPressed: () {
+                      _updateUserInfo(teFirstName.text, teLastName.text, teEmail.text, teMobile.text, data);
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      height: 25.0,
+                      width: 80.0,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Color(primaryColour),
+                        ),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Update',
+                          style: TextStyle(
+                            color: Color(primaryColour),
+                            fontSize: 16.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),
@@ -722,5 +778,20 @@ void _showEditAccount(BuildContext context, dynamic user, account, String title,
       context: context,
       builder: (_) {
         return alert;
+      });
+}
+
+void _updateUserInfo(String firstname, String lastname, String email, String mobile, AccountViewModel data) {
+  data.updateUserDetails(firstname, lastname, email, mobile);
+}
+
+void _processUserUpdate(BuildContext context, User user, AccountViewModel data) {
+  data.saveUserDetails().then((message) => {
+        Flushbar(
+          title: message.title,
+          message: message.message.replaceAll('Exception: ', ''),
+          backgroundColor: Color(message.colour),
+          duration: Duration(seconds: message.status != 200 ? 7 : 3),
+        )..show(context)
       });
 }
