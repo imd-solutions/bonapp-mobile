@@ -1,7 +1,6 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bonapp/enums/viewstate.dart';
-import 'package:flutter_bonapp/models/message.dart';
 import 'package:flutter_bonapp/models/user.dart';
 import 'package:flutter_bonapp/partials/application_header.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
@@ -11,10 +10,6 @@ import 'package:flutter_bonapp/widgets/base_model_widget.dart';
 import 'package:flutter_bonapp/widgets/full_busy_overlay.dart';
 
 class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
-  final User user;
-
-  AccountMobilePortrait({this.user});
-
   @override
   Widget build(BuildContext context, AccountViewModel data) {
     List cards = [
@@ -25,7 +20,7 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
         "account": data.professions,
         "selected": data.selectedProfession,
         "selectedName": data.selectedProfessionName,
-        "profile": user.profile.profession,
+        "profile": data.state != ViewState.Busy ?? data.user.profile.profession,
         "data": data
       },
       {
@@ -35,7 +30,7 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
         "account": data.nationality,
         "selected": data.selectedNationality,
         "selectedName": data.selectedNationalityName,
-        "profile": user.profile.nationality,
+        "profile": data.state != ViewState.Busy ?? data.user.profile.nationality,
         "data": data
       },
       {
@@ -45,15 +40,15 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
         "account": data.locations,
         "selected": data.selectedLocation,
         "selectedName": data.selectedLocationName,
-        "profile": user.profile.location,
+        "profile": data.state != ViewState.Busy ?? data.user.profile.location,
         "data": data
       },
     ];
 
     List switchers = [
-      {"icon": Icons.mail_outline, "text": "Email Notification", "divider": true, "type": "email", "alert": data.emailNotification},
-      {"icon": Icons.notifications, "text": "App Notification", "divider": true, "type": "app", "alert": data.appNotification},
-      {"icon": Icons.phone_android, "text": "Text Notification", "divider": false, "type": "text", "alert": data.textNotification},
+      {"icon": Icons.mail_outline, "text": "Email Notification", "divider": true, "type": "email", "alert": data.state != ViewState.Busy ? data.user.profile.alerts.email : data.emailNotification},
+      {"icon": Icons.notifications, "text": "App Notification", "divider": true, "type": "app", "alert": data.state != ViewState.Busy ? data.user.profile.alerts.notification : data.appNotification},
+      {"icon": Icons.phone_android, "text": "Text Notification", "divider": false, "type": "text", "alert": data.state != ViewState.Busy ? data.user.profile.alerts.text : data.textNotification},
     ];
 
     return Scaffold(
@@ -65,7 +60,7 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
               children: <Widget>[
-                ApplicationHeader(),
+                ApplicationHeader(user: data.user),
                 SizedBox(
                   height: 20.0,
                 ),
@@ -73,73 +68,74 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: <Widget>[
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Container(
-                              height: 100.0,
-                              width: 100.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(60.0),
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 3.0,
-                                    offset: Offset(0, 4.0),
-                                    color: Color(blackColour),
-                                  ),
-                                ],
-                                image: DecorationImage(
-                                  image: NetworkImage(graphQLApiImg + user.avatar),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 20.0,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  user.name,
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                Text(
-                                  user.email,
-                                  style: TextStyle(
-                                    color: Color(greyColour),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 20.0,
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    SmallButton(
-                                      btnText: "Edit",
-                                      onTap: _showEditUser,
-                                      data: data,
-                                    ),
-                                    SizedBox(
-                                      width: 10.0,
-                                    ),
-                                    SmallButton(
-                                      btnText: "Save",
-                                      onTap: _processUserUpdate,
-                                      data: data,
+                        if (data.state != ViewState.Busy)
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Container(
+                                height: 100.0,
+                                width: 100.0,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(60.0),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 3.0,
+                                      offset: Offset(0, 4.0),
+                                      color: Color(blackColour),
                                     ),
                                   ],
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
+                                  image: DecorationImage(
+                                    image: NetworkImage(graphQLApiImg + data.user.avatar),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 20.0,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    data.user.name,
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Text(
+                                    data.user.email,
+                                    style: TextStyle(
+                                      color: Color(greyColour),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20.0,
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      SmallButton(
+                                        btnText: "Edit",
+                                        onTap: _showEditUser,
+                                        data: data,
+                                      ),
+                                      SizedBox(
+                                        width: 10.0,
+                                      ),
+                                      SmallButton(
+                                        btnText: "Save",
+                                        onTap: _processUserUpdate,
+                                        data: data,
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
                         SizedBox(
                           height: 30.0,
                         ),
@@ -225,9 +221,6 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
 }
 
 class AccountMobileLandscape extends BaseModelWidget<AccountViewModel> {
-  final User user;
-
-  AccountMobileLandscape({this.user});
   @override
   Widget build(BuildContext context, AccountViewModel data) {
     List cards = [
@@ -238,7 +231,7 @@ class AccountMobileLandscape extends BaseModelWidget<AccountViewModel> {
         "account": data.professions,
         "selected": data.selectedProfession,
         "selectedName": data.selectedProfessionName,
-        "profile": user.profile.profession,
+        "profile": data.state != ViewState.Busy ?? data.user.profile.profession,
         "data": data
       },
       {
@@ -248,7 +241,7 @@ class AccountMobileLandscape extends BaseModelWidget<AccountViewModel> {
         "account": data.nationality,
         "selected": data.selectedNationality,
         "selectedName": data.selectedNationalityName,
-        "profile": user.profile.nationality,
+        "profile": data.state != ViewState.Busy ?? data.user.profile.nationality,
         "data": data
       },
       {
@@ -258,7 +251,7 @@ class AccountMobileLandscape extends BaseModelWidget<AccountViewModel> {
         "account": data.locations,
         "selected": data.selectedLocation,
         "selectedName": data.selectedLocationName,
-        "profile": user.profile.location,
+        "profile": data.state != ViewState.Busy ?? data.user.profile.location,
         "data": data
       },
     ];
@@ -278,7 +271,7 @@ class AccountMobileLandscape extends BaseModelWidget<AccountViewModel> {
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
               children: <Widget>[
-                ApplicationHeader(),
+                ApplicationHeader(user: data.user),
                 SizedBox(
                   height: 20.0,
                 ),
@@ -286,65 +279,68 @@ class AccountMobileLandscape extends BaseModelWidget<AccountViewModel> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: <Widget>[
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Container(
-                              height: 100.0,
-                              width: 100.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(60.0),
-                                boxShadow: [
-                                  BoxShadow(blurRadius: 3.0, offset: Offset(0, 4.0), color: Color(blackColour)),
-                                ],
-                                image: DecorationImage(
-                                  image: NetworkImage(graphQLApiImg + user.avatar),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 20.0,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  user.name,
-                                  style: TextStyle(
-                                    fontSize: 16.0,
+                        if (data.state != ViewState.Busy)
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Container(
+                                height: 100.0,
+                                width: 100.0,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(60.0),
+                                  boxShadow: [
+                                    BoxShadow(blurRadius: 3.0, offset: Offset(0, 4.0), color: Color(blackColour)),
+                                  ],
+                                  image: DecorationImage(
+                                    image: NetworkImage(graphQLApiImg + data.user.avatar),
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                Text(
-                                  user.email,
-                                  style: TextStyle(color: Color(greyColour)),
-                                ),
-                                SizedBox(
-                                  height: 20.0,
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    SmallButton(
-                                      btnText: "Edit",
-                                      onTap: _showEditUser,
+                              ),
+                              SizedBox(
+                                width: 20.0,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    data.user.name,
+                                    style: TextStyle(
+                                      fontSize: 16.0,
                                     ),
-                                    SizedBox(
-                                      width: 10.0,
-                                    ),
-                                    SmallButton(
-                                      btnText: "Save",
-                                      onTap: _showEditUser,
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Text(
+                                    data.user.email,
+                                    style: TextStyle(color: Color(greyColour)),
+                                  ),
+                                  SizedBox(
+                                    height: 20.0,
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      SmallButton(
+                                        btnText: "Edit",
+                                        onTap: _showEditUser,
+                                        data: data,
+                                      ),
+                                      SizedBox(
+                                        width: 10.0,
+                                      ),
+                                      SmallButton(
+                                        btnText: "Save",
+                                        onTap: _showEditUser,
+                                        data: data,
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
                         SizedBox(
                           height: 30.0,
                         ),
@@ -712,7 +708,7 @@ void _showEditAccount(BuildContext context, dynamic user, account, String title,
   List<DropdownMenuItem<int>> items = [];
 
   void _changedDropDownItem(String type, int index, String name) {
-    data.updateSelected(type, index, name);
+    data.updateSelected(type, (index + 1), name);
   }
 
   items.add(

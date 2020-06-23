@@ -12,9 +12,11 @@ import 'package:flutter_bonapp/widgets/full_busy_overlay.dart';
 
 class MessageMobilePortrait extends BaseModelWidget<MessageViewModel> {
   final Messages message;
-  MessageMobilePortrait({this.message});
+  final String route;
+  MessageMobilePortrait({this.message, this.route});
   @override
   Widget build(BuildContext context, MessageViewModel data) {
+
     return FullBusyOverlay(
       show: data.state == ViewState.Busy,
       child: SafeArea(
@@ -23,9 +25,12 @@ class MessageMobilePortrait extends BaseModelWidget<MessageViewModel> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              ApplicationHeader(),
+              ApplicationHeader(route: route),
               SizedBox(
                 height: 20.0,
+              ),
+              SizedBox(
+                height: 5.0,
               ),
               Expanded(
                 child: Column(
@@ -82,7 +87,9 @@ class MessageMobilePortrait extends BaseModelWidget<MessageViewModel> {
 
 class MessageMobileLandscape extends BaseModelWidget<MessageViewModel> {
   final Messages message;
-  MessageMobileLandscape({this.message});
+  final String route;
+
+  MessageMobileLandscape({this.message, this.route});
   @override
   Widget build(BuildContext context, MessageViewModel data) {
     return FullBusyOverlay(
@@ -92,7 +99,7 @@ class MessageMobileLandscape extends BaseModelWidget<MessageViewModel> {
           padding: EdgeInsets.symmetric(horizontal: 15.0),
           child: Column(
             children: <Widget>[
-              ApplicationHeader(),
+              ApplicationHeader(route: route),
               SizedBox(
                 height: 20.0,
               ),
@@ -220,7 +227,7 @@ void _snackBar(Message message, BuildContext context) {
       (_) {
         // Send the user to the Message Screen on success.
         if (message.status == 200) {
-          Navigator.of(context).pushNamedAndRemoveUntil(MessagesScreenRoute, (Route<dynamic> route) => false, arguments: 'messageDeleted');
+          Navigator.of(context).pushNamedAndRemoveUntil(MessagesScreenRoute, (Route<dynamic> route) => false);
         }
       },
     );

@@ -1,3 +1,4 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bonapp/models/menu.dart';
 import 'package:flutter_bonapp/partials/application_header.dart';
@@ -32,7 +33,7 @@ class CategoryMobilePortrait extends BaseModelWidget<CategoryViewModel> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            ApplicationHeader(),
+            ApplicationHeader(route: 'goback'),
             Stack(
               children: <Widget>[
                 Container(
@@ -126,7 +127,7 @@ class CategoryMobileLandscape extends BaseModelWidget<CategoryViewModel> {
         child: SafeArea(
           child: Column(
             children: <Widget>[
-              ApplicationHeader(),
+              ApplicationHeader(route: 'goback'),
               Stack(
                 children: <Widget>[
                   Container(
@@ -338,7 +339,15 @@ _buildListItem(Items item, double rating, double width, Orientation orientation,
                     children: <Widget>[
                       Container(
                         child: InkResponse(
-                          onTap: () => data.removeItemFromCart(item.id),
+                          onTap: () {
+                            data.removeItemFromCart(item.id);
+                            Flushbar(
+                              title: 'Success',
+                              message: 'That item has been removed.',
+                              backgroundColor: Color(successColour),
+                              duration: Duration(seconds: 5),
+                            )..show(context);
+                          },
                           child: Container(
                             width: 30.0,
                             height: 30.0,
@@ -359,7 +368,15 @@ _buildListItem(Items item, double rating, double width, Orientation orientation,
                       ),
                       Container(
                         child: InkResponse(
-                          onTap: () => data.addItemToCart(item.id, item.name, item.subtitle, item.price),
+                          onTap: () {
+                            data.addItemToCart(item.id, item.name, item.subtitle, item.price);
+                            Flushbar(
+                              title: 'Success',
+                              message: 'That item has been added.',
+                              backgroundColor: Color(successColour),
+                              duration: Duration(seconds: 5),
+                            )..show(context);
+                          },
                           child: Container(
                             width: 30.0,
                             height: 30.0,

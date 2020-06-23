@@ -10,7 +10,7 @@ class SettingsMobilePortrait extends BaseModelWidget<SettingsViewModel> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            ApplicationHeader(),
+            ApplicationHeader(user: data.user),
             Center(
               child: Text(data.emailAlert.toString()),
             )
@@ -28,7 +28,7 @@ class SettingsMobileLandscape extends BaseModelWidget<SettingsViewModel> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            ApplicationHeader(),
+            ApplicationHeader(user: data.user),
             Center(
               child: Text('Settings Page'),
             )

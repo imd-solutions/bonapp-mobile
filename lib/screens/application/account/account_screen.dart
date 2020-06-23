@@ -19,8 +19,8 @@ class AccountScreen extends StatelessWidget {
         onModelReady: (model) => model.initialise(),
         builder: (context) => ScreenTypeLayout(
           mobile: OrientationLayout(
-            portrait: (context) => AccountMobilePortrait(user: user),
-            landscape: (context) => AccountMobileLandscape(user: user),
+            portrait: (context) => AccountMobilePortrait(),
+            landscape: (context) => AccountMobileLandscape(),
           ),
           tablet: OrientationLayout(
             portrait: (context) => AccountMobilePortrait(),

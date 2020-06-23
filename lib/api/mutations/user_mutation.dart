@@ -23,6 +23,7 @@ class UserMutation {
             profile {
               firstname
               lastname
+              mobile_number
               profession {
                 id
                 title

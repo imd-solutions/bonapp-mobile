@@ -61,7 +61,12 @@ class MessagesViewModel extends BaseModel {
   }
 
   Future<Message> deleteMessage(int id) async {
-    message = await messagesService.deleteMessage(id);
+    setState(ViewState.Processing);
     notifyListeners();
+    Message response = await messagesService.deleteMessage(id);
+    setState(ViewState.Completed);
+    notifyListeners();
+
+    return response;
   }
 }

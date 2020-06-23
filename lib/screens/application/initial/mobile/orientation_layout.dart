@@ -229,10 +229,12 @@ class InitialMobileLandscape extends BaseModelWidget<InitialViewModel> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.all(0.0),
-          children: _drawerItems(user, context, data),
-        ),
+        child: data.state != ViewState.Busy
+            ? ListView(
+                padding: EdgeInsets.all(0.0),
+                children: _drawerItems(user, context, data),
+              )
+            : null,
       ),
       body: SafeArea(
         child: Column(

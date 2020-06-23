@@ -1,3 +1,7 @@
+import 'package:flushbar/flushbar.dart';
+import 'package:flushbar/flushbar.dart';
+import 'package:flushbar/flushbar.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bonapp/models/menu.dart';
 import 'package:flutter_bonapp/partials/application_header.dart';
@@ -32,7 +36,9 @@ class ItemMobilePortrait extends BaseModelWidget<ItemViewModel> {
           padding: const EdgeInsets.only(left: 15.0, right: 15.0),
           child: Column(
             children: <Widget>[
-              ApplicationHeader(),
+              ApplicationHeader(
+                route: 'goback',
+              ),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 30),
                 padding: EdgeInsets.all(6),
@@ -109,7 +115,15 @@ class ItemMobilePortrait extends BaseModelWidget<ItemViewModel> {
                             child: Row(
                               children: <Widget>[
                                 GestureDetector(
-                                  onTap: () => data.removeSingleItemFromCart(item.id), //removeItemFromCart
+                                  onTap: () {
+                                    data.removeSingleItemFromCart(item.id);
+                                    Flushbar(
+                                      title: 'Success',
+                                      message: 'That item has been removed.',
+                                      backgroundColor: Color(successColour),
+                                      duration: Duration(seconds: 5),
+                                    )..show(context);
+                                  }, //removeItemFromCart
                                   child: Icon(Icons.remove),
                                 ),
                                 SizedBox(width: 30),
@@ -119,14 +133,30 @@ class ItemMobilePortrait extends BaseModelWidget<ItemViewModel> {
                                 ),
                                 SizedBox(width: 30),
                                 GestureDetector(
-                                  onTap: () => data.addItemToCart(item.id, item.name, item.subtitle, item.price),
+                                  onTap: () {
+                                    data.addItemToCart(item.id, item.name, item.subtitle, item.price);
+                                    Flushbar(
+                                      title: 'Success',
+                                      message: 'That item has been added.',
+                                      backgroundColor: Color(successColour),
+                                      duration: Duration(seconds: 5),
+                                    )..show(context);
+                                  },
                                   child: Icon(Icons.add),
                                 ),
                               ],
                             ),
                           )
                         : GestureDetector(
-                            onTap: () => data.addItemToCart(item.id, item.name, item.subtitle, item.price),
+                            onTap: () {
+                              data.addItemToCart(item.id, item.name, item.subtitle, item.price);
+                              Flushbar(
+                                title: 'Success',
+                                message: 'That item has been added.',
+                                backgroundColor: Color(successColour),
+                                duration: Duration(seconds: 5),
+                              )..show(context);
+                            },
                             child: Container(
                               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 27),
                               decoration: BoxDecoration(
@@ -224,7 +254,9 @@ class ItemMobileLandscape extends BaseModelWidget<ItemViewModel> {
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Column(
             children: <Widget>[
-              ApplicationHeader(),
+              ApplicationHeader(
+                route: 'goback',
+              ),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -304,7 +336,15 @@ class ItemMobileLandscape extends BaseModelWidget<ItemViewModel> {
                                                 child: Row(
                                                   children: <Widget>[
                                                     GestureDetector(
-                                                      onTap: () => data.removeSingleItemFromCart(item.id), //removeItemFromCart
+                                                      onTap: () {
+                                                        data.removeSingleItemFromCart(item.id);
+                                                        Flushbar(
+                                                          title: 'Success',
+                                                          message: 'That item has been removed.',
+                                                          backgroundColor: Color(successColour),
+                                                          duration: Duration(seconds: 5),
+                                                        )..show(context);
+                                                      }, //removeItemFromCart
                                                       child: Icon(Icons.remove),
                                                     ),
                                                     SizedBox(width: 30),
@@ -314,14 +354,30 @@ class ItemMobileLandscape extends BaseModelWidget<ItemViewModel> {
                                                     ),
                                                     SizedBox(width: 30),
                                                     GestureDetector(
-                                                      onTap: () => data.addItemToCart(item.id, item.name, item.subtitle, item.price),
+                                                      onTap: () {
+                                                        data.addItemToCart(item.id, item.name, item.subtitle, item.price);
+                                                        Flushbar(
+                                                          title: 'Success',
+                                                          message: 'That item has been added.',
+                                                          backgroundColor: Color(successColour),
+                                                          duration: Duration(seconds: 5),
+                                                        )..show(context);
+                                                      },
                                                       child: Icon(Icons.add),
                                                     ),
                                                   ],
                                                 ),
                                               )
                                             : GestureDetector(
-                                                onTap: () => data.addItemToCart(item.id, item.name, item.subtitle, item.price),
+                                                onTap: () {
+                                                  data.addItemToCart(item.id, item.name, item.subtitle, item.price);
+                                                  Flushbar(
+                                                    title: 'Success',
+                                                    message: 'That item has been added.',
+                                                    backgroundColor: Color(successColour),
+                                                    duration: Duration(seconds: 5),
+                                                  )..show(context);
+                                                },
                                                 child: Container(
                                                   padding: EdgeInsets.symmetric(vertical: 20, horizontal: 27),
                                                   decoration: BoxDecoration(

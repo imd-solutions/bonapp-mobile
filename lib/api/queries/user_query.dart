@@ -79,6 +79,7 @@ class UserQuery {
           profile {
             firstname
             lastname
+            mobile_number
             points
             food_stamp
             drink_stamp

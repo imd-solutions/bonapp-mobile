@@ -1,3 +1,4 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bonapp/enums/viewstate.dart';
 import 'package:flutter_bonapp/models/user.dart';
@@ -21,14 +22,38 @@ class MessagesMobilePortrait extends BaseModelWidget<MessagesViewModel> {
           padding: EdgeInsets.symmetric(horizontal: 15.0),
           child: Column(
             children: <Widget>[
-              ApplicationHeader(user: data.user, message: message),
+              ApplicationHeader(user: data.user),
               SizedBox(
                 height: 20.0,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 15.0),
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      "Your messages",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Color(blackColour),
+                        fontFamily: primaryFont,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               if (data.state != ViewState.Busy)
                 Expanded(
                   child: data.userMessages.length < 1
-                      ? Text('You do not have any messages.')
+                      ? Container(
+                          padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              'You do not have any messages.',
+                              style: TextStyle(fontFamily: secondaryFont),
+                            ),
+                          ),
+                        )
                       : ListView.separated(
                           itemBuilder: (BuildContext context, int index) {
                             return ListTile(
@@ -63,7 +88,7 @@ class MessagesMobilePortrait extends BaseModelWidget<MessagesViewModel> {
                                       Spacer(),
                                       RaisedButton(
                                         color: Color(redColour),
-                                        onPressed: () => data.deleteMessage(data.userMessages[index].id),
+                                        onPressed: () => _deleteMessage(data.userMessages[index].id, data, context),
                                         child: Text(
                                           'Delete',
                                           style: TextStyle(
@@ -90,7 +115,6 @@ class MessagesMobilePortrait extends BaseModelWidget<MessagesViewModel> {
 }
 
 class MessagesMobileLandscape extends BaseModelWidget<MessagesViewModel> {
-
   final String message;
   MessagesMobileLandscape({this.message});
 
@@ -103,14 +127,38 @@ class MessagesMobileLandscape extends BaseModelWidget<MessagesViewModel> {
           padding: EdgeInsets.symmetric(horizontal: 15.0),
           child: Column(
             children: <Widget>[
-              ApplicationHeader(user: data.user, message: message),
+              ApplicationHeader(user: data.user),
               SizedBox(
                 height: 20.0,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 15.0),
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      "Your messages",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Color(blackColour),
+                        fontFamily: primaryFont,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               if (data.state != ViewState.Busy)
                 Expanded(
                   child: data.userMessages.length < 1
-                      ? Text('You do not have any messages.')
+                      ? Container(
+                          padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              'You do not have any messages.',
+                              style: TextStyle(fontFamily: secondaryFont),
+                            ),
+                          ),
+                        )
                       : ListView.separated(
                           itemBuilder: (BuildContext context, int index) {
                             return Row(
@@ -143,14 +191,16 @@ class MessagesMobileLandscape extends BaseModelWidget<MessagesViewModel> {
                                     ),
                                     RaisedButton(
                                       color: Color(redColour),
-                                      onPressed: () => data.deleteMessage(data.userMessages[index].id),
-                                      child: Text(
-                                        'Delete',
-                                        style: TextStyle(
-                                          color: Color(whiteColour),
-                                          fontFamily: secondaryFont,
-                                        ),
-                                      ),
+                                      onPressed: () => _deleteMessage(data.userMessages[index].id, data, context),
+                                      child: data.state == ViewState.Processing
+                                          ? CircularProgressIndicator()
+                                          : Text(
+                                              'Delete',
+                                              style: TextStyle(
+                                                color: Color(whiteColour),
+                                                fontFamily: secondaryFont,
+                                              ),
+                                            ),
                                     )
                                   ],
                                 )
@@ -184,6 +234,25 @@ class MessageReadAvatar extends StatelessWidget {
   }
 }
 
-_navigateToMessage({context, message}) {
-  Navigator.pushNamed(context, MessageScreenRoute, arguments: message);
+void _deleteMessage(int id, MessagesViewModel data, BuildContext context) {
+  data.setState(ViewState.Processing);
+  data.deleteMessage(id).then((message) {
+    Flushbar(
+      title: message.title,
+      message: message.message.replaceAll('Exception: ', ''),
+      backgroundColor: Color(message.colour),
+      duration: Duration(seconds: message.status != 200 ? 7 : 3),
+    )..show(context).then(
+        (_) {
+          // Send the user to the Initial Application Screen on success.
+          if (message.status == 200) {
+            Navigator.pushNamed(context, MessagesScreenRoute, arguments: 'messageDelete');
+          }
+        },
+      );
+  });
+}
+
+void _navigateToMessage({context, message}) {
+  Navigator.pushNamed(context, MessageScreenRoute, arguments: {'message': message, 'route': MessagesScreenRoute});
 }

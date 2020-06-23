@@ -19,7 +19,7 @@ class AboutMobilePortrait extends BaseModelWidget<AboutViewModel> {
               padding: EdgeInsets.symmetric(horizontal: 15.0),
               child: Column(
                 children: <Widget>[
-                  ApplicationHeader(),
+                  ApplicationHeader(route: 'goback'),
                   SizedBox(
                     height: 20.0,
                   ),
@@ -60,7 +60,7 @@ class AboutMobileLandscape extends BaseModelWidget<AboutViewModel> {
               padding: EdgeInsets.symmetric(horizontal: 15.0),
               child: Column(
                 children: <Widget>[
-                  ApplicationHeader(),
+                  ApplicationHeader(route: 'goback'),
                   SizedBox(
                     height: 20.0,
                   ),

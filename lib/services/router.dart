@@ -92,9 +92,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         builder: (context) => MessagesScreen(message: arguments),
       );
     case MessageScreenRoute:
-      var arguments = settings.arguments;
+      final Map arguments = settings.arguments;
       return MaterialPageRoute(
-        builder: (context) => MessageScreen(message: arguments),
+        builder: (context) => MessageScreen(
+          message: arguments['message'],
+          route: arguments['route'],
+        ),
       );
     case AccountScreenRoute:
       var arguments = settings.arguments;

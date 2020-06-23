@@ -8,8 +8,9 @@ import 'package:flutter_bonapp/widgets/base_widget.dart';
 
 class MessageScreen extends StatelessWidget {
   final Messages message;
+  final String route;
 
-  MessageScreen({this.message});
+  MessageScreen({this.message, this.route});
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +20,8 @@ class MessageScreen extends StatelessWidget {
         onModelReady: (model) => model.initialise(message.id),
         builder: (context) => ScreenTypeLayout(
           mobile: OrientationLayout(
-            portrait: (context) => MessageMobilePortrait(message: message),
-            landscape: (context) => MessageMobileLandscape(message: message),
+            portrait: (context) => MessageMobilePortrait(message: message, route: route),
+            landscape: (context) => MessageMobileLandscape(message: message, route: route),
           ),
           tablet: OrientationLayout(
             portrait: (context) => MessageMobilePortrait(message: message),

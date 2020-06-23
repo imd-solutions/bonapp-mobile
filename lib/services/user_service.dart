@@ -184,6 +184,7 @@ class UserService {
         firstname: result['user']['profile']['firstname'],
         lastname: result['user']['profile']['lastname'],
         points: result['user']['profile']['points'],
+        mobileNumber: result['user']['profile']['mobile_number'],
         foodStamp: result['user']['profile']['food_stamp'],
         drinkStamp: result['user']['profile']['drink_stamp'],
         profession: Professions(
@@ -428,6 +429,14 @@ class UserService {
               "id": id,
               "firstname": user.profile.firstname,
               "lastname": user.profile.lastname,
+              "email": user.email,
+              "mobile_number": user.profile.mobileNumber,
+              "job": int.parse(user.profile.profession.id),
+              "nationality": int.parse(user.profile.nationality.id),
+              "site": int.parse(user.profile.location.id),
+              "online": user.profile.alerts.email,
+              "sms": user.profile.alerts.text,
+              "notification": user.profile.alerts.notification,
             }
           },
         ),

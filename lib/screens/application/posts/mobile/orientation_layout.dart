@@ -32,7 +32,7 @@ class PostsMobilePortrait extends BaseModelWidget<PostsViewModel> {
             padding: EdgeInsets.symmetric(horizontal: 15.0),
             child: Column(
               children: <Widget>[
-                ApplicationHeader(),
+                ApplicationHeader(route: 'goback'),
                 SizedBox(
                   height: 20.0,
                 ),
@@ -106,7 +106,7 @@ class PostsMobileLandscape extends BaseModelWidget<PostsViewModel> {
             padding: EdgeInsets.symmetric(horizontal: 15.0),
             child: Column(
               children: <Widget>[
-                ApplicationHeader(),
+                ApplicationHeader(route: 'goback'),
                 SizedBox(
                   height: 20.0,
                 ),

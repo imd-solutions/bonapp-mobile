@@ -10,7 +10,7 @@ class FaqMobilePortrait extends BaseModelWidget<FaqViewModel> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            ApplicationHeader(),
+            ApplicationHeader(user: data.user),
             Center(
               child: Text('Faq Page'),
             ),
@@ -28,7 +28,7 @@ class FaqMobileLandscape extends BaseModelWidget<FaqViewModel> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            ApplicationHeader(),
+            ApplicationHeader(user: data.user),
             Center(
               child: Text('Faq Page'),
             )

@@ -1,3 +1,4 @@
+import 'package:flutter_bonapp/enums/viewstate.dart';
 import 'package:flutter_bonapp/models/user.dart';
 import 'package:flutter_bonapp/services/locator.dart';
 import 'package:flutter_bonapp/services/user_service.dart';
@@ -7,11 +8,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SettingsViewModel extends BaseModel {
   UserService userService = locator<UserService>();
 
+  User user;
   bool emailAlert;
   bool notificationAlerts;
 
   void initialise() {
+    setState(ViewState.Busy);
     _updateData();
+    notifyListeners();
   }
 
   updateStatus(String check) {

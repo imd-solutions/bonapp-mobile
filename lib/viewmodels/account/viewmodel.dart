@@ -66,10 +66,12 @@ class AccountViewModel extends BaseModel {
   }
 
   void updateUserDetails(String firstname, String lastname, String email, String mobile) {
+    user.name = '$firstname $lastname';
     user.profile.firstname = firstname;
     user.profile.lastname = lastname;
     user.email = email;
     user.profile.mobileNumber = mobile;
+    notifyListeners();
   }
 
   void updateSelected(String type, int index, String name) {
@@ -79,6 +81,8 @@ class AccountViewModel extends BaseModel {
           selectedLocation = index;
           user.profile.location.id = index.toString();
           selectedLocationName = name;
+          user.profile.profession.id = user.profile.profession.id;
+          user.profile.nationality.id = user.profile.nationality.id;
         }
         break;
       case 'Profession':
@@ -86,13 +90,24 @@ class AccountViewModel extends BaseModel {
           selectedProfession = index;
           user.profile.profession.id = index.toString();
           selectedProfessionName = name;
+          user.profile.location.id = user.profile.location.id;
+          user.profile.nationality.id = user.profile.nationality.id;
         }
         break;
-      default:
+      case 'Nationality':
         {
           selectedNationality = index;
           user.profile.nationality.id = index.toString();
           selectedNationalityName = name;
+          user.profile.location.id = user.profile.location.id;
+          user.profile.profession.id = user.profile.profession.id;
+        }
+        break;
+      default:
+        {
+//          selectedNationality = index;
+//          user.profile.nationality.id = index.toString();
+//          selectedNationalityName = name;
         }
         break;
     }
@@ -129,7 +144,7 @@ class AccountViewModel extends BaseModel {
 
     setState(ViewState.Processing);
     notifyListeners();
-
+//
     Message response = await userService.updateUserDetails(uid, user);
 
     setState(ViewState.Completed);
