@@ -9,6 +9,9 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:flutter_bonapp/models/user.dart';
 import 'package:flutter_bonapp/config/graphql.dart';
 import 'package:flutter_bonapp/api/queries/user_query.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 
 GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
 
@@ -447,12 +450,74 @@ class UserService {
         throw new Exception(message);
       }
 
+//      QueryResult imageResponse = await _user.mutate(
+//        MutationOptions(
+//          documentNode: gql(
+//            userMutation.uploadImage(),
+//          ),
+//          variables: {"file": image},
+//        ),
+//      );
+//
+//      if (imageResponse.hasException) {
+//        String message = response.exception.toString();
+//        throw new Exception(message);
+//      }
+
       final result = response.data;
 
       return Message(
         status: 200,
         title: 'Success',
         message: result['updateUserDetails']['message'],
+        colour: successColour,
+      );
+    } catch (e) {
+      return Message(
+        status: 400,
+        title: 'Error',
+        message: e.toString(),
+        colour: errorColour,
+      );
+    }
+  }
+
+  Future<Message> uploadUserAvatar(int id, dynamic imageFile) async {
+    String fileName = imageFile.path.split("/").last;
+    var byteData = imageFile.readAsBytesSync();
+
+    var multipartFile = http.MultipartFile.fromBytes(
+      'file',
+      byteData,
+      filename: fileName,
+//    contentType: MediaType("image", "jpg"),
+    );
+
+    try {
+      GraphQLClient _user = graphQLConfiguration.clientToQuery();
+      QueryResult response = await _user.mutate(
+        MutationOptions(
+          documentNode: gql(
+            userMutation.uploadUserAvatar(),
+          ),
+          variables: {
+            "id": id,
+            "file": multipartFile
+          },
+        ),
+      );
+
+      if (response.hasException) {
+        String message = response.exception.toString();
+        throw new Exception(message);
+      }
+
+      final result = response.data;
+
+      return Message(
+        status: 200,
+        title: 'Success',
+        message: result['uploadUserAvatar']['message'],
         colour: successColour,
       );
     } catch (e) {

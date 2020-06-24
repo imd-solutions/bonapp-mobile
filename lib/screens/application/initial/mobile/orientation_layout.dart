@@ -53,7 +53,9 @@ List<BottomNavigationBarItem> _bottomNavBarList = [
   )
 ];
 
-List<Widget> _drawerItems(User user, BuildContext context, InitialViewModel data) {
+List<Widget> _drawerItems(BuildContext context, InitialViewModel data) {
+  var user = data.user;
+
   return <Widget>[
     UserAccountsDrawerHeader(
       accountName: Text(user.name),
@@ -175,7 +177,7 @@ class InitialMobilePortrait extends BaseModelWidget<InitialViewModel> {
         child: data.state != ViewState.Busy
             ? ListView(
                 padding: EdgeInsets.all(0.0),
-                children: _drawerItems(user, context, data),
+                children: _drawerItems(context, data),
               )
             : null,
       ),
@@ -232,7 +234,7 @@ class InitialMobileLandscape extends BaseModelWidget<InitialViewModel> {
         child: data.state != ViewState.Busy
             ? ListView(
                 padding: EdgeInsets.all(0.0),
-                children: _drawerItems(user, context, data),
+                children: _drawerItems(context, data),
               )
             : null,
       ),

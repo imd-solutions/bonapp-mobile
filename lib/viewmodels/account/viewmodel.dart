@@ -7,6 +7,7 @@ import 'package:flutter_bonapp/models/user.dart';
 import 'package:flutter_bonapp/services/locator.dart';
 import 'package:flutter_bonapp/services/user_service.dart';
 import 'package:flutter_bonapp/viewmodels/base_model.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountViewModel extends BaseModel {
@@ -16,6 +17,7 @@ class AccountViewModel extends BaseModel {
   List<Professions> professions;
   List<Nationality> nationality;
   User user;
+  dynamic image;
 
   int selectedLocation = 0;
   String selectedLocationName = '';
@@ -144,8 +146,22 @@ class AccountViewModel extends BaseModel {
 
     setState(ViewState.Processing);
     notifyListeners();
-//
+
     Message response = await userService.updateUserDetails(uid, user);
+
+    setState(ViewState.Completed);
+    notifyListeners();
+
+    return response;
+  }
+
+  Future<Message> selectImage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int uid = prefs.getInt('userId');
+    setState(ViewState.Processing);
+    notifyListeners();
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    Message response = await userService.uploadUserAvatar(uid, image);
 
     setState(ViewState.Completed);
     notifyListeners();

@@ -87,4 +87,13 @@ class UserMutation {
       }
     """;
   }
+
+  String uploadUserAvatar() {
+    return """mutation uploadUserAvatar(\$id: Int!, \$file: Upload!) {
+      uploadUserAvatar(id: \$id, file: \$file) {
+           status
+           message 
+        }
+    }""";
+  }
 }

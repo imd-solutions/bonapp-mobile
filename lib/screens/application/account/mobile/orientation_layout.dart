@@ -73,23 +73,48 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              Container(
-                                height: 100.0,
-                                width: 100.0,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(60.0),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 3.0,
-                                      offset: Offset(0, 4.0),
-                                      color: Color(blackColour),
+                              Column(
+                                children: <Widget>[
+                                  Container(
+                                    height: 100.0,
+                                    width: 100.0,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(60.0),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          blurRadius: 3.0,
+                                          offset: Offset(0, 4.0),
+                                          color: Color(blackColour),
+                                        ),
+                                      ],
+                                      image: DecorationImage(
+                                        image: NetworkImage(graphQLApiImg + data.user.avatar),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                  ],
-                                  image: DecorationImage(
-                                    image: NetworkImage(graphQLApiImg + data.user.avatar),
-                                    fit: BoxFit.cover,
                                   ),
-                                ),
+                                  FlatButton(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        Icon(Icons.photo_library),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text("Select Image"),
+                                      ],
+                                    ),
+                                    onPressed: () => data.selectImage().then((message) {
+                                      Flushbar(
+                                        title: message.title,
+                                        message: message.message.replaceAll('Exception: ', ''),
+                                        backgroundColor: Color(message.colour),
+                                        duration: Duration(seconds: message.status != 200 ? 7 : 3),
+                                      )..show(context);
+                                    }),
+                                  ),
+                                ],
                               ),
                               SizedBox(
                                 width: 20.0,

@@ -36,6 +36,7 @@ class InitialViewModel extends BaseModel {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     prefs.setInt('userId', id);
+    user = await userService.getUser(id);
     application = await applicationService.getApplication();
     userUnreadMessages = await messagesService.getUnreadUserMessages(id);
 
