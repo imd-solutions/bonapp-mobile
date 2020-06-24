@@ -14,6 +14,7 @@ void main() {
   setupLocator();
 
   runApp(DevicePreview(
+    enabled: false,
     builder: (context) => MyApp(),
   ));
 }
