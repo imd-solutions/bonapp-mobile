@@ -1,4 +1,4 @@
-package com.imd.company.flutter_bonapp
+package com.imd.company.bonapp
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
