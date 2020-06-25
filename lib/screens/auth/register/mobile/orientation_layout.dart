@@ -104,7 +104,6 @@ class RegisterMobileLandscape extends BaseModelWidget<RegisterViewModel> {
 
 Widget listWidget(context, _formKey, data, user, profile) {
   var orientation = MediaQuery.of(context).orientation;
-  String token = '1234567890abcdefg';
 
   void _snackBar(Message message) {
     Flushbar(
@@ -116,7 +115,8 @@ Widget listWidget(context, _formKey, data, user, profile) {
         (_) {
           // Send the user to the Initial Application Screen on success.
           if (message.status == 200) {
-            Navigator.of(context).pushNamedAndRemoveUntil(LoginScreenRoute, (Route<dynamic> route) => false);
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                LoginScreenRoute, (Route<dynamic> route) => false);
           }
         },
       );
@@ -236,7 +236,8 @@ Widget listWidget(context, _formKey, data, user, profile) {
         children: <Widget>[
           Expanded(
             child: Container(
-              margin: EdgeInsets.only(left: 5.0, right: 10.0, bottom: 10.0, top: 10.0),
+              margin: EdgeInsets.only(
+                  left: 5.0, right: 10.0, bottom: 10.0, top: 10.0),
               padding: EdgeInsets.only(left: 5.0),
               child: GestureDetector(
                 onTap: () => data.initialVariables(),
@@ -255,7 +256,8 @@ Widget listWidget(context, _formKey, data, user, profile) {
           ),
           Expanded(
             child: Container(
-              margin: EdgeInsets.only(left: 5.0, right: 10.0, bottom: 10.0, top: 10.0),
+              margin: EdgeInsets.only(
+                  left: 5.0, right: 10.0, bottom: 10.0, top: 10.0),
               padding: EdgeInsets.only(left: 5.0),
               child: GestureDetector(
                 onTap: () => data.initialVariables(),
@@ -279,6 +281,7 @@ Widget listWidget(context, _formKey, data, user, profile) {
           children: <Widget>[
             InputText(
               icon: Icons.lock,
+              initialValue: data.password,
               hintText: 'Password',
               isPassword: true,
               validator: (String value) {
@@ -288,12 +291,16 @@ Widget listWidget(context, _formKey, data, user, profile) {
                 _formKey.currentState.save();
                 return null;
               },
+              onChanged: (String value) {
+                data.updatePassword(value);
+              },
               onSaved: (String value) {
                 user.password = value;
               },
             ),
             InputText(
               icon: Icons.lock,
+              initialValue: data.confirmPassword,
               hintText: 'Confirm Password',
               isPassword: true,
               validator: (String value) {
@@ -304,6 +311,9 @@ Widget listWidget(context, _formKey, data, user, profile) {
                 }
                 return null;
               },
+              onChanged: (String value) {
+                data.updateConfirmPassword(value);
+              },
             )
           ],
         ),
@@ -313,6 +323,7 @@ Widget listWidget(context, _formKey, data, user, profile) {
             Expanded(
               child: InputText(
                 icon: Icons.lock,
+                initialValue: data.password,
                 hintText: 'Password',
                 isPassword: true,
                 validator: (String value) {
@@ -330,6 +341,7 @@ Widget listWidget(context, _formKey, data, user, profile) {
             Expanded(
               child: InputText(
                 icon: Icons.lock,
+                initialValue: data.confirmPassword,
                 hintText: 'Confirm Password',
                 isPassword: true,
                 validator: (String value) {
@@ -390,13 +402,10 @@ Widget listWidget(context, _formKey, data, user, profile) {
                   return;
                 }
 
-                profile.location = data.location;
-                profile.profession = data.profession;
-
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
 
-                  data.registerUser(user, profile, token).then(
+                  data.registerUser(user, profile, data.location, data.profession).then(
                     (message) {
                       // Alert message to the user.
                       _snackBar(message);
@@ -422,7 +431,8 @@ Widget listWidget(context, _formKey, data, user, profile) {
             ),
           ),
           onTap: () {
-            Navigator.of(context).pushNamedAndRemoveUntil(LoginScreenRoute, (Route<dynamic> route) => false);
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                LoginScreenRoute, (Route<dynamic> route) => false);
           },
         ),
       ),

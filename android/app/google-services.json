@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "441233592013",
+    "firebase_url": "https://bon-appetit-d5d85.firebaseio.com",
+    "project_id": "bon-appetit-d5d85",
+    "storage_bucket": "bon-appetit-d5d85.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441233592013:android:2b543f2e56e285a6a56384",
+        "android_client_info": {
+          "package_name": "com.imd.company.bonapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "441233592013-2kisariki25c6h6k1htposo0s14lc4g1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.imd.company.bonapp",
+            "certificate_hash": "c3d3b70ceb14fad35784ef27cfa321db59260e7a"
+          }
+        },
+        {
+          "client_id": "441233592013-25u9phq7i6l57k0neo47govjvlggt5qu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZP0NI_mQcWA5wLsDDrmZmKG8dPKWb59s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "441233592013-25u9phq7i6l57k0neo47govjvlggt5qu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "441233592013-jsens51ik8c62ms8adrri79jvopiqbkk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.imd.company.bonapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

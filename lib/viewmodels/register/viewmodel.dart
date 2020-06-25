@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bonapp/enums/viewstate.dart';
 import 'package:flutter_bonapp/models/location.dart';
 import 'package:flutter_bonapp/models/message.dart';
@@ -27,6 +28,9 @@ class RegisterViewModel extends BaseModel {
   String mobile;
   int location;
   int profession;
+  String token;
+  String password;
+  String confirmPassword;
 
   void initialise() {
     setState(ViewState.Busy);
@@ -81,6 +85,14 @@ class RegisterViewModel extends BaseModel {
     profession = value;
   }
 
+  void updatePassword(String value) {
+    password = value;
+  }
+
+  void updateConfirmPassword(String value) {
+    confirmPassword = value;
+  }
+
   void initialVariables() {
     firstName = firstName;
     lastName = lastName;
@@ -101,7 +113,8 @@ class RegisterViewModel extends BaseModel {
   Future<void> getLocations() async {
     List<Locations> response = await userService.getLocations();
 
-    this.locations = response.map((json) => LocationsViewModel(location: json)).toList();
+    this.locations =
+        response.map((json) => LocationsViewModel(location: json)).toList();
 
     setState(ViewState.Completed);
     notifyListeners();
@@ -110,17 +123,24 @@ class RegisterViewModel extends BaseModel {
   Future<void> getProfessions() async {
     List<Professions> response = await userService.getProfessions();
 
-    this.professions = response.map((json) => ProfessionsViewModel(profession: json)).toList();
+    this.professions =
+        response.map((json) => ProfessionsViewModel(profession: json)).toList();
 
     setState(ViewState.Completed);
     notifyListeners();
   }
 
-  Future<Message> registerUser(User user, Profile profile, String token) async {
+  Future<Message> registerUser(
+      User user, Profile profile, int location, int profession) async {
     setState(ViewState.Processing);
     notifyListeners();
 
-    Message response = await userService.registerUser(user, profile, token);
+    FirebaseMessaging _fcm = FirebaseMessaging();
+
+    String token = await _fcm.getToken();
+
+    Message response = await userService.registerUser(
+        user, profile, location, profession, token);
 
     setState(ViewState.Completed);
     notifyListeners();

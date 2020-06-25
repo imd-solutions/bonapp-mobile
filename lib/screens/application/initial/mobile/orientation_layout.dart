@@ -17,8 +17,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 final List _accountDrawerList = [
   {'icon': Icons.person, 'title': 'My Acount', 'page': AccountScreenRoute},
   {'icon': Icons.insert_comment, 'title': 'News', 'page': PostsScreenRoute},
-  {'icon': Icons.mail_outline, 'title': 'My Messages', 'page': MessagesScreenRoute},
-  {'icon': Icons.shopping_basket, 'title': 'My Orders', 'page': OrdersScreenRoute},
+  {
+    'icon': Icons.mail_outline,
+    'title': 'My Messages',
+    'page': MessagesScreenRoute
+  },
+  {
+    'icon': Icons.shopping_basket,
+    'title': 'My Orders',
+    'page': OrdersScreenRoute
+  },
 ];
 
 final List _informationDrawerList = [
@@ -55,6 +63,9 @@ List<BottomNavigationBarItem> _bottomNavBarList = [
 
 List<Widget> _drawerItems(BuildContext context, InitialViewModel data) {
   var user = data.user;
+//  var fcm = data.firebaseMessaging.getToken();
+
+//  print(fcm);
 
   return <Widget>[
     UserAccountsDrawerHeader(
@@ -72,8 +83,11 @@ List<Widget> _drawerItems(BuildContext context, InitialViewModel data) {
       InkWell(
         onTap: () {
           _accountDrawerList[index]['page'] == MessagesScreenRoute
-              ? Navigator.of(context).popAndPushNamed(_accountDrawerList[index]['page'])
-              : Navigator.of(context).popAndPushNamed(_accountDrawerList[index]['page'], arguments: user);
+              ? Navigator.of(context)
+                  .popAndPushNamed(_accountDrawerList[index]['page'])
+              : Navigator.of(context).popAndPushNamed(
+                  _accountDrawerList[index]['page'],
+                  arguments: user);
         },
         child: ListTile(
           leading: Icon(
@@ -84,11 +98,13 @@ List<Widget> _drawerItems(BuildContext context, InitialViewModel data) {
             children: <Widget>[
               Text('${_accountDrawerList[index]['title']}'),
               Spacer(),
-              _accountDrawerList[index]['page'] == OrdersScreenRoute && user.orders.length > 0
+              _accountDrawerList[index]['page'] == OrdersScreenRoute &&
+                      user.orders.length > 0
                   ? CircleNotification(
                       notification: user.orders.length,
                     )
-                  : _accountDrawerList[index]['page'] == MessagesScreenRoute && data.userUnreadMessages.length > 0
+                  : _accountDrawerList[index]['page'] == MessagesScreenRoute &&
+                          data.userUnreadMessages.length > 0
                       ? CircleNotification(
                           notification: data.userUnreadMessages.length,
                         )
@@ -101,7 +117,8 @@ List<Widget> _drawerItems(BuildContext context, InitialViewModel data) {
     Divider(),
     for (var index = 0; index < _informationDrawerList.length; index++)
       InkWell(
-        onTap: () => Navigator.of(context).pushNamed(_informationDrawerList[index]['page']),
+        onTap: () => Navigator.of(context)
+            .pushNamed(_informationDrawerList[index]['page']),
         child: ListTile(
           leading: Icon(
             _informationDrawerList[index]['icon'],
@@ -200,7 +217,8 @@ class InitialMobilePortrait extends BaseModelWidget<InitialViewModel> {
         onTap: bottomNavOnTap,
         selectedItemColor: Color(primaryColour),
         unselectedItemColor: Color(accentThirdColour),
-        currentIndex: data.bottomNavIndex, // this will be set when a new tab is tapped
+        currentIndex:
+            data.bottomNavIndex, // this will be set when a new tab is tapped
         items: _bottomNavBarList,
       ),
     );
@@ -257,7 +275,8 @@ class InitialMobileLandscape extends BaseModelWidget<InitialViewModel> {
         onTap: bottomNavOnTap,
         selectedItemColor: Color(primaryColour),
         unselectedItemColor: Color(accentThirdColour),
-        currentIndex: data.bottomNavIndex, // this will be set when a new tab is tapped
+        currentIndex:
+            data.bottomNavIndex, // this will be set when a new tab is tapped
         items: _bottomNavBarList,
       ),
     );

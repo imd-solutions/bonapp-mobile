@@ -50,24 +50,27 @@ class AccountViewModel extends BaseModel {
     appNotification = user.profile.alerts.notification;
     textNotification = user.profile.alerts.text;
 
-    if (user.profile.location != null) {
-      selectedLocation = int.parse(user.profile.location.id);
-      selectedLocationName = user.profile.location.name;
-    }
-    if (user.profile.profession != null) {
-      selectedProfession = int.parse(user.profile.profession.id);
-      selectedProfessionName = user.profile.profession.name;
-    }
-    if (user.profile.nationality != null) {
-      selectedNationality = int.parse(user.profile.nationality.id);
-      selectedNationalityName = user.profile.nationality.name;
-    }
+    selectedLocation = int.parse(user.profile.location.id);
+    selectedLocationName = user.profile.location.name;
+
+    selectedProfession = int.parse(user.profile.profession.id);
+    selectedProfessionName = user.profile.profession.name;
+
+    print("This is the user nationality: ${user.profile.nationality.id}");
+
+    selectedNationality = user.profile.nationality.id != ''
+        ? int.parse(user.profile.nationality.id)
+        : 0;
+    selectedNationalityName = user.profile.nationality.id != ''
+        ? user.profile.nationality.name
+        : 'Please select';
 
     setState(ViewState.Completed);
     notifyListeners();
   }
 
-  void updateUserDetails(String firstname, String lastname, String email, String mobile) {
+  void updateUserDetails(
+      String firstname, String lastname, String email, String mobile) {
     user.name = '$firstname $lastname';
     user.profile.firstname = firstname;
     user.profile.lastname = lastname;

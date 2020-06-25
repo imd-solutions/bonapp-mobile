@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-Nationality nationalityFromJson(String str) => Nationality.fromJson(json.decode(str));
+Nationality nationalityFromJson(String str) =>
+    Nationality.fromJson(json.decode(str));
 
 String nationalityToJson(Nationality data) => json.encode(data.toJson());
 
@@ -14,8 +15,8 @@ class Nationality {
   });
 
   factory Nationality.fromJson(Map<String, dynamic> json) => Nationality(
-        id: json["id"],
-        name: json["name"],
+        id: json != null ? json["id"] : '0',
+        name: json != null ? json["name"] : 'Please complete the form.',
       );
 
   Map<String, dynamic> toJson() => {

@@ -19,34 +19,36 @@ class LoginMobilePortrait extends BaseModelWidget<LoginViewModel> {
   @override
   Widget build(BuildContext context, LoginViewModel data) {
     return Scaffold(
-      body: SafeArea(
-        left: true,
-        top: true,
-        right: true,
-        bottom: false,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Logo(
-              height: 100.0,
-            ),
-            PageTitle(
-              title: 'Login',
-              height: 100.0,
-            ),
-            Form(
-              key: _formKey,
-              child: Column(
-                children: <Widget>[
-                  userEmailTextInput(user, _formKey),
-                  userPasswordTextInput(user, _formKey),
-                  loginBtn(context, user, _formKey, data),
-                  SizedBox(height: 5.0),
-                  registerForgottenPassword(context, data),
-                ],
+      body: SingleChildScrollView(
+        child: SafeArea(
+          left: true,
+          top: true,
+          right: true,
+          bottom: false,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Logo(
+                height: 100.0,
               ),
-            ),
-          ],
+              PageTitle(
+                title: 'Login',
+                height: 100.0,
+              ),
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    userEmailTextInput(user, _formKey),
+                    userPasswordTextInput(user, _formKey),
+                    loginBtn(context, user, _formKey, data),
+                    SizedBox(height: 5.0),
+                    registerForgottenPassword(context, data),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -59,44 +61,46 @@ class LoginMobileLandscape extends BaseModelWidget<LoginViewModel> {
   @override
   Widget build(BuildContext context, LoginViewModel data) {
     return Scaffold(
-      body: SafeArea(
-        left: true,
-        top: true,
-        right: true,
-        child: Column(
-          children: <Widget>[
-            Logo(
-              height: 50.0,
-            ),
-            PageTitle(
-              title: 'Login',
-              height: 50.0,
-            ),
-            SizedBox(
-              height: 25.0,
-            ),
-            Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: userEmailTextInput(user, _formKey),
-                      ),
-                      Expanded(
-                        child: userPasswordTextInput(user, _formKey),
-                      ),
-                    ],
-                  ),
-                  loginBtn(context, user, _formKey, data),
-                  SizedBox(height: 5.0),
-                  registerForgottenPassword(context, data),
-                ],
+      body: SingleChildScrollView(
+        child: SafeArea(
+          left: true,
+          top: true,
+          right: true,
+          child: Column(
+            children: <Widget>[
+              Logo(
+                height: 50.0,
               ),
-            ),
-          ],
+              PageTitle(
+                title: 'Login',
+                height: 50.0,
+              ),
+              SizedBox(
+                height: 25.0,
+              ),
+              Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: userEmailTextInput(user, _formKey),
+                        ),
+                        Expanded(
+                          child: userPasswordTextInput(user, _formKey),
+                        ),
+                      ],
+                    ),
+                    loginBtn(context, user, _formKey, data),
+                    SizedBox(height: 5.0),
+                    registerForgottenPassword(context, data),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -142,7 +146,8 @@ Widget userPasswordTextInput(User user, _formKey) {
 }
 
 // Login button.
-Widget loginBtn(BuildContext context, User user, _formKey, LoginViewModel data) {
+Widget loginBtn(
+    BuildContext context, User user, _formKey, LoginViewModel data) {
   // Alert the user of the progress..
   void _snackBar(Message message) {
     Flushbar(
@@ -154,7 +159,9 @@ Widget loginBtn(BuildContext context, User user, _formKey, LoginViewModel data) 
         (_) {
           // Send the user to the Initial Application Screen on success.
           if (message.status == 200) {
-            Navigator.of(context).pushNamedAndRemoveUntil(InitialScreenRoute, (Route<dynamic> route) => false, arguments: message.data);
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                InitialScreenRoute, (Route<dynamic> route) => false,
+                arguments: message.data);
           }
         },
       );
@@ -320,7 +327,8 @@ Widget registerForgottenPassword(BuildContext context, LoginViewModel data) {
             ),
           ),
           onTap: () {
-            Navigator.of(context).pushNamedAndRemoveUntil(RegisterScreenRoute, (Route<dynamic> route) => false);
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                RegisterScreenRoute, (Route<dynamic> route) => false);
           },
         ),
       ),
