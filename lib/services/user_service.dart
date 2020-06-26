@@ -9,9 +9,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:flutter_bonapp/models/user.dart';
 import 'package:flutter_bonapp/config/graphql.dart';
 import 'package:flutter_bonapp/api/queries/user_query.dart';
-import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart';
 
 GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
 

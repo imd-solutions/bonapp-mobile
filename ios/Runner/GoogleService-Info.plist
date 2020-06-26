@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>441233592013-jsens51ik8c62ms8adrri79jvopiqbkk.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.441233592013-jsens51ik8c62ms8adrri79jvopiqbkk</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>441233592013-2kisariki25c6h6k1htposo0s14lc4g1.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC-x0CSJ2oaiNhav1EVpkTWWP9tqzQ3RBg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>441233592013</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.imd.company.bonapp</string>
+	<key>PROJECT_ID</key>
+	<string>bon-appetit-d5d85</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bon-appetit-d5d85.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:441233592013:ios:24dcd0644fed16b7a56384</string>
+	<key>DATABASE_URL</key>
+	<string>https://bon-appetit-d5d85.firebaseio.com</string>
+</dict>
+</plist>
