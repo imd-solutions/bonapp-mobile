@@ -22,6 +22,7 @@ class RegisterMobilePortrait extends BaseModelWidget<RegisterViewModel> {
 
   @override
   Widget build(BuildContext context, RegisterViewModel data) {
+    var width = MediaQuery.of(context).size.width;
     return FullBusyOverlay(
       show: data.state == ViewState.Busy,
       child: Scaffold(
@@ -39,15 +40,16 @@ class RegisterMobilePortrait extends BaseModelWidget<RegisterViewModel> {
                   title: 'Register',
                   height: 50.0,
                 ),
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      listWidget(context, _formKey, data, user, profile),
-                    ],
+                if (data.state != ViewState.Busy)
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        listWidget(context, _formKey, data, user, profile, width),
+                      ],
+                    ),
                   ),
-                ),
               ],
             ),
           ),
@@ -64,6 +66,7 @@ class RegisterMobileLandscape extends BaseModelWidget<RegisterViewModel> {
   final Profile profile = Profile();
   @override
   Widget build(BuildContext context, RegisterViewModel data) {
+    var width = MediaQuery.of(context).size.width;
     return FullBusyOverlay(
       show: data.state == ViewState.Busy,
       child: Scaffold(
@@ -84,15 +87,16 @@ class RegisterMobileLandscape extends BaseModelWidget<RegisterViewModel> {
                 SizedBox(
                   height: 25.0,
                 ),
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      listWidget(context, _formKey, data, user, profile),
-                    ],
+                if (data.state != ViewState.Busy)
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        listWidget(context, _formKey, data, user, profile, width),
+                      ],
+                    ),
                   ),
-                ),
               ],
             ),
           ),
@@ -102,7 +106,7 @@ class RegisterMobileLandscape extends BaseModelWidget<RegisterViewModel> {
   }
 }
 
-Widget listWidget(context, _formKey, data, user, profile) {
+Widget listWidget(context, _formKey, data, user, profile, width) {
   var orientation = MediaQuery.of(context).orientation;
 
   void _snackBar(Message message) {
@@ -115,8 +119,7 @@ Widget listWidget(context, _formKey, data, user, profile) {
         (_) {
           // Send the user to the Initial Application Screen on success.
           if (message.status == 200) {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-                LoginScreenRoute, (Route<dynamic> route) => false);
+            Navigator.of(context).pushNamedAndRemoveUntil(LoginScreenRoute, (Route<dynamic> route) => false);
           }
         },
       );
@@ -236,8 +239,7 @@ Widget listWidget(context, _formKey, data, user, profile) {
         children: <Widget>[
           Expanded(
             child: Container(
-              margin: EdgeInsets.only(
-                  left: 5.0, right: 10.0, bottom: 10.0, top: 10.0),
+              margin: EdgeInsets.only(left: 5.0, right: 10.0, bottom: 10.0, top: 10.0),
               padding: EdgeInsets.only(left: 5.0),
               child: GestureDetector(
                 onTap: () => data.initialVariables(),
@@ -256,8 +258,7 @@ Widget listWidget(context, _formKey, data, user, profile) {
           ),
           Expanded(
             child: Container(
-              margin: EdgeInsets.only(
-                  left: 5.0, right: 10.0, bottom: 10.0, top: 10.0),
+              margin: EdgeInsets.only(left: 5.0, right: 10.0, bottom: 10.0, top: 10.0),
               padding: EdgeInsets.only(left: 5.0),
               child: GestureDetector(
                 onTap: () => data.initialVariables(),
@@ -314,46 +315,114 @@ Widget listWidget(context, _formKey, data, user, profile) {
               onChanged: (String value) {
                 data.updateConfirmPassword(value);
               },
-            )
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            for (var i = 0; i < data.legals.length; i++)
+              Column(
+                children: <Widget>[
+                  Container(
+                    width: width * 0.95,
+//                height: 150.0,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 24.0,
+                          width: 24.0,
+                          child: Checkbox(
+                            value: data.checkbox[i],
+                            onChanged: (bool value) => data.updateCheckBox(i, value),
+                          ),
+                        ),
+                        SizedBox(width: 10.0),
+                        Expanded(
+                          child: Text(data.legals[i].description),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  )
+                ],
+              )
           ],
         ),
       if (orientation == Orientation.landscape)
-        Row(
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Expanded(
-              child: InputText(
-                icon: Icons.lock,
-                initialValue: data.password,
-                hintText: 'Password',
-                isPassword: true,
-                validator: (String value) {
-                  if (value.length < 6) {
-                    return 'Minimum of 6 characters.';
-                  }
-                  _formKey.currentState.save();
-                  return null;
-                },
-                onSaved: (String value) {
-                  user.password = value;
-                },
-              ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: InputText(
+                    icon: Icons.lock,
+                    initialValue: data.password,
+                    hintText: 'Password',
+                    isPassword: true,
+                    validator: (String value) {
+                      if (value.length < 6) {
+                        return 'Minimum of 6 characters.';
+                      }
+                      _formKey.currentState.save();
+                      return null;
+                    },
+                    onSaved: (String value) {
+                      user.password = value;
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: InputText(
+                    icon: Icons.lock,
+                    initialValue: data.confirmPassword,
+                    hintText: 'Confirm Password',
+                    isPassword: true,
+                    validator: (String value) {
+                      if (value.length < 6) {
+                        return 'Minimum of 6 characters.';
+                      } else if (user.password != null && value != user.password) {
+                        return 'The passwords do not match.';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+              ],
             ),
-            Expanded(
-              child: InputText(
-                icon: Icons.lock,
-                initialValue: data.confirmPassword,
-                hintText: 'Confirm Password',
-                isPassword: true,
-                validator: (String value) {
-                  if (value.length < 6) {
-                    return 'Minimum of 6 characters.';
-                  } else if (user.password != null && value != user.password) {
-                    return 'The passwords do not match.';
-                  }
-                  return null;
-                },
+            SizedBox(
+              height: 10.0,
+            ),
+            for (var i = 0; i < data.legals.length; i++)
+              Column(
+                children: <Widget>[
+                  Container(
+                    width: width * 0.87,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 24.0,
+                          width: 24.0,
+                          child: Checkbox(
+                            value: data.checkbox[i],
+                            onChanged: (bool value) => data.updateCheckBox(i, value),
+                          ),
+                        ),
+                        SizedBox(width: 10.0),
+                        Expanded(
+                          child: Text(data.legals[i].description),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  )
+                ],
               ),
-            )
           ],
         ),
       Column(
@@ -402,6 +471,46 @@ Widget listWidget(context, _formKey, data, user, profile) {
                   return;
                 }
 
+                if (!data.checkbox[0]) {
+                  Flushbar(
+                    title: 'Warning',
+                    message: 'Please confirm that you are old enough to use this app.',
+                    backgroundColor: Color(warningColour),
+                    duration: Duration(seconds: 5),
+                  )..show(context);
+                  return;
+                }
+
+                if (!data.checkbox[1]) {
+                  Flushbar(
+                    title: 'Warning',
+                    message: 'Please confirm that you are happy with the GDPR policy.',
+                    backgroundColor: Color(warningColour),
+                    duration: Duration(seconds: 5),
+                  )..show(context);
+                  return;
+                }
+
+                if (!data.checkbox[2]) {
+                  Flushbar(
+                    title: 'Warning',
+                    message: 'Please confirm that you have read the terms and conditions.',
+                    backgroundColor: Color(warningColour),
+                    duration: Duration(seconds: 5),
+                  )..show(context);
+                  return;
+                }
+
+                if (!data.checkbox[3]) {
+                  Flushbar(
+                    title: 'Warning',
+                    message: 'Please confirm that you have read the privacy policy.',
+                    backgroundColor: Color(warningColour),
+                    duration: Duration(seconds: 5),
+                  )..show(context);
+                  return;
+                }
+
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
 
@@ -431,8 +540,7 @@ Widget listWidget(context, _formKey, data, user, profile) {
             ),
           ),
           onTap: () {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-                LoginScreenRoute, (Route<dynamic> route) => false);
+            Navigator.of(context).pushNamedAndRemoveUntil(LoginScreenRoute, (Route<dynamic> route) => false);
           },
         ),
       ),

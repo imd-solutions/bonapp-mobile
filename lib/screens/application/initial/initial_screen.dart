@@ -16,7 +16,7 @@ class InitialScreen extends StatelessWidget {
     return Center(
       child: BaseWidget<InitialViewModel>(
         viewModel: InitialViewModel(),
-        onModelReady: (model) => model.initialise(user.id.toInt()),
+        onModelReady: (model) => model.initialise(user.id.toInt(), context),
         builder: (context) => ScreenTypeLayout(
           mobile: OrientationLayout(
             portrait: (context) => InitialMobilePortrait(

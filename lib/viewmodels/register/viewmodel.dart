@@ -1,10 +1,12 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bonapp/enums/viewstate.dart';
+import 'package:flutter_bonapp/models/legal.dart';
 import 'package:flutter_bonapp/models/location.dart';
 import 'package:flutter_bonapp/models/message.dart';
 import 'package:flutter_bonapp/models/profession.dart';
 import 'package:flutter_bonapp/models/title.dart';
 import 'package:flutter_bonapp/models/user.dart';
+import 'package:flutter_bonapp/services/legal_service.dart';
 import 'package:flutter_bonapp/services/locator.dart';
 import 'package:flutter_bonapp/services/user_service.dart';
 import 'package:flutter_bonapp/viewmodels/base_model.dart';
@@ -14,9 +16,13 @@ import 'package:flutter_bonapp/viewmodels/titles/viewmodel.dart';
 
 class RegisterViewModel extends BaseModel {
   UserService userService = locator<UserService>();
+  LegalService legalService = locator<LegalService>();
   List<TitleViewModel> titles = List<TitleViewModel>();
   List<LocationsViewModel> locations = List<LocationsViewModel>();
   List<ProfessionsViewModel> professions = List<ProfessionsViewModel>();
+
+  List<Legal> legals;
+
   int titleDropdown = 0;
   int professionDropdown = 0;
   int locationDropdown = 0;
@@ -32,6 +38,13 @@ class RegisterViewModel extends BaseModel {
   String password;
   String confirmPassword;
 
+  dynamic checkbox = [false, false, false, false];
+
+  void updateCheckBox(int index, bool value) {
+    checkbox[index] = value;
+    notifyListeners();
+  }
+
   void initialise() {
     setState(ViewState.Busy);
     notifyListeners();
@@ -39,6 +52,7 @@ class RegisterViewModel extends BaseModel {
     this.getTitles();
     this.getLocations();
     this.getProfessions();
+    this.getLegalInfo();
     notifyListeners();
   }
 
@@ -113,8 +127,7 @@ class RegisterViewModel extends BaseModel {
   Future<void> getLocations() async {
     List<Locations> response = await userService.getLocations();
 
-    this.locations =
-        response.map((json) => LocationsViewModel(location: json)).toList();
+    this.locations = response.map((json) => LocationsViewModel(location: json)).toList();
 
     setState(ViewState.Completed);
     notifyListeners();
@@ -123,15 +136,13 @@ class RegisterViewModel extends BaseModel {
   Future<void> getProfessions() async {
     List<Professions> response = await userService.getProfessions();
 
-    this.professions =
-        response.map((json) => ProfessionsViewModel(profession: json)).toList();
+    this.professions = response.map((json) => ProfessionsViewModel(profession: json)).toList();
 
     setState(ViewState.Completed);
     notifyListeners();
   }
 
-  Future<Message> registerUser(
-      User user, Profile profile, int location, int profession) async {
+  Future<Message> registerUser(User user, Profile profile, int location, int profession) async {
     setState(ViewState.Processing);
     notifyListeners();
 
@@ -139,12 +150,17 @@ class RegisterViewModel extends BaseModel {
 
     String token = await _fcm.getToken();
 
-    Message response = await userService.registerUser(
-        user, profile, location, profession, token);
+    Message response = await userService.registerUser(user, profile, location, profession, token);
 
     setState(ViewState.Completed);
     notifyListeners();
 
     return response;
+  }
+
+  Future<void> getLegalInfo() async {
+    legals = await legalService.getLegalsOrder();
+    setState(ViewState.Completed);
+    notifyListeners();
   }
 }

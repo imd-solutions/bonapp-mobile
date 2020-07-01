@@ -1,8 +1,10 @@
 import 'package:flutter_bonapp/services/application_service.dart';
 import 'package:flutter_bonapp/services/cart_service.dart';
 import 'package:flutter_bonapp/services/faq_service.dart';
+import 'package:flutter_bonapp/services/legal_service.dart';
 import 'package:flutter_bonapp/services/menu_service.dart';
 import 'package:flutter_bonapp/services/message_service.dart';
+import 'package:flutter_bonapp/services/navigation_service.dart';
 import 'package:flutter_bonapp/services/offer_service.dart';
 import 'package:flutter_bonapp/services/order_service.dart';
 import 'package:flutter_bonapp/services/page_service.dart';
@@ -27,8 +29,10 @@ void setupLocator() {
   locator.registerLazySingleton(() => OfferService());
   locator.registerLazySingleton(() => CartService());
   locator.registerLazySingleton(() => FaqService());
+  locator.registerLazySingleton(() => LegalService());
   locator.registerLazySingleton(() => PageService());
   locator.registerLazySingleton(() => MessagesService());
+  locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => OrderService());
   locator.registerLazySingleton(() => PushNotificationService());
 

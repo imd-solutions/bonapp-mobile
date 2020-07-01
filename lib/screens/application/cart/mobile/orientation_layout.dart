@@ -94,7 +94,7 @@ class CartMobilePortrait extends BaseModelWidget<CartViewModel> {
               : Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    CartApplicationHeader(),
+                    CartApplicationHeader(user: data.user),
                     Center(
                       child: Text(
                         'There are no items in your cart.',
@@ -127,7 +127,6 @@ class CartMobileLandscape extends BaseModelWidget<CartViewModel> {
           child: data.itemCount > 0
               ? Column(
                   children: <Widget>[
-                    // TEST!
                     CartApplicationHeader(),
                     Text(
                       'Cart Items.',
@@ -194,7 +193,7 @@ class CartMobileLandscape extends BaseModelWidget<CartViewModel> {
               : Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    CartApplicationHeader(),
+                    CartApplicationHeader(user: data.user),
                     Center(
                       child: Text(
                         'There are no items in your cart.',

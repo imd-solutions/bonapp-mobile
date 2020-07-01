@@ -26,9 +26,9 @@ class InitialViewModel extends BaseModel {
 
   int bottomNavIndex = 0;
 
-  void initialise(int id) {
+  void initialise(int id, BuildContext context) {
     setState(ViewState.Busy);
-    _updateData(id);
+    _updateData(id, context);
     notifyListeners();
   }
 
@@ -36,7 +36,7 @@ class InitialViewModel extends BaseModel {
     notifyListeners();
   }
 
-  Future<void> _updateData(int id) async {
+  Future<void> _updateData(int id, BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     prefs.setInt('userId', id);
@@ -44,7 +44,7 @@ class InitialViewModel extends BaseModel {
     application = await applicationService.getApplication();
     userUnreadMessages = await messagesService.getUnreadUserMessages(id);
     // Register for push notifications
-    firebaseMessaging = await _pushNotificationService.initialise();
+    firebaseMessaging = await _pushNotificationService.initialise(context);
 
     setState(ViewState.Completed);
     notifyListeners();
