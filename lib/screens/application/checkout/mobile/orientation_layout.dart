@@ -1,6 +1,11 @@
+import 'dart:convert';
+
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bonapp/enums/viewstate.dart';
 import 'package:flutter_bonapp/partials/application_header.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
+import 'package:flutter_bonapp/utils/routing_constants.dart';
 import 'package:flutter_bonapp/viewmodels/checkout/viewmodel.dart';
 import 'package:flutter_bonapp/widgets/base_model_widget.dart';
 
@@ -233,17 +238,7 @@ class CheckoutMobilePortrait extends BaseModelWidget<CheckoutViewModel> {
                   height: 80.0,
                   width: double.infinity,
                   padding: EdgeInsets.all(15.0),
-                  child: FlatButton(
-                    onPressed: () {},
-                    child: Text(
-                      'SUBMIT ORDER',
-                      style: TextStyle(color: Color(whiteColour), fontWeight: FontWeight.bold),
-                    ),
-                    color: Color(primaryColour),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                  ),
+                  child: submitOrder(data, context),
                 ),
               ),
             )
@@ -475,17 +470,7 @@ class CheckoutMobileLandscape extends BaseModelWidget<CheckoutViewModel> {
                   height: 80.0,
                   width: double.infinity,
                   padding: EdgeInsets.all(15.0),
-                  child: FlatButton(
-                    onPressed: () {},
-                    child: Text(
-                      'SUBMIT ORDER',
-                      style: TextStyle(color: Color(whiteColour), fontWeight: FontWeight.bold),
-                    ),
-                    color: Color(primaryColour),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                  ),
+                  child: submitOrder(data, context),
                 ),
               ),
             )
@@ -494,4 +479,56 @@ class CheckoutMobileLandscape extends BaseModelWidget<CheckoutViewModel> {
       ),
     );
   }
+}
+
+FlatButton submitOrder(CheckoutViewModel data, BuildContext context) {
+  List orderItems = [];
+  Map itemDetails = Map<dynamic, dynamic>();
+
+  return FlatButton(
+    onPressed: data.state == ViewState.Processing
+        ? null
+        : () {
+            var total = data.cartTotal * 100;
+
+            for (var i = 0; i < data.items.length; i++) {
+              orderItems = data.items.values
+                  .map((e) => itemDetails = {
+                        "menuitem_id": e.id,
+                        "quantity": e.quantity,
+                        "price": e.price,
+                        "total_price": e.price * e.quantity,
+                      })
+                  .toList();
+            }
+
+            data.payWithNewCard(data.user.id, total.round().toString(), orderItems).then(
+                  (message) => {
+                    if (message.success == true)
+                      {
+                        Flushbar(
+                          title: 'Success',
+                          message: 'That order has been processed successfully. Thank you',
+                          backgroundColor: Color(successColour),
+                          duration: Duration(seconds: 7),
+                        )..show(context).then(
+                            (_) {
+                              Navigator.of(context).pushNamedAndRemoveUntil(InitialScreenRoute, (Route<dynamic> route) => false, arguments: data.user);
+                            },
+                          )
+                      }
+                  },
+                );
+          },
+    child: data.state == ViewState.Processing
+        ? Text('Processing...', style: TextStyle(color: Color(primaryColour), fontWeight: FontWeight.bold))
+        : Text(
+            'SUBMIT ORDER',
+            style: TextStyle(color: Color(whiteColour), fontWeight: FontWeight.bold),
+          ),
+    color: Color(primaryColour),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(5.0),
+    ),
+  );
 }

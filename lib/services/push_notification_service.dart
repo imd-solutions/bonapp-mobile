@@ -2,8 +2,6 @@ import 'dart:io';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bonapp/services/locator.dart';
-import 'package:flutter_bonapp/services/navigation_service.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
 import 'package:flutter_bonapp/utils/routing_constants.dart';
 

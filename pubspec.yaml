@@ -41,6 +41,8 @@ dependencies:
   qr_mobile_vision:
   firebase_core:
   firebase_messaging:
+  stripe_payment:
+  http:
 
 dev_dependencies:
   flutter_test:

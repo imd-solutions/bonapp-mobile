@@ -20,4 +20,24 @@ class OrderMutation {
       }
     """;
   }
+
+  String orderCreate() {
+    return """ 
+    mutation orderCreate(\$input: OrderInput) {
+        orderCreate(input: \$input) {
+          id
+        }
+      }
+    """;
+  }
+
+  String orderUpdate() {
+    return """ 
+    mutation orderUpdate(\$input: OrderUpdateInput) {
+        orderUpdate(input: \$input) {
+          status
+        }
+      }
+    """;
+  }
 }
