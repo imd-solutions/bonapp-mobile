@@ -10,6 +10,7 @@ import 'package:flutter_bonapp/services/order_service.dart';
 import 'package:flutter_bonapp/services/page_service.dart';
 import 'package:flutter_bonapp/services/post_service.dart';
 import 'package:flutter_bonapp/services/push_notification_service.dart';
+import 'package:flutter_bonapp/services/scan_service.dart';
 import 'package:flutter_bonapp/services/stripe_service.dart';
 import 'package:flutter_bonapp/services/user_service.dart';
 import 'package:flutter_bonapp/viewmodels/application/viewmodel.dart';
@@ -37,6 +38,7 @@ void setupLocator() {
   locator.registerLazySingleton(() => OrderService());
   locator.registerLazySingleton(() => PushNotificationService());
   locator.registerLazySingleton(() => StripeService());
+  locator.registerLazySingleton(() => ScanService());
 
   // Register view models
   locator.registerFactory<ApplicationViewModel>(() => ApplicationViewModel());
