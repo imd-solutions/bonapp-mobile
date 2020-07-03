@@ -51,15 +51,17 @@ class OrderService {
       );
 
       if (response.hasException) {
-        throw new Exception(response.exception.toString());
+        throw new Exception(response.exception.graphqlErrors);
       }
 
       final result = response.data;
 
+      print(result);
+
       return Message(
         title: 'Success',
         status: 200,
-        message: result['orderReceived']['message'],
+        message: result['sendOrderMessage']['message'],
         colour: successColour,
       );
     } catch (e) {
