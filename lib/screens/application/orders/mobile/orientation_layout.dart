@@ -173,154 +173,179 @@ Widget _buildOrderTiles(BuildContext context, Order order, OrderViewModel data) 
       ],
     ),
     children: <Widget>[
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: Align(
-          alignment: Alignment.topLeft,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              OrderHeadlineStyle(
-                title: 'Order Number:',
-                data: '#${order.id} ',
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Row(
-                children: <Widget>[
-                  Text(
-                    'QTY',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Text(
-                    'Item',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Spacer(),
-                  SizedBox(
-                    width: 45.0,
-                  ),
-                  Text(
-                    'Price',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Spacer(),
-                  Text(
-                    'Total',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-              for (var i = 0; i < order.items.length; i++)
+      if (data.state != ViewState.Busy)
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                OrderHeadlineStyle(
+                  title: 'Order Number:',
+                  data: '#${order.id} ',
+                ),
+                SizedBox(
+                  height: 5.0,
+                ),
                 Row(
                   children: <Widget>[
-                    Text('${order.items[i].pivot.quantity}x'),
-                    SizedBox(
-                      width: 25.0,
-                    ),
-                    Text('${order.items[i].name}'),
-                    Spacer(),
-                    Text('£${order.items[i].pivot.price.toStringAsFixed(2)}'),
-                    Spacer(),
-                    Text('£${order.items[i].pivot.totalPrice.toStringAsFixed(2)}'),
-                  ],
-                ),
-              SizedBox(
-                height: 15.0,
-              ),
-              Row(
-                children: <Widget>[
-                  Spacer(),
-                  Text(
-                    'Subtotal: ',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    width: 7.0,
-                  ),
-                  Text('£${order.billingSubtotal.toStringAsFixed(2)}'),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  Spacer(),
-                  Text(
-                    'Tax: ',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Text('£${order.billingTax.toStringAsFixed(2)}'),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  Spacer(),
-                  Text(
-                    'Total: ',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Text('£${order.billingTotal.toStringAsFixed(2)}'),
-                ],
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
-              Row(
-                children: <Widget>[
-                  RaisedButton(
-                    onPressed: () => _showOrderMessage(context, order, data),
-                    color: Color(primaryColour),
-                    child: Text(
-                      'Contact Us',
+                    Text(
+                      'Status:',
                       style: TextStyle(
-                        color: Color(whiteColour),
+                        fontWeight: FontWeight.bold,
+                        fontFamily: primaryFont,
+                        color: Color(accentColour),
                       ),
                     ),
+                    SizedBox(
+                      width: 5.0,
+                    ),
+                    Text(
+                      '${order.status}',
+                      style: TextStyle(
+                        fontSize: 12.0,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 5.0,
+                ),
+                Row(
+                  children: <Widget>[
+                    Text(
+                      'QTY',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Text(
+                      'Item',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Spacer(),
+                    SizedBox(
+                      width: 45.0,
+                    ),
+                    Text(
+                      'Price',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Spacer(),
+                    Text(
+                      'Total',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                for (var i = 0; i < order.items.length; i++)
+                  Row(
+                    children: <Widget>[
+                      Text('${order.items[i].pivot.quantity}x'),
+                      SizedBox(
+                        width: 25.0,
+                      ),
+                      Text('${order.items[i].name}'),
+                      Spacer(),
+                      Text('£${order.items[i].pivot.price.toStringAsFixed(2)}'),
+                      Spacer(),
+                      Text('£${order.items[i].pivot.totalPrice.toStringAsFixed(2)}'),
+                    ],
                   ),
-                  Spacer(),
-                  if (order.status != 'COMPLETED')
+                SizedBox(
+                  height: 15.0,
+                ),
+                Row(
+                  children: <Widget>[
+                    Spacer(),
+                    Text(
+                      'Subtotal: ',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      width: 7.0,
+                    ),
+                    Text('£${order.billingSubtotal.toStringAsFixed(2)}'),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Spacer(),
+                    Text(
+                      'Tax: ',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Text('£${order.billingTax.toStringAsFixed(2)}'),
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Spacer(),
+                    Text(
+                      'Total: ',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Text('£${order.billingTotal.toStringAsFixed(2)}'),
+                  ],
+                ),
+                SizedBox(
+                  height: 15.0,
+                ),
+                Row(
+                  children: <Widget>[
                     RaisedButton(
-                      onPressed: () {
-                        data.orderReceived(int.parse(order.id)).then((message) {
-                          Flushbar(
-                            title: message.title,
-                            message: message.message.replaceAll('Exception: ', ''),
-                            backgroundColor: Color(message.colour),
-                            duration: Duration(seconds: message.status != 200 ? 7 : 3),
-                          )..show(context).then(
-                              (_) {
-                                // Send the user to the Initial Application Screen on success.
-                                if (message.status == 200) {
-                                  Navigator.pushNamed(context, OrdersScreenRoute);
-                                }
-                              },
-                            );
-                        });
-                      },
-                      color: Color(successColour),
+                      onPressed: () => _showOrderMessage(context, order, data),
+                      color: Color(primaryColour),
                       child: Text(
-                        'Order Received',
+                        'Contact Us',
                         style: TextStyle(
                           color: Color(whiteColour),
                         ),
                       ),
-                    )
-                ],
-              )
-            ],
+                    ),
+                    Spacer(),
+                    if (order.status != 'COMPLETED')
+                      RaisedButton(
+                        onPressed: () {
+                          data.orderReceived(int.parse(order.id)).then((message) {
+                            Flushbar(
+                              title: message.title,
+                              message: message.message.replaceAll('Exception: ', ''),
+                              backgroundColor: Color(message.colour),
+                              duration: Duration(seconds: message.status != 200 ? 7 : 3),
+                            )..show(context).then(
+                                (_) {
+                                  // Send the user to the Initial Application Screen on success.
+                                  if (message.status == 200) {
+                                    Navigator.pushNamed(context, OrdersScreenRoute);
+                                  }
+                                },
+                              );
+                          });
+                        },
+                        color: Color(successColour),
+                        child: Text(
+                          'Order Received',
+                          style: TextStyle(
+                            color: Color(whiteColour),
+                          ),
+                        ),
+                      )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
-      ),
       SizedBox(
         height: 10.0,
       )

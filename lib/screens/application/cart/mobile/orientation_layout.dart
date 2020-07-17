@@ -40,7 +40,6 @@ class CartMobilePortrait extends BaseModelWidget<CartViewModel> {
                                   color: Colors.red,
                                 ),
                                 onDismissed: (direction) {
-//        print("WTF!!!");
                                   data.removeItem(data.items.values.toList()[i].id);
                                 },
                                 child: CartItems(
@@ -143,12 +142,22 @@ class CartMobileLandscape extends BaseModelWidget<CartViewModel> {
                           Expanded(
                             child: ListView.builder(
                               itemCount: data.items.length,
-                              itemBuilder: (ctx, i) => CartItems(
-                                data.items.values.toList()[i].id.toString(),
-                                data.items.keys.toList()[i],
-                                data.items.values.toList()[i].price,
-                                data.items.values.toList()[i].quantity,
-                                data.items.values.toList()[i].name,
+                              itemBuilder: (ctx, i) => Dismissible(
+                                key: ValueKey(data.items.values.toList()[i].id),
+                                direction: DismissDirection.endToStart,
+                                background: Container(
+                                  color: Colors.red,
+                                ),
+                                onDismissed: (direction) {
+                                  data.removeItem(data.items.values.toList()[i].id);
+                                },
+                                child: CartItems(
+                                  data.items.values.toList()[i].id.toString(),
+                                  data.items.keys.toList()[i],
+                                  data.items.values.toList()[i].price,
+                                  data.items.values.toList()[i].quantity,
+                                  data.items.values.toList()[i].name,
+                                ),
                               ),
                             ),
                           ),

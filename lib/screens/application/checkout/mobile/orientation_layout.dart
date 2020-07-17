@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bonapp/enums/viewstate.dart';
@@ -142,55 +140,11 @@ class CheckoutMobilePortrait extends BaseModelWidget<CheckoutViewModel> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          'Subtotal:',
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            color: Color(accentColour),
-                          ),
-                        ),
-                        Text(
-                          '£${data.cartSubTotal.toStringAsFixed(2)}',
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            color: Color(accentThirdColour),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          'Tax (20%):',
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            color: Color(accentColour),
-                          ),
-                        ),
-                        Text(
-                          '${data.cartTax.toStringAsFixed(2)}',
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            color: Color(accentThirdColour),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
                           'Total:',
                           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
                         ),
                         Text(
-                          '${data.cartTotal.toStringAsFixed(2)}',
+                          '£${data.cartSubTotal.toStringAsFixed(2)}',
                           style: TextStyle(
                             fontSize: 22.0,
                             fontWeight: FontWeight.bold,
@@ -369,51 +323,7 @@ class CheckoutMobileLandscape extends BaseModelWidget<CheckoutViewModel> {
                           ],
                         );
                       },
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          'Subtotal:',
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            color: Color(accentColour),
-                          ),
-                        ),
-                        Text(
-                          '£${data.cartSubTotal.toStringAsFixed(2)}',
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            color: Color(accentThirdColour),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          'Tax (20%):',
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            color: Color(accentColour),
-                          ),
-                        ),
-                        Text(
-                          '${data.cartTax.toStringAsFixed(2)}',
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            color: Color(accentThirdColour),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
+                    ), //
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -422,7 +332,7 @@ class CheckoutMobileLandscape extends BaseModelWidget<CheckoutViewModel> {
                           style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
                         ),
                         Text(
-                          '${data.cartTotal.toStringAsFixed(2)}',
+                          '£${data.cartSubTotal.toStringAsFixed(2)}',
                           style: TextStyle(
                             fontSize: 22.0,
                             fontWeight: FontWeight.bold,
@@ -489,7 +399,7 @@ FlatButton submitOrder(CheckoutViewModel data, BuildContext context) {
     onPressed: data.state == ViewState.Processing
         ? null
         : () {
-            var total = data.cartTotal * 100;
+            var total = data.cartSubTotal * 100;
 
             for (var i = 0; i < data.items.length; i++) {
               orderItems = data.items.values

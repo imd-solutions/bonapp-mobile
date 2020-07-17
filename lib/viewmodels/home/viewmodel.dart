@@ -34,7 +34,7 @@ class HomeViewModel extends BaseModel {
 
     user = await userService.getUser(id);
     userUnreadMessages = await messagesService.getUnreadUserMessages(id);
-    featuredItems = await menuService.getFeaturedItems();
+    featuredItems = await menuService.getFeaturedItems(id);
     offer = await offerService.getOffer(1);
 
     setState(ViewState.Completed);

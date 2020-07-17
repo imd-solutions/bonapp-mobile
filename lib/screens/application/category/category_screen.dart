@@ -16,7 +16,7 @@ class CategoryScreen extends StatelessWidget {
     return Center(
       child: BaseWidget<CategoryViewModel>(
         viewModel: CategoryViewModel(),
-        onModelReady: (model) => model.initialise(),
+        onModelReady: (model) => model.initialise(category.id),
         builder: (context) => ScreenTypeLayout(
           mobile: OrientationLayout(
             portrait: (context) => CategoryMobilePortrait(

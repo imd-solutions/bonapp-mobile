@@ -6,6 +6,10 @@ final int settingsBackground = 0xFFFFFFFF;
 final int settingsSliderStatus = 0;
 final int settingsSliderFull = 0;
 
-final String graphQLApi = "https://app.bonappetit.co.uk";
+//final String graphQLApi = "https://app.bonappetit.co.uk";
+
+final String ngrok = "9e99041fdaeb";
+
+final String graphQLApi = 'https://$ngrok.ngrok.io';
 
 final String graphQLApiImg = graphQLApi + '/storage/';

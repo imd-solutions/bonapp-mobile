@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:flutter_bonapp/models/menu.dart';
 import 'package:flutter_bonapp/config/graphql.dart';
@@ -31,14 +33,14 @@ class MenuService {
   }
 
   // Get featured Items.
-  Future<List<Items>> getFeaturedItems() async {
+  Future<List<Items>> getFeaturedItems(int id) async {
     GraphQLClient _items = graphQLConfiguration.clientToQuery();
     QueryResult response = await _items.query(
       QueryOptions(
-        documentNode: gql(
-          menuQuery.getFeaturedItems(),
-        ),
-      ),
+          documentNode: gql(
+            menuQuery.getFeaturedItems(),
+          ),
+          variables: {"id": id}),
     );
 
     if (response.hasException) {
@@ -53,14 +55,14 @@ class MenuService {
   }
 
   // Get featured Items.
-  Future<List<Items>> getPickOfDayItems() async {
+  Future<List<Items>> getPickOfDayItems(int id) async {
     GraphQLClient _items = graphQLConfiguration.clientToQuery();
     QueryResult response = await _items.query(
       QueryOptions(
-        documentNode: gql(
-          menuQuery.getPickOfDayItems(),
-        ),
-      ),
+          documentNode: gql(
+            menuQuery.getPickOfDayItems(),
+          ),
+          variables: {"id": id}),
     );
 
     if (response.hasException) {
@@ -70,6 +72,60 @@ class MenuService {
     final result = response.data;
 
     Iterable list = result['menuitemPickOfDay'];
+
+    return list.map((menu) => Items.fromJson(menu)).toList();
+  }
+
+  // Get a single menu item.
+  Future<Items> getMenuitemShop(int id, int pid) async {
+    GraphQLClient _items = graphQLConfiguration.clientToQuery();
+    QueryResult response = await _items.query(
+      QueryOptions(
+          documentNode: gql(
+            menuQuery.getShopItem(),
+          ),
+          variables: {
+            "id": id,
+            "pid": pid,
+          }),
+    );
+
+    if (response.hasException) {
+      throw new Exception(response.exception.graphqlErrors);
+    }
+
+    final result = response.data;
+
+    return Items(
+      name: result['menuitemShop']['name'],
+      subtitle: result['menuitemShop']['subtitle'],
+      description: result['menuitemShop']['description'],
+      image: result['menuitemShop']['image'],
+      pivot: ItemPivot(
+        mainPrice: result['menuitemShop']['pivot']['main_price'],
+        qty: result['menuitemShop']['pivot']['qty'],
+      ),
+    );
+  }
+
+  // Get featured Items.
+  Future<List<Items>> getItemsCategory(int id, int cid) async {
+    GraphQLClient _items = graphQLConfiguration.clientToQuery();
+    QueryResult response = await _items.query(
+      QueryOptions(
+          documentNode: gql(
+            menuQuery.getItemsCategory(),
+          ),
+          variables: {"id": id, "cid": cid}),
+    );
+
+    if (response.hasException) {
+      throw new Exception('Could not get setting data.');
+    }
+
+    final result = response.data;
+
+    Iterable list = result['menuitemsCategory'];
 
     return list.map((menu) => Items.fromJson(menu)).toList();
   }

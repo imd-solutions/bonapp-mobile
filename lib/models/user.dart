@@ -281,8 +281,8 @@ class Pivot {
 
   factory Pivot.fromJson(Map<String, dynamic> json) => Pivot(
         quantity: json["quantity"],
-        price: json["price"].toDouble(),
-        totalPrice: json["total_price"].toDouble(),
+        price: json["price"] != null ? json["price"].toDouble() : null,
+        totalPrice: json["total_price"] != null ? json["total_price"].toDouble() : null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -307,15 +307,15 @@ class Voucher {
 
   factory Voucher.fromJson(Map<String, dynamic> json) => Voucher(
         id: json["id"],
-    name: json["name"],
-    subTitle: json["sub_title"],
-    code: json["code"],
+        name: json["name"],
+        subTitle: json["sub_title"],
+        code: json["code"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-    "name": name,
-    "sub_title": subTitle,
-    "code": code,
+        "name": name,
+        "sub_title": subTitle,
+        "code": code,
       };
 }

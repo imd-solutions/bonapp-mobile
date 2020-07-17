@@ -16,7 +16,7 @@ class ItemScreen extends StatelessWidget {
     return Center(
       child: BaseWidget<ItemViewModel>(
         viewModel: ItemViewModel(),
-        onModelReady: (model) => model.initialise(),
+        onModelReady: (model) => model.initialise(item.id),
         builder: (context) => ScreenTypeLayout(
           mobile: OrientationLayout(
             portrait: (context) => ItemMobilePortrait(

@@ -44,7 +44,7 @@ class MenuMobilePortrait extends BaseModelWidget<MenuViewModel> {
                         for (var i = 0; i < data.pickOfDayItems.length; i++)
                           _buildCard(
                             data.pickOfDayItems[i].pickInfo.name,
-                            '£${data.pickOfDayItems[i].pickInfo.price.toStringAsFixed(2)}',
+                            '£${data.pickOfDayItems[i].pickInfo.pivot.mainPrice.toStringAsFixed(2)}',
                             graphQLApiImg + data.pickOfDayItems[i].pickInfo.image,
                             false,
                             false,
@@ -99,7 +99,7 @@ class MenuMobileLandscape extends BaseModelWidget<MenuViewModel> {
                         for (var i = 0; i < data.pickOfDayItems.length; i++)
                           _buildCard(
                             data.pickOfDayItems[i].pickInfo.name,
-                            '£${data.pickOfDayItems[i].pickInfo.price.toStringAsFixed(2)}',
+                            '£${data.pickOfDayItems[i].pickInfo.pivot.mainPrice.toStringAsFixed(2)}',
                             graphQLApiImg + data.pickOfDayItems[i].pickInfo.image,
                             false,
                             false,

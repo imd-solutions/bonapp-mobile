@@ -1,5 +1,6 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bonapp/enums/viewstate.dart';
 import 'package:flutter_bonapp/models/menu.dart';
 import 'package:flutter_bonapp/partials/application_header.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_bonapp/utils/env.dart';
 import 'package:flutter_bonapp/utils/routing_constants.dart';
 import 'package:flutter_bonapp/viewmodels/category/viewmodel.dart';
 import 'package:flutter_bonapp/widgets/base_model_widget.dart';
+import 'package:flutter_bonapp/widgets/full_busy_overlay.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 class CategoryMobilePortrait extends BaseModelWidget<CategoryViewModel> {
@@ -17,114 +19,22 @@ class CategoryMobilePortrait extends BaseModelWidget<CategoryViewModel> {
   Widget build(BuildContext context, CategoryViewModel data) {
     var width = MediaQuery.of(context).size.width;
     var orientation = MediaQuery.of(context).orientation;
-    return Scaffold(
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.all(5.0),
-        child: Container(
-          height: 50.0,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/banner_add.jpg'),
-              fit: BoxFit.fill,
+    return FullBusyOverlay(
+      show: data.state == ViewState.Busy,
+      child: Scaffold(
+        bottomNavigationBar: Padding(
+          padding: EdgeInsets.all(5.0),
+          child: Container(
+            height: 50.0,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/banner_add.jpg'),
+                fit: BoxFit.fill,
+              ),
             ),
           ),
         ),
-      ),
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            ApplicationHeader(route: 'goback'),
-            Stack(
-              children: <Widget>[
-                Container(
-                  constraints: BoxConstraints.expand(
-                    height: 200.0,
-                  ),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      colorFilter: ColorFilter.mode(
-                        Color(blackColour).withOpacity(0.2),
-                        BlendMode.dstATop,
-                      ),
-                      image: NetworkImage(graphQLApiImg + category.image),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 120.0,
-                  left: 10.0,
-                  child: Text(
-                    category.name,
-                    style: TextStyle(
-                      fontSize: 25.0,
-                      fontFamily: primaryFont,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 155.0,
-                  left: 10.0,
-                  child: Container(
-                    width: width * 0.9,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          category.description,
-                          style: TextStyle(fontFamily: secondaryFont, fontSize: 15.0),
-                        )
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            ColumnHeader(
-              title: 'Scroll down for more.',
-              more: false,
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            Expanded(
-              child: ListView(
-                shrinkWrap: true,
-                children: <Widget>[
-                  for (var i = 0; i < category.items.length; i++)
-                    _buildListItem(
-                      category.items[i],
-                      4.0,
-                      width,
-                      orientation,
-                      context,
-                      data,
-                    ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class CategoryMobileLandscape extends BaseModelWidget<CategoryViewModel> {
-  final Menu category;
-
-  CategoryMobileLandscape({this.category});
-  @override
-  Widget build(BuildContext context, CategoryViewModel data) {
-    var width = MediaQuery.of(context).size.width;
-    var orientation = MediaQuery.of(context).orientation;
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: SafeArea(
+        body: SafeArea(
           child: Column(
             children: <Widget>[
               ApplicationHeader(route: 'goback'),
@@ -146,19 +56,31 @@ class CategoryMobileLandscape extends BaseModelWidget<CategoryViewModel> {
                     ),
                   ),
                   Positioned(
-                    top: 125.0,
+                    top: 120.0,
                     left: 10.0,
                     child: Text(
                       category.name,
-                      style: TextStyle(fontSize: 25.0, fontFamily: primaryFont, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 25.0,
+                        fontFamily: primaryFont,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   Positioned(
-                    top: 165.0,
+                    top: 155.0,
                     left: 10.0,
-                    child: Text(
-                      category.description,
-                      style: TextStyle(fontFamily: secondaryFont, fontSize: 15.0),
+                    child: Container(
+                      width: width * 0.9,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            category.description,
+                            style: TextStyle(fontFamily: secondaryFont, fontSize: 15.0),
+                          )
+                        ],
+                      ),
                     ),
                   )
                 ],
@@ -167,23 +89,119 @@ class CategoryMobileLandscape extends BaseModelWidget<CategoryViewModel> {
                 height: 20.0,
               ),
               ColumnHeader(
-                title: 'Scroll left/right more.',
+                title: 'Scroll down for more.',
                 more: false,
               ),
               SizedBox(
                 height: 10.0,
               ),
-              Container(
-                height: 120.0,
-                child: ListView(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
+              if (data.state != ViewState.Busy)
+                Expanded(
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: <Widget>[
+                      for (var i = 0; i < data.categoryItems.length; i++)
+                        _buildListItem(
+                          data.categoryItems[i],
+                          4.0,
+                          width,
+                          orientation,
+                          context,
+                          data,
+                        ),
+                    ],
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CategoryMobileLandscape extends BaseModelWidget<CategoryViewModel> {
+  final Menu category;
+
+  CategoryMobileLandscape({this.category});
+  @override
+  Widget build(BuildContext context, CategoryViewModel data) {
+    var width = MediaQuery.of(context).size.width;
+    var orientation = MediaQuery.of(context).orientation;
+    return FullBusyOverlay(
+      show: data.state == ViewState.Busy,
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Column(
+              children: <Widget>[
+                ApplicationHeader(route: 'goback'),
+                Stack(
                   children: <Widget>[
-                    for (var i = 0; i < category.items.length; i++) _buildListItem(category.items[i], 4.0, width, orientation, context, data),
+                    Container(
+                      constraints: BoxConstraints.expand(
+                        height: 200.0,
+                      ),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          colorFilter: ColorFilter.mode(
+                            Color(blackColour).withOpacity(0.2),
+                            BlendMode.dstATop,
+                          ),
+                          image: NetworkImage(graphQLApiImg + category.image),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: 125.0,
+                      left: 10.0,
+                      child: Text(
+                        category.name,
+                        style: TextStyle(fontSize: 25.0, fontFamily: primaryFont, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Positioned(
+                      top: 165.0,
+                      left: 10.0,
+                      child: Text(
+                        category.description,
+                        style: TextStyle(fontFamily: secondaryFont, fontSize: 15.0),
+                      ),
+                    )
                   ],
                 ),
-              )
-            ],
+                SizedBox(
+                  height: 20.0,
+                ),
+                ColumnHeader(
+                  title: 'Scroll left/right more.',
+                  more: false,
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                if (data.state != ViewState.Busy)
+                  Container(
+                    height: 120.0,
+                    child: ListView(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      children: <Widget>[
+                        for (var i = 0; i < data.categoryItems.length; i++)
+                          _buildListItem(
+                            data.categoryItems[i],
+                            4.0,
+                            width,
+                            orientation,
+                            context,
+                            data,
+                          ),
+                      ],
+                    ),
+                  )
+              ],
+            ),
           ),
         ),
       ),
@@ -302,7 +320,7 @@ _buildListItem(Items item, double rating, double width, Orientation orientation,
                             Row(
                               children: <Widget>[
                                 Text(
-                                  '£${item.price.toStringAsFixed(2)}',
+                                  '£${item.pivot.mainPrice.toStringAsFixed(2)}',
                                   style: TextStyle(fontFamily: secondaryFont),
                                 ),
                                 SizedBox(
@@ -369,7 +387,7 @@ _buildListItem(Items item, double rating, double width, Orientation orientation,
                       Container(
                         child: InkResponse(
                           onTap: () {
-                            data.addItemToCart(item.id, item.name, item.subtitle, item.price);
+                            data.addItemToCart(item.id, item.name, item.subtitle, item.pivot.mainPrice);
                             Flushbar(
                               title: 'Success',
                               message: 'That item has been added.',
@@ -448,7 +466,7 @@ _buildListItem(Items item, double rating, double width, Orientation orientation,
                         Row(
                           children: <Widget>[
                             Text(
-                              '£${item.price.toStringAsFixed(2)}',
+                              '£${item.pivot.mainPrice.toStringAsFixed(2)}',
                               style: TextStyle(fontFamily: secondaryFont),
                             ),
                           ],

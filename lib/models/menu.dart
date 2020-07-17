@@ -51,6 +51,7 @@ class Items {
   String description;
   double price;
   String image;
+  ItemPivot pivot;
 
   Items({
     this.id,
@@ -59,6 +60,7 @@ class Items {
     this.description,
     this.price,
     this.image,
+    this.pivot,
   });
 
   factory Items.fromJson(Map<String, dynamic> json) => Items(
@@ -66,8 +68,9 @@ class Items {
         name: json["name"],
         subtitle: json["subtitle"],
         description: json["description"],
-        price: json["price"].toDouble(),
+        price: json["price"] != null ? json["price"].toDouble() : null,
         image: json["imgUrl"],
+        pivot: json["pivot"] != null ? ItemPivot.fromJson(json["pivot"]) : null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -77,5 +80,27 @@ class Items {
         "description": description,
         "price": price,
         "image": image,
+        "pivot": pivot.toJson(),
+      };
+}
+
+class ItemPivot {
+  ItemPivot({
+    this.qty,
+    this.mainPrice,
+  });
+
+  int qty;
+  double mainPrice;
+  double totalPrice;
+
+  factory ItemPivot.fromJson(Map<String, dynamic> json) => ItemPivot(
+        qty: json["qty"],
+        mainPrice: json["main_price"] != null ? json["main_price"].toDouble() : null,
+      );
+
+  Map<String, dynamic> toJson() => {
+        "qty": qty,
+        "mainPrice": mainPrice,
       };
 }

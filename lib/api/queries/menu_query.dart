@@ -58,8 +58,8 @@ class MenuQuery {
   // Get all the menu items.
   String getItems() {
     return """
-            query {
-             menuitems {
+            query menuitems (\$id: ID!) {
+             menuitems (user_id: \$id) {
                 id
                 name
                 subtitle
@@ -70,6 +70,26 @@ class MenuQuery {
                   quantity
                   price
                   total_price
+                }   
+              }
+            }
+      """;
+  }
+
+  // Get all the menu items.
+  String getItemsCategory() {
+    return """
+            query menuitemsCategory (\$id: ID, \$cid: ID) {
+             menuitemsCategory (user_id: \$id, category_id: \$cid) {
+                id
+                name
+                subtitle
+                description
+                price
+                imgUrl 
+                pivot {
+                  main_price
+                  qty
                 }   
               }
             }
@@ -97,21 +117,43 @@ class MenuQuery {
       """;
   }
 
+  // Get a single menu item.
+  String getShopItem() {
+    return """
+            query menuitemShop (\$id: ID, \$pid: ID)  {
+               menuitemShop (user_id: \$id, menuitem_id: \$pid) {
+                id
+                name
+                subtitle
+                description
+                price 
+                imgUrl   
+                pivot {
+                  quantity
+                  price
+                  total_price
+                  main_price
+                  qty
+                } 
+              }
+            }
+      """;
+  }
+
   // Get featured menu items.
   String getFeaturedItems() {
     return """
-            query {
-             menuitemFeatured {
+            query menuitemFeatured (\$id: ID)  {
+             menuitemFeatured (user_id: \$id) {
                 id
                 name
                 subtitle
                 description
                 price
                 imgUrl 
-                pivot {
-                  quantity
-                  price
-                  total_price
+                pivot {                 
+                  main_price
+                  qty
                 }   
               }
             }
@@ -121,18 +163,17 @@ class MenuQuery {
   // Get pick of the day items.
   String getPickOfDayItems() {
     return """
-            query {
-             menuitemPickOfDay {
+            query menuitemPickOfDay (\$id: ID)   {
+             menuitemPickOfDay (user_id: \$id) {
               id
                 name
                 subtitle
                 description
                 price
                 imgUrl
-                pivot {
-                  quantity
-                  price
-                  total_price
+                pivot {                                
+                  main_price
+                  qty
                 }    
               }
             }

@@ -18,6 +18,8 @@ class HomeMobilePortrait extends BaseModelWidget<HomeViewModel> {
 
   @override
   Widget build(BuildContext context, HomeViewModel data) {
+    var width = MediaQuery.of(context).size.width;
+
     return data.state == ViewState.Busy
         ? BusyOverlay(
             show: data.state == ViewState.Busy,
@@ -111,50 +113,45 @@ class HomeMobilePortrait extends BaseModelWidget<HomeViewModel> {
                   SizedBox(
                     height: 15.0,
                   ),
-                  _rowHeader(
-                    context: context,
-                    title: 'Top Sellers',
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      _cardInformation(
-                        context: context,
-                        title: data.featuredItems[0].name,
-                        fontSize: 10.0,
-                        height: 150.0,
-                        data: data.featuredItems[0],
-                        more: false,
-                      ),
-                      SizedBox(
-                        width: 5.0,
-                      ),
-                      _cardInformation(
-                        context: context,
-                        title: data.featuredItems[1].name,
-                        fontSize: 10.0,
-                        height: 150.0,
-                        data: data.featuredItems[1],
-                        more: false,
-                      ),
-                      SizedBox(
-                        width: 5.0,
-                      ),
-                      _cardInformation(
-                        context: context,
-                        title: data.featuredItems[2].name,
-                        fontSize: 10.0,
-                        height: 150.0,
-                        data: data.featuredItems[2],
-                        more: false,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
+                  if (data.featuredItems.length > 0)
+                    Column(
+                      children: <Widget>[
+                        _rowHeader(
+                          context: context,
+                          title: 'Top Sellers',
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Row(
+                          children: <Widget>[
+                            for (var i = 0; i < data.featuredItems.length; i++)
+                              Container(
+                                width: (width / (data.featuredItems.length + (0.2 * data.featuredItems.length))),
+                                child: Row(
+                                  children: <Widget>[
+                                    _cardInformation(
+                                      context: context,
+                                      title: data.featuredItems[i].name,
+                                      fontSize: 10.0,
+                                      height: 150.0,
+                                      data: data.featuredItems[i],
+                                      more: false,
+                                    ),
+                                    if (i < (data.featuredItems.length - 1))
+                                      SizedBox(
+                                        width: 5.0,
+                                      ),
+                                  ],
+                                ),
+                              )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                      ],
+                    )
                 ],
               ),
             ),
@@ -169,6 +166,7 @@ class HomeMobileLandscape extends BaseModelWidget<HomeViewModel> {
 
   @override
   Widget build(BuildContext context, HomeViewModel data) {
+    var width = MediaQuery.of(context).size.width;
     return data.state == ViewState.Busy
         ? BusyOverlay(
             show: data.state == ViewState.Busy,
@@ -246,41 +244,62 @@ class HomeMobileLandscape extends BaseModelWidget<HomeViewModel> {
                   SizedBox(
                     height: 15.0,
                   ),
-                  _rowHeader(
-                    context: context,
-                    title: 'Top Sellers',
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      _cardInformation(
-                        context: context,
-                        title: data.featuredItems[0].name,
-                        data: data.featuredItems[0],
-                        more: false,
-                      ),
-                      SizedBox(
-                        width: 5.0,
-                      ),
-                      _cardInformation(
-                        context: context,
-                        title: data.featuredItems[1].name,
-                        data: data.featuredItems[1],
-                        more: false,
-                      ),
-                      SizedBox(
-                        width: 5.0,
-                      ),
-                      _cardInformation(
-                        context: context,
-                        title: data.featuredItems[2].name,
-                        data: data.featuredItems[2],
-                        more: false,
-                      ),
-                    ],
-                  ),
+                  if (data.featuredItems.length > 0)
+                    Column(
+                      children: <Widget>[
+                        _rowHeader(
+                          context: context,
+                          title: 'Top Sellers',
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Row(
+                          children: <Widget>[
+                            for (var i = 0; i < data.featuredItems.length; i++)
+                              Container(
+                                width: (width / (data.featuredItems.length + (0.2 * data.featuredItems.length))),
+                                child: Row(
+                                  children: <Widget>[
+                                    _cardInformation(
+                                      context: context,
+                                      title: data.featuredItems[i].name,
+                                      fontSize: 10.0,
+                                      height: 150.0,
+                                      data: data.featuredItems[i],
+                                      more: false,
+                                    ),
+                                    if (i < (data.featuredItems.length - 1))
+                                      SizedBox(
+                                        width: 5.0,
+                                      ),
+                                  ],
+                                ),
+                              )
+
+//                      _cardInformation(
+//                        context: context,
+//                        title: data.featuredItems[1].name,
+//                        fontSize: 10.0,
+//                        height: 150.0,
+//                        data: data.featuredItems[1],
+//                        more: false,
+//                      ),
+//                      SizedBox(
+//                        width: 5.0,
+//                      ),
+//                      _cardInformation(
+//                        context: context,
+//                        title: data.featuredItems[2].name,
+//                        fontSize: 10.0,
+//                        height: 150.0,
+//                        data: data.featuredItems[2],
+//                        more: false,
+//                      ),
+                          ],
+                        ),
+                      ],
+                    )
                 ],
               ),
             ),

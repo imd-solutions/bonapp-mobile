@@ -115,7 +115,6 @@ List<Widget> _drawerItems(BuildContext context, InitialViewModel data) {
       InkWell(
         onTap: () {
           data.logUserOut(context);
-//          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context) => LoginScreen()), (route) => false);
         },
         child: ListTile(
           leading: Icon(
