@@ -8,7 +8,7 @@ final int settingsSliderFull = 0;
 
 //final String graphQLApi = "https://app.bonappetit.co.uk";
 
-final String ngrok = "9e99041fdaeb";
+final String ngrok = "71c288204a97";
 
 final String graphQLApi = 'https://$ngrok.ngrok.io';
 

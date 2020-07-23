@@ -49,6 +49,7 @@ class MenuMobilePortrait extends BaseModelWidget<MenuViewModel> {
                             false,
                             false,
                             context,
+                            data.pickOfDayItems[i].pickInfo,
                           ),
                       ],
                     ),
@@ -104,6 +105,7 @@ class MenuMobileLandscape extends BaseModelWidget<MenuViewModel> {
                             false,
                             false,
                             context,
+                            data.pickOfDayItems[i].pickInfo,
                           ),
                       ],
                     ),
@@ -193,14 +195,14 @@ class ColumnFooter extends StatelessWidget {
   }
 }
 
-Widget _buildCard(String name, String price, String imgPath, bool added, bool isFavorite, context) {
+Widget _buildCard(String name, String price, String imgPath, bool added, bool isFavorite, context, Items item) {
   var screenHeight = MediaQuery.of(context).size.height;
   var orientation = MediaQuery.of(context).orientation;
 
   return Padding(
     padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
     child: InkWell(
-      onTap: () {},
+      onTap: () => _navigateToItem(context, item),
       child: Container(
         margin: orientation == Orientation.landscape ? EdgeInsets.only(right: 20.0) : null,
         width: orientation == Orientation.landscape ? 150.0 : null,
@@ -240,7 +242,7 @@ Widget _buildCard(String name, String price, String imgPath, bool added, bool is
               ),
             ),
             Hero(
-              tag: imgPath,
+              tag: name + imgPath,
               child: Container(
                 height: _imageSize(screenHeight.toInt()),
                 width: _imageSize(screenHeight.toInt()),
