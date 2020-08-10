@@ -27,8 +27,12 @@ class ItemScreen extends StatelessWidget {
             ),
           ),
           tablet: OrientationLayout(
-            portrait: (context) => ItemMobilePortrait(),
-            landscape: (context) => ItemMobileLandscape(),
+            portrait: (context) => ItemMobilePortrait(
+                item: item
+            ),
+            landscape: (context) => ItemMobileLandscape(
+                item: item
+            ),
           ),
         ),
       ),

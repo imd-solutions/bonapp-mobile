@@ -80,9 +80,7 @@ class UserService {
 
     Iterable list = result['professions'];
 
-    return list
-        .map((professions) => Professions.fromJson(professions))
-        .toList();
+    return list.map((professions) => Professions.fromJson(professions)).toList();
   }
 
   // Get the list of nationalities.
@@ -104,9 +102,7 @@ class UserService {
 
     Iterable list = result['nationalities'];
 
-    return list
-        .map((nationalities) => Nationality.fromJson(nationalities))
-        .toList();
+    return list.map((nationalities) => Nationality.fromJson(nationalities)).toList();
   }
 
   // Get a list of users from the site.
@@ -148,8 +144,7 @@ class UserService {
     );
 
     if (response.hasException) {
-      throw new Exception(
-          'Could not get user data for ID: $id. ${response.exception.graphqlErrors.first}');
+      throw new Exception('Could not get user data for ID: $id. ${response.exception.graphqlErrors.first}');
     }
 
     final result = response.data;
@@ -194,35 +189,20 @@ class UserService {
         foodStamp: result['user']['profile']['food_stamp'],
         drinkStamp: result['user']['profile']['drink_stamp'],
         profession: Professions(
-          id: result['user']['profile']['profession'] != null
-              ? result['user']['profile']['profession']['id'].toString()
-              : '',
-          name: result['user']['profile']['profession'] != null
-              ? result['user']['profile']['profession']['title']
-              : '',
+          id: result['user']['profile']['profession'] != null ? result['user']['profile']['profession']['id'].toString() : '',
+          name: result['user']['profile']['profession'] != null ? result['user']['profile']['profession']['title'] : '',
         ),
         nationality: Nationality(
-          id: result['user']['profile']['nationality'] != null
-              ? result['user']['profile']['nationality']['id'].toString()
-              : '',
-          name: result['user']['profile']['nationality'] != null
-              ? result['user']['profile']['nationality']['name']
-              : '',
+          id: result['user']['profile']['nationality'] != null ? result['user']['profile']['nationality']['id'].toString() : '',
+          name: result['user']['profile']['nationality'] != null ? result['user']['profile']['nationality']['name'] : '',
         ),
         location: Locations(
-          id: result['user']['profile']['site'] != null
-              ? result['user']['profile']['site']['id'].toString()
-              : '',
-          name: result['user']['profile']['site'] != null
-              ? result['user']['profile']['site']['name']
-              : '',
+          id: result['user']['profile']['site'] != null ? result['user']['profile']['site']['id'].toString() : '',
+          name: result['user']['profile']['site'] != null ? result['user']['profile']['site']['name'] : '',
         ),
         alerts: Alert(
-          email:
-              result['user']['profile']['alerts']['email'] == 1 ? true : false,
-          notification: result['user']['profile']['alerts']['notification'] == 1
-              ? true
-              : false,
+          email: result['user']['profile']['alerts']['email'] == 1 ? true : false,
+          notification: result['user']['profile']['alerts']['notification'] == 1 ? true : false,
           text: result['user']['profile']['alerts']['text'] == 1 ? true : false,
         ),
       ),
@@ -304,43 +284,21 @@ class UserService {
             lastname: result['login']['user']['profile']['lastname'],
             points: result['login']['user']['profile']['points'],
             profession: Professions(
-              id: result['login']['user']['profile']['profession'] != null
-                  ? result['login']['user']['profile']['profession']['id']
-                      .toString()
-                  : '',
-              name: result['login']['user']['profile']['profession'] != null
-                  ? result['login']['user']['profile']['profession']['title']
-                  : '',
+              id: result['login']['user']['profile']['profession'] != null ? result['login']['user']['profile']['profession']['id'].toString() : '',
+              name: result['login']['user']['profile']['profession'] != null ? result['login']['user']['profile']['profession']['title'] : '',
             ),
             nationality: Nationality(
-              id: result['login']['user']['profile']['nationality'] != null
-                  ? result['login']['user']['profile']['nationality']['id']
-                      .toString()
-                  : '',
-              name: result['login']['user']['profile']['nationality'] != null
-                  ? result['login']['user']['profile']['nationality']['name']
-                  : '',
+              id: result['login']['user']['profile']['nationality'] != null ? result['login']['user']['profile']['nationality']['id'].toString() : '',
+              name: result['login']['user']['profile']['nationality'] != null ? result['login']['user']['profile']['nationality']['name'] : '',
             ),
             location: Locations(
-              id: result['login']['user']['profile']['site'] != null
-                  ? result['login']['user']['profile']['site']['id'].toString()
-                  : '',
-              name: result['login']['user']['profile']['site'] != null
-                  ? result['login']['user']['profile']['site']['name']
-                  : '',
+              id: result['login']['user']['profile']['site'] != null ? result['login']['user']['profile']['site']['id'].toString() : '',
+              name: result['login']['user']['profile']['site'] != null ? result['login']['user']['profile']['site']['name'] : '',
             ),
             alerts: Alert(
-              email: result['login']['user']['profile']['alerts']['email'] == 1
-                  ? true
-                  : false,
-              notification: result['login']['user']['profile']['alerts']
-                          ['notification'] ==
-                      1
-                  ? true
-                  : false,
-              text: result['login']['user']['profile']['alerts']['text'] == 1
-                  ? true
-                  : false,
+              email: result['login']['user']['profile']['alerts']['email'] == 1 ? true : false,
+              notification: result['login']['user']['profile']['alerts']['notification'] == 1 ? true : false,
+              text: result['login']['user']['profile']['alerts']['text'] == 1 ? true : false,
             ),
           ),
         ),
@@ -381,12 +339,8 @@ class UserService {
         ),
       );
 
-      if (response.hasException &&
-          response.exception.graphqlErrors.first.extensions['validation'] !=
-              null) {
-        var message = response
-            .exception.graphqlErrors.first.extensions['validation']
-            .toString();
+      if (response.hasException && response.exception.graphqlErrors.first.extensions['validation'] != null) {
+        var message = response.exception.graphqlErrors.first.extensions['validation'].toString();
         return Message(
           status: 301,
           title: 'Warning',
@@ -396,14 +350,13 @@ class UserService {
       }
 
       if (response.hasException) {
-        throw new Exception(response.exception);
+        throw new Exception(response);
       }
 
       return Message(
         status: 200,
         title: 'Success',
-        message:
-            'You have been registered successfully. Please check your email.',
+        message: 'You have been registered successfully. Please check your email.',
         colour: successColour,
       );
     } catch (e) {
@@ -434,8 +387,7 @@ class UserService {
       );
 
       if (response.hasException) {
-        throw new Exception(
-            'There seems to be a problem. Please contact the system admin.');
+        throw new Exception('There seems to be a problem. Please contact the system admin.');
       }
 
       final result = response.data;

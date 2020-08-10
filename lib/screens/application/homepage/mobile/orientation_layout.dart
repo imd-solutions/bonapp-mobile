@@ -365,19 +365,6 @@ Widget _rowHeader({context, title, data, view = true}) {
           ),
         ),
       ),
-      if (view)
-        Expanded(
-          child: GestureDetector(
-            onTap: () => _navigateToPosts(context, data),
-            child: Text(
-              "View All",
-              style: TextStyle(
-                color: Color(primaryColour),
-              ),
-              textAlign: TextAlign.end,
-            ),
-          ),
-        )
     ],
   );
 }

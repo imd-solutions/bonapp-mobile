@@ -27,8 +27,12 @@ class InitialScreen extends StatelessWidget {
             ),
           ),
           tablet: OrientationLayout(
-            portrait: (context) => InitialMobilePortrait(),
-            landscape: (context) => InitialMobileLandscape(),
+            portrait: (context) => InitialMobilePortrait(
+              user: this.user,
+            ),
+            landscape: (context) => InitialMobileLandscape(
+              user: this.user,
+            ),
           ),
         ),
       ),

@@ -27,8 +27,12 @@ class CategoryScreen extends StatelessWidget {
             ),
           ),
           tablet: OrientationLayout(
-            portrait: (context) => CategoryMobilePortrait(),
-            landscape: (context) => CategoryMobileLandscape(),
+            portrait: (context) => CategoryMobilePortrait(
+                category: category
+            ),
+            landscape: (context) => CategoryMobileLandscape(
+                category: category
+            ),
           ),
         ),
       ),

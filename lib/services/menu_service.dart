@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:flutter_bonapp/models/menu.dart';
 import 'package:flutter_bonapp/config/graphql.dart';

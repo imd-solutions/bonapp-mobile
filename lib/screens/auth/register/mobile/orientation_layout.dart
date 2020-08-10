@@ -15,7 +15,7 @@ import 'package:flutter_bonapp/widgets/full_busy_overlay.dart';
 import 'package:validators/validators.dart' as validator;
 
 class RegisterMobilePortrait extends BaseModelWidget<RegisterViewModel> {
-  final _formKey = GlobalKey<FormState>();
+  static final _formKey = GlobalKey<FormState>();
   final int titleID = 0;
   final User user = User();
   final Profile profile = Profile();
@@ -319,35 +319,36 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
             SizedBox(
               height: 10.0,
             ),
-            for (var i = 0; i < data.legals.length; i++)
-              Column(
-                children: <Widget>[
-                  Container(
-                    width: width * 0.95,
+            if (data.state != ViewState.Busy)
+              for (var i = 0; i < data.legals.length; i++)
+                Column(
+                  children: <Widget>[
+                    Container(
+                      width: width * 0.95,
 //                height: 150.0,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 24.0,
-                          width: 24.0,
-                          child: Checkbox(
-                            value: data.checkbox[i],
-                            onChanged: (bool value) => data.updateCheckBox(i, value),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          SizedBox(
+                            height: 24.0,
+                            width: 24.0,
+                            child: Checkbox(
+                              value: data.checkbox[i],
+                              onChanged: (bool value) => data.updateCheckBox(i, value),
+                            ),
                           ),
-                        ),
-                        SizedBox(width: 10.0),
-                        Expanded(
-                          child: Text(data.legals[i].description),
-                        )
-                      ],
+                          SizedBox(width: 10.0),
+                          Expanded(
+                            child: Text(data.legals[i].description),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  )
-                ],
-              )
+                    SizedBox(
+                      height: 10.0,
+                    )
+                  ],
+                )
           ],
         ),
       if (orientation == Orientation.landscape)

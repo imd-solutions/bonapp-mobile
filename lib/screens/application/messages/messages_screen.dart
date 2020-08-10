@@ -22,8 +22,8 @@ class MessagesScreen extends StatelessWidget {
             landscape: (context) => MessagesMobileLandscape(message: message),
           ),
           tablet: OrientationLayout(
-            portrait: (context) => MessagesMobilePortrait(),
-            landscape: (context) => MessagesMobileLandscape(),
+            portrait: (context) => MessagesMobilePortrait(message: message),
+            landscape: (context) => MessagesMobileLandscape(message: message),
           ),
         ),
       ),

@@ -26,7 +26,9 @@ class CheckoutViewModel extends BaseModel {
   StripePayment stripePayment;
 
   void initialise() {
+    setState(ViewState.Busy);
     _updateData();
+    notifyListeners();
   }
 
   Future<void> _updateData() async {
@@ -34,8 +36,11 @@ class CheckoutViewModel extends BaseModel {
     int uid = prefs.getInt('userId');
 
     user = await userService.getUser(uid);
+
     // Register Stripe Payment.
     stripePayment = await stripeService.init();
+    setState(ViewState.Completed);
+    notifyListeners();
   }
 
   Future<StripeTransactionResponse> payWithNewCard(int uid, String total, orderItems) async {
