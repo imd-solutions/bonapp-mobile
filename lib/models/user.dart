@@ -18,6 +18,7 @@ class User {
   String avatar;
   String email;
   String password;
+  Role role;
   Profile profile;
   List<Messages> messages;
   List<Order> orders;
@@ -29,6 +30,7 @@ class User {
     this.avatar,
     this.email,
     this.password,
+    this.role,
     this.profile,
     this.messages,
     this.orders,
@@ -58,6 +60,27 @@ class User {
         "orders": orders.toList(),
         "vouchers": vouchers.toList(),
       };
+}
+
+class Role {
+  int id;
+  String name;
+
+  Role({
+  this.id,
+  this.name,
+  });
+
+  factory Role.fromJson(Map<String, dynamic> json) => Role(
+    id: int.parse(json["id"]),
+    name: json["name"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "name": name,
+  };
+
 }
 
 class Profile {
@@ -298,18 +321,21 @@ class Voucher {
     this.name,
     this.subTitle,
     this.code,
+    this.qrcode,
   });
 
   String id;
   String name;
   String subTitle;
   String code;
+  String qrcode;
 
   factory Voucher.fromJson(Map<String, dynamic> json) => Voucher(
         id: json["id"],
         name: json["name"],
         subTitle: json["sub_title"],
         code: json["code"],
+        qrcode: json["code"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -317,5 +343,6 @@ class Voucher {
         "name": name,
         "sub_title": subTitle,
         "code": code,
+        "qrcode": code,
       };
 }

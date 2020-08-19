@@ -25,6 +25,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 android {
     compileSdkVersion 29
 
@@ -46,11 +52,28 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+
+            if (System.getenv()["CI"]) { // CI=true is exported by Codemagic
+                storeFile file(System.getenv()["FCI_KEYSTORE_PATH"])
+                storePassword System.getenv()["FCI_KEYSTORE_PASSWORD"]
+                keyAlias System.getenv()["FCI_KEY_ALIAS"]
+                keyPassword System.getenv()["FCI_KEY_PASSWORD"]
+            } else {
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+                storePassword keystoreProperties['storePassword']
+            }
+        }
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
     }
 }
@@ -60,9 +83,9 @@ flutter {
 }
 
 dependencies {
-    implementation 'com.google.firebase:firebase-core:17.4.3'
-    implementation 'com.google.firebase:firebase-messaging:20.2.1'
-    implementation 'com.google.firebase:firebase-analytics:17.4.3'
+    implementation 'com.google.firebase:firebase-core:17.5.0'
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
+    implementation 'com.google.firebase:firebase-analytics:17.5.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

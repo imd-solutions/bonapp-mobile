@@ -146,8 +146,7 @@ Widget userPasswordTextInput(User user, _formKey) {
 }
 
 // Login button.
-Widget loginBtn(
-    BuildContext context, User user, _formKey, LoginViewModel data) {
+Widget loginBtn(BuildContext context, User user, _formKey, LoginViewModel data) {
   // Alert the user of the progress..
   void _snackBar(Message message) {
     Flushbar(
@@ -159,9 +158,11 @@ Widget loginBtn(
         (_) {
           // Send the user to the Initial Application Screen on success.
           if (message.status == 200) {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-                InitialScreenRoute, (Route<dynamic> route) => false,
-                arguments: message.data);
+            if (message.data.role.id == 2) {
+              Navigator.of(context).pushNamedAndRemoveUntil(InitialScreenRoute, (Route<dynamic> route) => false, arguments: message.data);
+            } else {
+              Navigator.of(context).pushNamedAndRemoveUntil(DashboardScreenRoute, (Route<dynamic> route) => false, arguments: {'user': message.data, 'information': 'dashboard'});
+            }
           }
         },
       );
@@ -327,8 +328,7 @@ Widget registerForgottenPassword(BuildContext context, LoginViewModel data) {
             ),
           ),
           onTap: () {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-                RegisterScreenRoute, (Route<dynamic> route) => false);
+            Navigator.of(context).pushNamedAndRemoveUntil(RegisterScreenRoute, (Route<dynamic> route) => false);
           },
         ),
       ),

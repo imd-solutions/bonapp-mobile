@@ -20,6 +20,10 @@ class UserMutation {
             orders {
               id
             }
+            role {
+              id
+              name
+            }
             profile {
               firstname
               lastname
@@ -88,6 +92,7 @@ class UserMutation {
     """;
   }
 
+  // Upload the user Avatar.
   String uploadUserAvatar() {
     return """mutation uploadUserAvatar(\$id: Int!, \$file: Upload!) {
       uploadUserAvatar(id: \$id, file: \$file) {

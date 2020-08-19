@@ -44,9 +44,19 @@ class HomeMobilePortrait extends BaseModelWidget<HomeViewModel> {
                           children: <Widget>[
                             _userInformation(
                               landscape: true,
-                              icon: FontAwesomeIcons.trophy,
-                              data: data.user.profile.points != null ? data.user.profile.points : '0',
-                              title: 'Points',
+                              icon: FontAwesomeIcons.coffee,
+                              data: data.user.profile.drinkStamp != null ? data.user.profile.drinkStamp : '0',
+                              title: 'Drink Stamps',
+                              backgroundColour: 0xFF27B8F0,
+                            ),
+                            SizedBox(
+                              width: 2.5,
+                            ),
+                            _userInformation(
+                              landscape: true,
+                              icon: FontAwesomeIcons.hamburger,
+                              data: data.user.profile.foodStamp != null ? data.user.profile.foodStamp : '0',
+                              title: 'Food Stamps',
                               backgroundColour: 0xFFFD7384,
                             ),
                             SizedBox(
@@ -186,9 +196,19 @@ class HomeMobileLandscape extends BaseModelWidget<HomeViewModel> {
                       children: <Widget>[
                         _userInformation(
                           landscape: true,
-                          icon: FontAwesomeIcons.trophy,
-                          data: data.user.profile.points != null ? data.user.profile.points : '0',
-                          title: 'Points',
+                          icon: FontAwesomeIcons.coffee,
+                          data: data.user.profile.drinkStamp != null ? data.user.profile.drinkStamp : '0',
+                          title: 'Drink Stamps',
+                          backgroundColour: 0xFF27B8F0,
+                        ),
+                        SizedBox(
+                          width: 5.0,
+                        ),
+                        _userInformation(
+                          landscape: true,
+                          icon: FontAwesomeIcons.hamburger,
+                          data: data.user.profile.foodStamp != null ? data.user.profile.foodStamp : '0',
+                          title: 'Food Stamps',
                           backgroundColour: 0xFFFD7384,
                         ),
                         SizedBox(

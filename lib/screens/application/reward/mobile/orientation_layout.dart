@@ -27,6 +27,7 @@ class RewardMobilePortrait extends BaseModelWidget<RewardViewModel> {
                         name: data.user.vouchers[i].name,
                         subTitle: data.user.vouchers[i].subTitle,
                         code: data.user.vouchers[i].code,
+                        qrcode: data.user.vouchers[i].qrcode,
                       ),
                   ],
                 ),
@@ -59,6 +60,7 @@ class RewardMobileLandscape extends BaseModelWidget<RewardViewModel> {
                         name: data.user.vouchers[i].name,
                         subTitle: data.user.vouchers[i].subTitle,
                         code: data.user.vouchers[i].code,
+                        qrcode: data.user.vouchers[i].qrcode,
                       ),
                   ],
                 ),
@@ -103,7 +105,7 @@ class VoucherHeader extends StatelessWidget {
             children: <Widget>[
               count > 0
                   ? Container(
-                      width: width * 0.9,
+                      width: width * 0.7,
                       child: Text(
                         "Tap to reveal the discount code.",
                         style: TextStyle(fontSize: 15.0, color: Color(blackColour), fontFamily: primaryFont),
@@ -131,8 +133,9 @@ class VoucherFlip extends StatelessWidget {
   final String name;
   final String subTitle;
   final String code;
+  final String qrcode;
 
-  const VoucherFlip({@required this.name, @required this.subTitle, @required this.code});
+  const VoucherFlip({@required this.name, @required this.subTitle, @required this.code, @required this.qrcode});
 
   @override
   Widget build(BuildContext context) {
@@ -155,7 +158,7 @@ class VoucherFlip extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 20.0, left: _orientation == Orientation.landscape ? 60.0 : 0.00),
+                    padding: EdgeInsets.only(top: 20.0, left: _orientation == Orientation.landscape ? 60.0 : 0.00, right: _orientation == Orientation.portrait ? 80.0 : 0.00),
                     child: Align(
                       alignment: Alignment.center,
                       child: Text(
@@ -172,7 +175,7 @@ class VoucherFlip extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 60.0, left: _orientation == Orientation.landscape ? 60.0 : 0.00),
+                    padding: EdgeInsets.only(top: 60.0, left: _orientation == Orientation.landscape ? 60.0 : 0.00, right: _orientation == Orientation.portrait ? 80.0 : 0.00),
                     child: Align(
                       alignment: Alignment.center,
                       child: Text(
@@ -196,26 +199,56 @@ class VoucherFlip extends StatelessWidget {
                 children: <Widget>[
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 15.0),
-                    width: 350.0,
+                    width: 150.0,
                     height: 150.0,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('assets/images/voucher_background.png'),
+                        image: NetworkImage('$qrcode'),
                         fit: BoxFit.fill,
                       ),
                     ),
                   ),
-                  Padding(
+                  Container(
+                    width: 300.0,
                     padding: const EdgeInsets.only(top: 60.0, left: 60.0),
-                    child: Text(
-                      'CODE: $code',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Color(whiteColour),
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'secondaryFont',
-                      ),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                '',
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                'CODE:',
+                                style: TextStyle(
+                                  color: Color(blackColour),
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'secondaryFont',
+                                ),
+                              ),
+                              Text(
+                                '$code',
+                                style: TextStyle(
+                                  color: Color(blackColour),
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'secondaryFont',
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

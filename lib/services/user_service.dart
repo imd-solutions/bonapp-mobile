@@ -178,8 +178,13 @@ class UserService {
             name: i['name'],
             subTitle: i['sub_title'],
             code: i['code'],
+            qrcode: i['qrcode'],
           ),
         ),
+      ),
+      role: Role(
+        id: int.parse(result['user']['role']['id']),
+        name: result['user']['role']['name'],
       ),
       profile: Profile(
         firstname: result['user']['profile']['firstname'],
@@ -278,6 +283,10 @@ class UserService {
                 id: i['id'],
               ),
             ),
+          ),
+          role: Role(
+            id: int.parse(result['login']['user']['role']['id']),
+            name: result['login']['user']['role']['name'],
           ),
           profile: Profile(
             firstname: result['login']['user']['profile']['firstname'],

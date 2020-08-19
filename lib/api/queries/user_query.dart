@@ -72,9 +72,14 @@ class UserQuery {
             name
             sub_title
             code
+            qrcode
           }
           orders {
             id
+          }
+          role {
+            id
+            name
           }
           profile {
             firstname

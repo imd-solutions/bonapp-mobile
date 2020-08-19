@@ -19,3 +19,5 @@ const String PostsScreenRoute = '/application/posts';
 const String FavouritesScreenRoute = '/application/favourites';
 const String FaqScreenRoute = '/application/faq';
 const String SettingsScreenRoute = '/application/settings';
+// Manager screen.
+const String DashboardScreenRoute = '/manager/dashboard';

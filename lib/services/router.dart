@@ -15,12 +15,21 @@ import 'package:flutter_bonapp/screens/application/posts/posts_screen.dart';
 import 'package:flutter_bonapp/screens/application/settings/settings_screen.dart';
 import 'package:flutter_bonapp/screens/auth/login/login_screen.dart';
 import 'package:flutter_bonapp/screens/auth/register/register_screen.dart';
-import 'package:flutter_bonapp/screens/intro_screen.dart';
+import 'package:flutter_bonapp/screens/introscreen/intro_screen.dart';
+import 'package:flutter_bonapp/screens/manager/dashboard/dashboard_screen.dart';
 import 'package:flutter_bonapp/screens/undefind_screen.dart';
 import 'package:flutter_bonapp/utils/routing_constants.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
+    case DashboardScreenRoute:
+      final Map arguments = settings.arguments;
+      return MaterialPageRoute(
+        builder: (context) => DashboardScreen(
+          user: arguments['user'],
+          information: arguments['information'],
+        ),
+      );
     case IntroScreenRoute:
       return MaterialPageRoute(
         builder: (context) => IntroScreen(),

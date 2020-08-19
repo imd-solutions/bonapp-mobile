@@ -9,4 +9,15 @@ class ScanMutation {
     }
     """;
   }
+
+  String scanQRCodeVoucher() {
+    return """ 
+    mutation scanQRcodeVoucher(\$input: ScanInput) {
+      scanQRcodeVoucher(input: \$input) {
+        status
+        message
+      }
+    }
+    """;
+  }
 }

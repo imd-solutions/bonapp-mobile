@@ -7,6 +7,7 @@ import 'package:flutter_bonapp/utils/routing_constants.dart';
 import 'package:flutter_bonapp/viewmodels/cart/viewmodel.dart';
 import 'package:flutter_bonapp/viewmodels/checkout/viewmodel.dart';
 import 'package:flutter_bonapp/widgets/base_model_widget.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeApplicationHeader extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey;
@@ -45,22 +46,30 @@ class HomeApplicationHeader extends StatelessWidget {
 class ApplicationHeader extends StatelessWidget {
   final User user;
   final String route;
+  final String information;
 
-  const ApplicationHeader({Key key, this.user, this.route}) : super(key: key);
+  const ApplicationHeader({Key key, this.user, this.route, this.information}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     CartService _cartService = locator<CartService>();
 
+    print(route);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        IconButton(
-          onPressed: () => route == null
-              ? Navigator.pushNamed(context, InitialScreenRoute, arguments: user)
-              : route == 'goback' ? Navigator.of(context).pop() : Navigator.of(context).pushNamedAndRemoveUntil(route, (Route<dynamic> route) => false),
-          icon: Icon(Icons.arrow_back),
-        ),
+        information != 'dashboard'
+            ? IconButton(
+                onPressed: () => route == null
+                    ? Navigator.pushNamed(context, InitialScreenRoute, arguments: user)
+                    : route == 'goback' ? Navigator.of(context).pop() : Navigator.of(context).pushNamedAndRemoveUntil(route, (Route<dynamic> route) => false),
+                icon: Icon(Icons.arrow_back),
+              )
+            : Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(Icons.dashboard),
+              ),
         Column(
           children: <Widget>[
             Image.asset(
@@ -71,10 +80,15 @@ class ApplicationHeader extends StatelessWidget {
         ),
         Stack(
           children: <Widget>[
-            IconButton(
-              onPressed: () => _navigateToCart(context),
-              icon: Icon(Icons.shopping_cart),
-            ),
+            information != 'dashboard'
+                ? IconButton(
+                    onPressed: () => _navigateToCart(context),
+                    icon: Icon(Icons.shopping_cart),
+                  )
+                : IconButton(
+                    onPressed: () => _logUserOut(context),
+                    icon: Icon(FontAwesomeIcons.signOutAlt),
+                  ),
             if (_cartService.itemCount > 0) HeaderCartIcon(cartService: _cartService)
           ],
         )
@@ -177,4 +191,8 @@ class CheckoutApplicationHeader extends BaseModelWidget<CheckoutViewModel> {
 
 void _navigateToCart(BuildContext context) {
   Navigator.pushNamed(context, CartScreenRoute);
+}
+
+void _logUserOut(BuildContext context) {
+  Navigator.pushNamed(context, LoginScreenRoute);
 }

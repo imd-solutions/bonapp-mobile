@@ -2,7 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_bonapp/screens/intro_screen.dart';
+import 'package:flutter_bonapp/screens/introscreen/intro_screen.dart';
 import 'package:flutter_bonapp/services/locator.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
 import 'package:flutter_bonapp/utils/routing_constants.dart';
