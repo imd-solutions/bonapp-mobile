@@ -20,7 +20,7 @@ class PushNotificationService {
     if (Platform.isIOS) {
       _fcm.requestNotificationPermissions(IosNotificationSettings(sound: true, badge: true, alert: true));
     }
-//
+
 //    _fcm.getToken().then((token) {
 //      print(token);
 //    });

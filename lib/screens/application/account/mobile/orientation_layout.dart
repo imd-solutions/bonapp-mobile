@@ -584,7 +584,6 @@ class BuildAccountList extends StatelessWidget {
               ),
               Spacer(),
               InkWell(
-//                onTap: () => print(data[0].id),
                 onTap: () => _showEditAccount(context, user, account, text, selected, selectedName, data),
                 child: Icon(
                   Icons.create,

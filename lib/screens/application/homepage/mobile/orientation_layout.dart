@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bonapp/enums/viewstate.dart';
 import 'package:flutter_bonapp/models/menu.dart';
+import 'package:flutter_bonapp/models/offer.dart';
 import 'package:flutter_bonapp/models/post.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
 import 'package:flutter_bonapp/utils/env.dart';
@@ -258,6 +259,8 @@ class HomeMobileLandscape extends BaseModelWidget<HomeViewModel> {
                         title: data.offer.name,
                         more: false,
                         data: data.offer,
+                        height: 250.0,
+                        containerHeight: 200.0,
                       ),
                     ],
                   ),
@@ -495,7 +498,8 @@ Widget _userInformation(
 Widget _cardInformation({context, height = 150.0, containerHeight = 100.0, radius = 5.0, data, sizedBox = 5.0, fontSize = 15.0, @required title, more = true, item = true}) {
   return Expanded(
     child: GestureDetector(
-      onTap: () => item == true ? _navigateToItem(context, data) : _navigateToUrl(data),
+      onTap: () => data.runtimeType == Offer ? null : item == true ? _navigateToItem(context, data) : _navigateToUrl(data),
+//      onTap: () => print(jsonEncode(data)),
       child: Container(
         height: height,
         child: Column(

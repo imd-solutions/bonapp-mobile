@@ -210,7 +210,6 @@ class MessageBtns extends StatelessWidget {
 void _processMessageDelete(int id, MessageViewModel data, BuildContext context) {
   data.deleteMessage(id).then(
     (message) {
-      print('This is the message: $message');
       // Alert message to the user.
       _snackBar(message, context);
     },

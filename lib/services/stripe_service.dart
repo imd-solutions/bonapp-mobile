@@ -58,8 +58,6 @@ class StripeService {
       if (response.status == 'succeeded') {
         success = await orderService.updateOrder(int.parse(result.message), response);
 
-        print('That order was for $amount');
-
         return new StripeTransactionResponse(message: 'Transaction successful', success: true);
       } else {
         return new StripeTransactionResponse(message: 'Transaction failed', success: false);

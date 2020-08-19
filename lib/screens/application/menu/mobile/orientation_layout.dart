@@ -23,10 +23,12 @@ class MenuMobilePortrait extends BaseModelWidget<MenuViewModel> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Column(
-                    children: _topHalfScreen(data),
+                    children: _topHalfScreen(context, data),
                   ),
                   ColumnHeader(
                     title: 'Pick of the Day',
+                    showArrow: true,
+                    arrowDown: true,
                   ),
                   SizedBox(
                     height: 10.0,
@@ -82,11 +84,11 @@ class MenuMobileLandscape extends BaseModelWidget<MenuViewModel> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Column(
-                    children: _topHalfScreen(data),
+                    children: _topHalfScreen(context, data),
                   ),
                   ColumnHeader(
                     title: 'Pick of the Day',
-                    more: false,
+                    more: true,
                   ),
                   SizedBox(
                     height: 10.0,
@@ -126,11 +128,15 @@ class MenuMobileLandscape extends BaseModelWidget<MenuViewModel> {
 class ColumnHeader extends StatelessWidget {
   final String title;
   final bool more;
+  final bool showArrow;
+  final bool arrowDown;
 
   ColumnHeader({
     Key key,
     this.title,
     this.more = true,
+    this.showArrow = true,
+    this.arrowDown = false,
   }) : super(key: key);
 
   @override
@@ -159,11 +165,17 @@ class ColumnHeader extends StatelessWidget {
                     color: Color(primaryColour),
                   ),
                 ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: 10.0,
-                  color: Color(primaryColour),
-                )
+                showArrow && arrowDown
+                    ? Icon(
+                        Icons.arrow_downward,
+                        size: 10.0,
+                        color: Color(primaryColour),
+                      )
+                    : Icon(
+                        Icons.arrow_forward,
+                        size: 10.0,
+                        color: Color(primaryColour),
+                      )
               ],
             ),
           ),
@@ -265,12 +277,16 @@ Widget _buildCard(String name, String price, String imgPath, bool added, bool is
                 fontSize: _priceNameSize(screenHeight.toInt()),
               ),
             ),
-            Text(
-              name,
-              style: TextStyle(
-                color: Color(accentColour),
-                fontFamily: secondaryFont,
-                fontSize: _priceNameSize(screenHeight.toInt()),
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+              child: Text(
+                name,
+                style: TextStyle(
+                  color: Color(accentColour),
+                  fontFamily: secondaryFont,
+//                fontSize: _priceNameSize(screenHeight.toInt()),
+                  fontSize: 10.5,
+                ),
               ),
             ),
             Padding(
@@ -333,7 +349,8 @@ double _priceNameSize(int height) {
   }
 }
 
-List<Widget> _topHalfScreen(MenuViewModel data) {
+List<Widget> _topHalfScreen(BuildContext context, MenuViewModel data) {
+  var orientation = MediaQuery.of(context).orientation;
   return [
     SizedBox(
       height: 15.0,
@@ -351,6 +368,7 @@ List<Widget> _topHalfScreen(MenuViewModel data) {
     ),
     ColumnHeader(
       title: 'Featured',
+      more: orientation == Orientation.landscape ? false : true,
     ),
     SizedBox(
       height: 5.0,
@@ -359,7 +377,7 @@ List<Widget> _topHalfScreen(MenuViewModel data) {
       height: 120.0,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: data.menus.length,
+          itemCount: data.featuredItems.length,
           itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
               onTap: () => _navigateToItem(context, data.featuredItems[index].itemInfo),
@@ -415,6 +433,7 @@ List<Widget> _topHalfScreen(MenuViewModel data) {
     ),
     ColumnHeader(
       title: 'Categories',
+      more: orientation == Orientation.landscape ? false : true,
     ),
     SizedBox(
       height: 5.0,

@@ -54,8 +54,6 @@ class ApplicationHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     CartService _cartService = locator<CartService>();
 
-    print(route);
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[

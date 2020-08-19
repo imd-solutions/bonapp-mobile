@@ -54,8 +54,6 @@ class OrderService {
 
       final result = response.data;
 
-      print(result);
-
       return Message(
         title: 'Success',
         status: 200,
