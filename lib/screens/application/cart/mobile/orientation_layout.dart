@@ -37,7 +37,19 @@ class CartMobilePortrait extends BaseModelWidget<CartViewModel> {
                                 key: ValueKey(data.items.values.toList()[i].id),
                                 direction: DismissDirection.endToStart,
                                 background: Container(
+                                  padding: EdgeInsets.only(right: 20.0),
                                   color: Colors.red,
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Text(
+                                      'Delete',
+                                      textAlign: TextAlign.right,
+                                      style: new TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                                 onDismissed: (direction) {
                                   data.removeItem(data.items.values.toList()[i].id);
@@ -146,7 +158,19 @@ class CartMobileLandscape extends BaseModelWidget<CartViewModel> {
                                 key: ValueKey(data.items.values.toList()[i].id),
                                 direction: DismissDirection.endToStart,
                                 background: Container(
+                                  padding: EdgeInsets.only(right: 20.0),
                                   color: Colors.red,
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Text(
+                                      'Delete',
+                                      textAlign: TextAlign.right,
+                                      style: new TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                                 onDismissed: (direction) {
                                   data.removeItem(data.items.values.toList()[i].id);

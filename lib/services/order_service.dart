@@ -106,7 +106,7 @@ class OrderService {
     }
   }
 
-  Future<Message> processOrder(int uid, orderItems) async {
+  Future<Message> processOrder(int uid, orderItems, branchDropdown, deliveryDropdown, specialInstructions) async {
     try {
       GraphQLClient _order = graphQLConfiguration.clientToQuery();
       QueryResult response = await _order.mutate(
@@ -115,10 +115,7 @@ class OrderService {
             orderMutation.orderCreate(),
           ),
           variables: {
-            "input": {
-              "user": uid,
-              "items": orderItems,
-            }
+            "input": {"user": uid, "items": orderItems, "branch": branchDropdown, "delivery": deliveryDropdown, 'instructions': specialInstructions}
           },
         ),
       );

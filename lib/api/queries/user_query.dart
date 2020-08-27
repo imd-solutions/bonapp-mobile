@@ -99,6 +99,14 @@ class UserQuery {
             site {
               id
               name
+              branches {
+                id
+                name
+                deliveries {
+                  id
+                  delivery_time
+                }
+              }
             }
             alerts {
                email
@@ -108,5 +116,16 @@ class UserQuery {
           }
         }
       }""";
+  }
+
+  String getDeliveries() {
+    return """ 
+    query getDeliveries(\$id: Int) {
+      getDeliveries(id: \$id) {
+        id
+        delivery_time
+      }
+    } 
+    """;
   }
 }

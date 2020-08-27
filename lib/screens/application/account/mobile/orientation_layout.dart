@@ -357,7 +357,7 @@ class AccountMobileLandscape extends BaseModelWidget<AccountViewModel> {
                                       ),
                                       SmallButton(
                                         btnText: "Save",
-                                        onTap: _showEditUser,
+                                        onTap: _processUserUpdate,
                                         data: data,
                                       ),
                                     ],

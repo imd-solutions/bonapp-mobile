@@ -16,7 +16,6 @@ class MessageMobilePortrait extends BaseModelWidget<MessageViewModel> {
   MessageMobilePortrait({this.message, this.route});
   @override
   Widget build(BuildContext context, MessageViewModel data) {
-
     return FullBusyOverlay(
       show: data.state == ViewState.Busy,
       child: SafeArea(
@@ -98,6 +97,7 @@ class MessageMobileLandscape extends BaseModelWidget<MessageViewModel> {
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 15.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               ApplicationHeader(route: route),
               SizedBox(
@@ -167,17 +167,6 @@ class MessageBtns extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        FlatButton(
-          onPressed: () => print('Reply'),
-          child: Text(
-            'Reply',
-            style: TextStyle(
-              color: Color(secondaryColour),
-              fontSize: 20.0,
-              fontFamily: secondaryFont,
-            ),
-          ),
-        ),
         Spacer(),
         RaisedButton(
           color: Color(primaryColour),

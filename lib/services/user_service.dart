@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_bonapp/api/mutations/user_mutation.dart';
 import 'package:flutter_bonapp/models/location.dart';
 import 'package:flutter_bonapp/models/message.dart';
@@ -105,6 +107,29 @@ class UserService {
     return list.map((nationalities) => Nationality.fromJson(nationalities)).toList();
   }
 
+  // Get the list of nationalities.
+  Future<List<Delivery>> getDeliveries(int id) async {
+    GraphQLClient _user = graphQLConfiguration.clientToQuery();
+    QueryResult response = await _user.query(
+      QueryOptions(
+        documentNode: gql(
+          userQuery.getDeliveries(),
+        ),
+        variables: {"id": id},
+      ),
+    );
+
+    if (response.hasException) {
+      throw new Exception('Could not get branch delivery data.');
+    }
+
+    final result = response.data;
+
+    Iterable list = result['getDeliveries'];
+
+    return list.map((getDeliveries) => Delivery.fromJson(getDeliveries)).toList();
+  }
+
   // Get a list of users from the site.
   Future<User> getUsers() async {
     GraphQLClient _user = graphQLConfiguration.clientToQuery();
@@ -204,6 +229,26 @@ class UserService {
         location: Locations(
           id: result['user']['profile']['site'] != null ? result['user']['profile']['site']['id'].toString() : '',
           name: result['user']['profile']['site'] != null ? result['user']['profile']['site']['name'] : '',
+          branches: result['user']['profile']['site']['branches'] != null
+              ? List<Branch>.from(
+                  result['user']['profile']['site']['branches'].map(
+                    (i) => Branch(
+                      id: i['id'],
+                      name: i['name'],
+                      deliveries: i['deliveries'] != null
+                          ? List<Delivery>.from(
+                              i['deliveries'].map(
+                                (j) => Delivery(
+                                  id: j['id'],
+                                  delivery_time: j['delivery_time'],
+                                ),
+                              ),
+                            )
+                          : [],
+                    ),
+                  ),
+                )
+              : [],
         ),
         alerts: Alert(
           email: result['user']['profile']['alerts']['email'] == 1 ? true : false,

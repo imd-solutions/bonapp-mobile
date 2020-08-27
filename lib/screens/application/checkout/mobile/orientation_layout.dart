@@ -1,6 +1,8 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bonapp/enums/viewstate.dart';
+import 'package:flutter_bonapp/includes/select/branch_dropdown.dart';
+import 'package:flutter_bonapp/includes/select/delivery_dropdown.dart';
 import 'package:flutter_bonapp/partials/application_header.dart';
 import 'package:flutter_bonapp/utils/constants.dart';
 import 'package:flutter_bonapp/utils/routing_constants.dart';
@@ -19,6 +21,8 @@ class CartItems {
 class CheckoutMobilePortrait extends BaseModelWidget<CheckoutViewModel> {
   @override
   Widget build(BuildContext context, CheckoutViewModel data) {
+    TextEditingController _controller = new TextEditingController();
+
     return FullBusyOverlay(
       show: data.state == ViewState.Busy,
       child: Scaffold(
@@ -156,31 +160,119 @@ class CheckoutMobilePortrait extends BaseModelWidget<CheckoutViewModel> {
                         ],
                       ),
                       SizedBox(
-                        height: 20.0,
-                      ),
-                      Text(
-                        'Pickup',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(
                         height: 10.0,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          if (data.state != ViewState.Busy)
-                            Text(
-                              data.user.profile.location.name,
-                              style: TextStyle(
-                                fontSize: 15.0,
-                                color: Color(accentThirdColour),
-                                height: 1.5,
+                      if (data.state != ViewState.Busy)
+                        data.user.profile.location.branches.length > 0
+                            ? Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 15.0,
+                                  ),
+                                  Text('Collection or Delivery'),
+                                  SizedBox(
+                                    height: 5.0,
+                                  ),
+                                  BranchDropdown(
+                                    selectedTitle: 'Collection at ${data.user.profile.location.name}',
+                                    selected: data.branchDropdown,
+                                    data: data.user.profile.location.branches,
+                                    updateSelected: (val) {
+                                      data.updateBranchDropdown(val);
+                                      if (val > 0) {
+                                        data.getDeliveryTimes(val);
+                                      }
+                                    },
+                                  ),
+                                  if (data.branchDropdown > 0)
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        SizedBox(
+                                          height: 10.0,
+                                        ),
+                                        Text('Please select a delivery time.'),
+                                        SizedBox(
+                                          height: 10.0,
+                                        ),
+                                        data.state != ViewState.DoingSomething
+                                            ? DeliveryDropdown(
+                                                selectedTitle: 'Delivery time',
+                                                selected: data.deliveryDropdown,
+                                                data: data.deliveries,
+                                                updateSelected: (val) {
+                                                  data.updateDeliveryDropdown(val);
+                                                },
+                                              )
+                                            : Center(
+                                                child: CircularProgressIndicator(
+                                                  backgroundColor: Color(primaryColour),
+                                                  strokeWidth: 2,
+                                                ),
+                                              ),
+                                      ],
+                                    )
+                                ],
+                              )
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Text(
+                                    'Pickup',
+                                    style: TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        data.user.profile.location.name,
+                                        style: TextStyle(
+                                          fontSize: 15.0,
+                                          color: Color(accentThirdColour),
+                                          height: 1.5,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      Text('Special Instructions:'),
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      TextField(
+                        controller: _controller,
+                        onChanged: (text) => data.updateSpecialInstructions(text),
+                        autofocus: true,
+                        cursorColor: Color(primaryColour),
+                        style: TextStyle(height: 1.0),
+                        cursorWidth: 2.0,
+                        maxLines: 5,
+                        minLines: 3,
+                        decoration: InputDecoration(
+                          hintText: "Please add any special instructions here.",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                            borderSide: BorderSide(
+                              color: Colors.amber,
+                              style: BorderStyle.solid,
                             ),
-                        ],
+                          ),
+                        ),
                       ),
                       SizedBox(
                         height: 80.0,
@@ -211,6 +303,7 @@ class CheckoutMobilePortrait extends BaseModelWidget<CheckoutViewModel> {
 class CheckoutMobileLandscape extends BaseModelWidget<CheckoutViewModel> {
   @override
   Widget build(BuildContext context, CheckoutViewModel data) {
+    TextEditingController _controller = new TextEditingController();
     return FullBusyOverlay(
       show: data.state == ViewState.Busy,
       child: Scaffold(
@@ -348,31 +441,119 @@ class CheckoutMobileLandscape extends BaseModelWidget<CheckoutViewModel> {
                         ],
                       ),
                       SizedBox(
-                        height: 20.0,
-                      ),
-                      Text(
-                        'Pickup',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(
                         height: 10.0,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          if (data.state != ViewState.Busy)
-                            Text(
-                              data.user.profile.location.name,
-                              style: TextStyle(
-                                fontSize: 15.0,
-                                color: Color(accentThirdColour),
-                                height: 1.5,
+                      if (data.state != ViewState.Busy)
+                        data.user.profile.location.branches.length > 0
+                            ? Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 15.0,
+                                  ),
+                                  Text('Collection or Delivery'),
+                                  SizedBox(
+                                    height: 5.0,
+                                  ),
+                                  BranchDropdown(
+                                    selectedTitle: 'Collection at ${data.user.profile.location.name}',
+                                    selected: data.branchDropdown,
+                                    data: data.user.profile.location.branches,
+                                    updateSelected: (val) {
+                                      data.updateBranchDropdown(val);
+                                      if (val > 0) {
+                                        data.getDeliveryTimes(val);
+                                      }
+                                    },
+                                  ),
+                                  if (data.branchDropdown > 0)
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        SizedBox(
+                                          height: 10.0,
+                                        ),
+                                        Text('Please select a delivery time.'),
+                                        SizedBox(
+                                          height: 10.0,
+                                        ),
+                                        data.state != ViewState.DoingSomething
+                                            ? DeliveryDropdown(
+                                                selectedTitle: 'Delivery time',
+                                                selected: data.deliveryDropdown,
+                                                data: data.deliveries,
+                                                updateSelected: (val) {
+                                                  data.updateDeliveryDropdown(val);
+                                                },
+                                              )
+                                            : Center(
+                                                child: CircularProgressIndicator(
+                                                  backgroundColor: Color(primaryColour),
+                                                  strokeWidth: 2,
+                                                ),
+                                              ),
+                                      ],
+                                    )
+                                ],
+                              )
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Text(
+                                    'Pickup',
+                                    style: TextStyle(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        data.user.profile.location.name,
+                                        style: TextStyle(
+                                          fontSize: 15.0,
+                                          color: Color(accentThirdColour),
+                                          height: 1.5,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      Text('Special Instructions:'),
+                      SizedBox(
+                        height: 5.0,
+                      ),
+                      TextField(
+                        controller: _controller,
+                        onChanged: (text) => data.updateSpecialInstructions(text),
+                        autofocus: true,
+                        cursorColor: Color(primaryColour),
+                        style: TextStyle(height: 1.0),
+                        cursorWidth: 2.0,
+                        maxLines: 5,
+                        minLines: 3,
+                        decoration: InputDecoration(
+                          hintText: "Please add any special instructions here.",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                            borderSide: BorderSide(
+                              color: Colors.amber,
+                              style: BorderStyle.solid,
                             ),
-                        ],
+                          ),
+                        ),
                       ),
                       SizedBox(
                         height: 80.0,
@@ -421,7 +602,7 @@ FlatButton submitOrder(CheckoutViewModel data, BuildContext context) {
                   .toList();
             }
 
-            data.payWithNewCard(data.user.id, total.round().toString(), orderItems).then(
+            data.payWithNewCard(data.user.id, total.round().toString(), orderItems, data.branchDropdown, data.deliveryDropdown, data.specialInstructions).then(
                   (message) => {
                     if (message.success == true)
                       {

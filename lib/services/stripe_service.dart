@@ -43,9 +43,9 @@ class StripeService {
     }
   }
 
-  Future<StripeTransactionResponse> payWithNewCard({String amount, String currency, int userId, orderItems}) async {
+  Future<StripeTransactionResponse> payWithNewCard({String amount, String currency, int userId, orderItems, branch, delivery, instructions}) async {
     try {
-      var result = await orderService.processOrder(userId, orderItems);
+      var result = await orderService.processOrder(userId, orderItems, branch, delivery, instructions);
 
       if (result.status != 200) {
         throw new Exception('Order was not created.');
