@@ -6,7 +6,7 @@ class CartTabletPortrait extends BaseModelWidget<CartViewModel> {
   @override
   Widget build(BuildContext context, CartViewModel data) {
     return Container(
-      child: Text('Cart Page.'),
+      child: const Text('Cart Page.'),
     );
   }
 }
@@ -15,7 +15,7 @@ class CartTabletLandscape extends BaseModelWidget<CartViewModel> {
   @override
   Widget build(BuildContext context, CartViewModel data) {
     return Container(
-      child: Text('Cart Page.'),
+      child: const Text('Cart Page.'),
     );
   }
 }

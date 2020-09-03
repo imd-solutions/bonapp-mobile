@@ -15,7 +15,7 @@ import 'package:flutter_bonapp/widgets/base_model_widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 final List _accountDrawerList = [
-  {'icon': Icons.person, 'title': 'My Acount', 'page': AccountScreenRoute},
+  {'icon': Icons.person, 'title': 'My Account', 'page': AccountScreenRoute},
   {'icon': Icons.insert_comment, 'title': 'News', 'page': PostsScreenRoute},
   {'icon': Icons.mail_outline, 'title': 'My Messages', 'page': MessagesScreenRoute},
   {'icon': Icons.shopping_basket, 'title': 'My Orders', 'page': OrdersScreenRoute},
@@ -33,23 +33,23 @@ final List _logoutDrawerList = [
 List<BottomNavigationBarItem> _bottomNavBarList = [
   BottomNavigationBarItem(
     icon: Icon(Icons.home),
-    title: Text('Home'),
+    title: const Text('Home'),
   ),
   BottomNavigationBarItem(
     icon: Icon(Icons.settings_overscan),
-    title: Text('Scan'),
+    title: const Text('Scan'),
   ),
   BottomNavigationBarItem(
     icon: Icon(Icons.favorite_border),
-    title: Text('Loyalty'),
+    title: const Text('Loyalty'),
   ),
   BottomNavigationBarItem(
     icon: Icon(Icons.local_cafe),
-    title: Text('Rewards'),
+    title: const Text('Rewards'),
   ),
   BottomNavigationBarItem(
     icon: Icon(Icons.local_dining),
-    title: Text('Menu'),
+    title: const Text('Menu'),
   )
 ];
 
@@ -92,7 +92,7 @@ List<Widget> _drawerItems(BuildContext context, InitialViewModel data) {
                       ? CircleNotification(
                           notification: data.userUnreadMessages.length,
                         )
-                      : Text(''),
+                      : const Text(''),
             ],
           ),
           trailing: Icon(Icons.keyboard_arrow_right),

@@ -24,7 +24,7 @@ class HomeMobilePortrait extends BaseModelWidget<HomeViewModel> {
     return data.state == ViewState.Busy
         ? BusyOverlay(
             show: data.state == ViewState.Busy,
-            child: Text(''),
+            child: const Text(''),
           )
         : SingleChildScrollView(
             child: Padding(
@@ -181,7 +181,7 @@ class HomeMobileLandscape extends BaseModelWidget<HomeViewModel> {
     return data.state == ViewState.Busy
         ? BusyOverlay(
             show: data.state == ViewState.Busy,
-            child: Text(''),
+            child: const Text(''),
           )
         : SingleChildScrollView(
             child: Padding(
@@ -355,7 +355,7 @@ List<Widget> _topHeaderInformation(data) {
                   fontFamily: secondaryFont,
                 ),
               )
-            : Text(''),
+            : const Text(''),
       ],
     ),
     SizedBox(

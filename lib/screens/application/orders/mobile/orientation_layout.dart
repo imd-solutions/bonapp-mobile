@@ -386,7 +386,7 @@ void _showOrderMessage(BuildContext context, Order order, OrderViewModel data) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Contact us.'),
+        title: const Text('Contact us.'),
         content: SingleChildScrollView(
           child: Form(
             key: _formKey,

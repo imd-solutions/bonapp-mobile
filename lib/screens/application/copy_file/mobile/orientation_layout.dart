@@ -12,7 +12,7 @@ class FaqMobilePortrait extends BaseModelWidget<FaqViewModel> {
           children: <Widget>[
             ApplicationHeader(user: data.user),
             Center(
-              child: Text('Faq Page'),
+              child: const Text('Faq Page'),
             ),
           ],
         ),
@@ -30,7 +30,7 @@ class FaqMobileLandscape extends BaseModelWidget<FaqViewModel> {
           children: <Widget>[
             ApplicationHeader(user: data.user),
             Center(
-              child: Text('Faq Page'),
+              child: const Text('Faq Page'),
             )
           ],
         ),

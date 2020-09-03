@@ -6,7 +6,7 @@ class AccountTabletPortrait extends BaseModelWidget<AccountViewModel> {
   @override
   Widget build(BuildContext context, AccountViewModel data) {
     return Container(
-      child: Text('Account Page.'),
+      child: const Text('Account Page.'),
     );
   }
 }
@@ -15,7 +15,7 @@ class AccountTabletLandscape extends BaseModelWidget<AccountViewModel> {
   @override
   Widget build(BuildContext context, AccountViewModel data) {
     return Container(
-      child: Text('Account Page.'),
+      child: const Text('Account Page.'),
     );
   }
 }

@@ -10,7 +10,7 @@ class PostsTabletPortrait extends BaseModelWidget<PostsViewModel> {
   @override
   Widget build(BuildContext context, PostsViewModel data) {
     return Container(
-      child: Text('Posts Page.'),
+      child: const Text('Posts Page.'),
     );
   }
 }
@@ -22,7 +22,7 @@ class PostsTabletLandscape extends BaseModelWidget<PostsViewModel> {
   @override
   Widget build(BuildContext context, PostsViewModel data) {
     return Container(
-      child: Text('Posts Page.'),
+      child: const Text('Posts Page.'),
     );
   }
 }

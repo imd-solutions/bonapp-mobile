@@ -369,7 +369,7 @@ class UserService {
   }
 
   // Register the user.
-  Future<Message> registerUser(User user, Profile profile, int location, int profession, String token) async {
+  Future<Message> registerUser(User user, Profile profile, int location, int profession, String token, bool email, bool app, bool text) async {
     try {
       GraphQLClient _user = graphQLConfiguration.clientToQuery();
       QueryResult response = await _user.mutate(
@@ -387,7 +387,10 @@ class UserService {
               "mobile_number": profile.mobileNumber,
               "site": location,
               "job": profession,
-              "mobile_token": token
+              "mobile_token": token,
+              "emailNotification": email,
+              "appNotification": app,
+              "textNotification": text,
             }
           },
         ),

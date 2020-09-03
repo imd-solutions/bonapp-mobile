@@ -14,7 +14,7 @@ class MenuMobilePortrait extends BaseModelWidget<MenuViewModel> {
     return data.state == ViewState.Busy
         ? BusyOverlay(
             show: data.state == ViewState.Busy,
-            child: Text(''),
+            child: const Text(''),
           )
         : SingleChildScrollView(
             child: Padding(
@@ -75,7 +75,7 @@ class MenuMobileLandscape extends BaseModelWidget<MenuViewModel> {
     return data.state == ViewState.Busy
         ? BusyOverlay(
             show: data.state == ViewState.Busy,
-            child: Text(''),
+            child: const Text(''),
           )
         : SingleChildScrollView(
             child: Padding(

@@ -84,7 +84,7 @@ class CheckoutMobilePortrait extends BaseModelWidget<CheckoutViewModel> {
                                   SizedBox(
                                     width: 8.0,
                                   ),
-                                  Text('x'),
+                                  const Text('x'),
                                   SizedBox(
                                     width: 8.0,
                                   ),
@@ -171,7 +171,7 @@ class CheckoutMobilePortrait extends BaseModelWidget<CheckoutViewModel> {
                                   SizedBox(
                                     height: 15.0,
                                   ),
-                                  Text('Collection or Delivery'),
+                                  const Text('Collection or Delivery'),
                                   SizedBox(
                                     height: 5.0,
                                   ),
@@ -193,7 +193,7 @@ class CheckoutMobilePortrait extends BaseModelWidget<CheckoutViewModel> {
                                         SizedBox(
                                           height: 10.0,
                                         ),
-                                        Text('Please select a delivery time.'),
+                                        const Text('Please select a delivery time.'),
                                         SizedBox(
                                           height: 10.0,
                                         ),
@@ -250,7 +250,7 @@ class CheckoutMobilePortrait extends BaseModelWidget<CheckoutViewModel> {
                       SizedBox(
                         height: 15.0,
                       ),
-                      Text('Special Instructions:'),
+                      const Text('Special Instructions:'),
                       SizedBox(
                         height: 5.0,
                       ),
@@ -365,7 +365,7 @@ class CheckoutMobileLandscape extends BaseModelWidget<CheckoutViewModel> {
                                   SizedBox(
                                     width: 8.0,
                                   ),
-                                  Text('x'),
+                                  const Text('x'),
                                   SizedBox(
                                     width: 8.0,
                                   ),
@@ -452,7 +452,7 @@ class CheckoutMobileLandscape extends BaseModelWidget<CheckoutViewModel> {
                                   SizedBox(
                                     height: 15.0,
                                   ),
-                                  Text('Collection or Delivery'),
+                                  const Text('Collection or Delivery'),
                                   SizedBox(
                                     height: 5.0,
                                   ),
@@ -474,7 +474,7 @@ class CheckoutMobileLandscape extends BaseModelWidget<CheckoutViewModel> {
                                         SizedBox(
                                           height: 10.0,
                                         ),
-                                        Text('Please select a delivery time.'),
+                                        const Text('Please select a delivery time.'),
                                         SizedBox(
                                           height: 10.0,
                                         ),
@@ -531,7 +531,7 @@ class CheckoutMobileLandscape extends BaseModelWidget<CheckoutViewModel> {
                       SizedBox(
                         height: 15.0,
                       ),
-                      Text('Special Instructions:'),
+                      const Text('Special Instructions:'),
                       SizedBox(
                         height: 5.0,
                       ),

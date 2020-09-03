@@ -16,7 +16,7 @@ class IntroScreenMobilePortrait extends BaseModelWidget<IntroScreenViewModel> {
     return data.state == ViewState.Busy
         ? BusyOverlay(
             show: data.state == ViewState.Busy,
-            child: Text(''),
+            child: const Text(''),
           )
         : Column(
             children: <Widget>[
@@ -66,7 +66,7 @@ class IntroScreenMobileLandscape extends BaseModelWidget<IntroScreenViewModel> {
     return data.state == ViewState.Busy
         ? BusyOverlay(
             show: data.state == ViewState.Busy,
-            child: Text(''),
+            child: const Text(''),
           )
         : Column(
             children: <Widget>[

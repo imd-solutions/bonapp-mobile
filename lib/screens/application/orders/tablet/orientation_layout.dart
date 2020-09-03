@@ -6,7 +6,7 @@ class OrderTabletPortrait extends BaseModelWidget<OrderViewModel> {
   @override
   Widget build(BuildContext context, OrderViewModel data) {
     return Container(
-      child: Text('Order Page.'),
+      child: const Text('Order Page.'),
     );
   }
 }
@@ -15,7 +15,7 @@ class OrderTabletLandscape extends BaseModelWidget<OrderViewModel> {
   @override
   Widget build(BuildContext context, OrderViewModel data) {
     return Container(
-      child: Text('Order Page.'),
+      child: const Text('Order Page.'),
     );
   }
 }

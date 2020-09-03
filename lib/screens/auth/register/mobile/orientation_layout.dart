@@ -12,6 +12,7 @@ import 'package:flutter_bonapp/viewmodels/register/viewmodel.dart';
 import 'package:flutter_bonapp/widgets/base_model_widget.dart';
 import 'package:flutter_bonapp/enums/viewstate.dart';
 import 'package:flutter_bonapp/widgets/full_busy_overlay.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:validators/validators.dart' as validator;
 
 class RegisterMobilePortrait extends BaseModelWidget<RegisterViewModel> {
@@ -319,13 +320,93 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
             SizedBox(
               height: 10.0,
             ),
+            Column(
+              children: <Widget>[
+                Container(
+                  width: width * 0.95,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 24.0,
+                        width: 24.0,
+                        child: Checkbox(
+                          value: data.emailNotification,
+                          onChanged: (bool value) => data.processBool('email', value),
+                        ),
+                      ),
+                      SizedBox(width: 10.0),
+                      Expanded(
+                        child: const Text('I would like to be notified by email.'),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10.0,
+                )
+              ],
+            ),
+            Column(
+              children: <Widget>[
+                Container(
+                  width: width * 0.95,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 24.0,
+                        width: 24.0,
+                        child: Checkbox(
+                          value: data.appNotification,
+                          onChanged: (bool value) => data.processBool('app', value),
+                        ),
+                      ),
+                      SizedBox(width: 10.0),
+                      Expanded(
+                        child: const Text('I would like to be notified by the app notification.'),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10.0,
+                )
+              ],
+            ),
+//            Column(
+//              children: <Widget>[
+//                Container(
+//                  width: width * 0.95,
+//                  child: Row(
+//                    crossAxisAlignment: CrossAxisAlignment.start,
+//                    children: <Widget>[
+//                      SizedBox(
+//                        height: 24.0,
+//                        width: 24.0,
+//                        child: Checkbox(
+//                          value: data.textNotification,
+//                          onChanged: (bool value) => data.processBool('text', value),
+//                        ),
+//                      ),
+//                      SizedBox(width: 10.0),
+//                      Expanded(
+//                        child: const Text('I would like to be notified by text.'),
+//                      ),
+//                    ],
+//                  ),
+//                ),
+//                SizedBox(
+//                  height: 10.0,
+//                )
+//              ],
+//            ),
             if (data.state != ViewState.Busy)
               for (var i = 0; i < data.legals.length; i++)
                 Column(
                   children: <Widget>[
                     Container(
                       width: width * 0.95,
-//                height: 150.0,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -340,7 +421,20 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                           SizedBox(width: 10.0),
                           Expanded(
                             child: Text(data.legals[i].description),
-                          )
+                          ),
+                          if (data.legals[i].link != null)
+                            SizedBox(
+                              height: 25.0,
+                              width: 25.0,
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.info,
+                                ),
+                                iconSize: 15.0,
+                                color: Color(thirdColour),
+                                onPressed: () => _navigateToUrl(data.legals[i].link),
+                              ),
+                            )
                         ],
                       ),
                     ),
@@ -396,6 +490,87 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
             SizedBox(
               height: 10.0,
             ),
+            Column(
+              children: <Widget>[
+                Container(
+                  width: width * 0.87,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 24.0,
+                        width: 24.0,
+                        child: Checkbox(
+                          value: data.emailNotification,
+                          onChanged: (bool value) => data.processBool('email', value),
+                        ),
+                      ),
+                      SizedBox(width: 10.0),
+                      Expanded(
+                        child: const Text('I would like to be notified by email.'),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10.0,
+                )
+              ],
+            ),
+            Column(
+              children: <Widget>[
+                Container(
+                  width: width * 0.87,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 24.0,
+                        width: 24.0,
+                        child: Checkbox(
+                          value: data.appNotification,
+                          onChanged: (bool value) => data.processBool('app', value),
+                        ),
+                      ),
+                      SizedBox(width: 10.0),
+                      Expanded(
+                        child: const Text('I would like to be notified by the app notification.'),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10.0,
+                )
+              ],
+            ),
+//            Column(
+//              children: <Widget>[
+//                Container(
+//                  width: width * 0.87,
+//                  child: Row(
+//                    crossAxisAlignment: CrossAxisAlignment.start,
+//                    children: <Widget>[
+//                      SizedBox(
+//                        height: 24.0,
+//                        width: 24.0,
+//                        child: Checkbox(
+//                          value: data.textNotification,
+//                          onChanged: (bool value) => data.processBool('text', value),
+//                        ),
+//                      ),
+//                      SizedBox(width: 10.0),
+//                      Expanded(
+//                        child: const Text('I would like to be notified by text.'),
+//                      ),
+//                    ],
+//                  ),
+//                ),
+//                SizedBox(
+//                  height: 10.0,
+//                )
+//              ],
+//            ),
             if (data.state != ViewState.Busy)
               for (var i = 0; i < data.legals.length; i++)
                 Column(
@@ -416,7 +591,20 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                           SizedBox(width: 10.0),
                           Expanded(
                             child: Text(data.legals[i].description),
-                          )
+                          ),
+                          if (data.legals[i].link != null)
+                            SizedBox(
+                              height: 25.0,
+                              width: 25.0,
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.info,
+                                ),
+                                iconSize: 15.0,
+                                color: Color(thirdColour),
+                                onPressed: () => _navigateToUrl(data.legals[i].link),
+                              ),
+                            )
                         ],
                       ),
                     ),
@@ -516,7 +704,7 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
 
-                  data.registerUser(user, profile, data.location, data.profession).then(
+                  data.registerUser(user, profile, data.location, data.profession, data.emailNotification, data.appNotification, data.textNotification).then(
                     (message) {
                       // Alert message to the user.
                       _snackBar(message);
@@ -548,4 +736,12 @@ Widget listWidget(context, _formKey, data, user, profile, width) {
       ),
     ],
   );
+}
+
+void _navigateToUrl(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
 }

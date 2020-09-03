@@ -64,7 +64,7 @@ class PostsMobilePortrait extends BaseModelWidget<PostsViewModel> {
                                   ListTile(
                                     leading: Image.network(graphQLApiImg + data.allPosts[index].image),
                                     title: Text(data.allPosts[index].title),
-                                    subtitle: Text('View News...'),
+                                    subtitle: const Text('View News...'),
                                   ),
                                 ],
                               ),
@@ -138,7 +138,7 @@ class PostsMobileLandscape extends BaseModelWidget<PostsViewModel> {
                                   ListTile(
                                     leading: Image.network(graphQLApiImg + data.allPosts[index].image),
                                     title: Text(data.allPosts[index].title),
-                                    subtitle: Text('View News...'),
+                                    subtitle: const Text('View News...'),
                                   ),
                                 ],
                               ),

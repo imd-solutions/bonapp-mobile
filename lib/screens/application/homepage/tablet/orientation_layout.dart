@@ -6,7 +6,7 @@ class HomeTabletPortrait extends BaseModelWidget<HomeViewModel> {
   @override
   Widget build(BuildContext context, HomeViewModel data) {
     return Center(
-      child: Text('HomePage'),
+      child: const Text('HomePage'),
     );
   }
 }
@@ -15,7 +15,7 @@ class HomeTabletLandscape extends BaseModelWidget<HomeViewModel> {
   @override
   Widget build(BuildContext context, HomeViewModel data) {
     return Center(
-      child: Text('HomePage'),
+      child: const Text('HomePage'),
     );
   }
 }

@@ -6,7 +6,7 @@ class FaqTabletPortrait extends BaseModelWidget<FaqViewModel> {
   @override
   Widget build(BuildContext context, FaqViewModel data) {
     return Container(
-      child: Text('Faq Page.'),
+      child: const Text('Faq Page.'),
     );
   }
 }
@@ -15,7 +15,7 @@ class FaqTabletLandscape extends BaseModelWidget<FaqViewModel> {
   @override
   Widget build(BuildContext context, FaqViewModel data) {
     return Container(
-      child: Text('Faq Page.'),
+      child: const Text('Faq Page.'),
     );
   }
 }

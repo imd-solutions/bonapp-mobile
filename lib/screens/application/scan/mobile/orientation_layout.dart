@@ -69,7 +69,7 @@ Container scanWidgetBuilder(double height, ScanViewModel data, BuildContext cont
                     ),
                   )
                 : Center(
-                    child: Text("Camera inactive"),
+                    child: const Text('Camera inactive'),
                   ),
           ),
         if (data.qrCodeFail == true)

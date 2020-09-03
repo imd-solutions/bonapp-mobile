@@ -30,7 +30,7 @@ class SettingsMobileLandscape extends BaseModelWidget<SettingsViewModel> {
           children: <Widget>[
             ApplicationHeader(user: data.user),
             Center(
-              child: Text('Settings Page'),
+              child: const Text('Settings Page'),
             )
           ],
         ),

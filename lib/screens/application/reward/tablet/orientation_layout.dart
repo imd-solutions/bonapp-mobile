@@ -9,7 +9,7 @@ class RewardTabletPortrait extends BaseModelWidget<RewardViewModel> {
 
     return Scaffold(
       body: Center(
-        child: Text('Reward Page'),
+        child: const Text('Reward Page'),
       ),
     );
   }
@@ -21,7 +21,7 @@ class RewardTabletLandscape extends BaseModelWidget<RewardViewModel> {
   Widget build(BuildContext context, RewardViewModel data) {
     return Scaffold(
       body: Center(
-        child: Text('Reward Page'),
+        child: const Text('Reward Page'),
       ),
     );
   }

@@ -107,7 +107,7 @@ Container scanWidgetBuilder(double height, DashboardViewModel data, BuildContext
                     ),
                   )
                 : Center(
-                    child: Text("Camera inactive"),
+                    child: const Text('Camera inactive'),
                   ),
           ),
         if (data.qrCodeFail == true)

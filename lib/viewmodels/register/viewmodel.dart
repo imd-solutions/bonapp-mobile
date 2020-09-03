@@ -27,6 +27,10 @@ class RegisterViewModel extends BaseModel {
   int professionDropdown = 0;
   int locationDropdown = 0;
 
+  bool emailNotification = true;
+  bool appNotification = true;
+  bool textNotification = true;
+
   int title;
   String firstName;
   String lastName;
@@ -53,6 +57,18 @@ class RegisterViewModel extends BaseModel {
     this.getLocations();
     this.getProfessions();
     this.getLegalInfo();
+    notifyListeners();
+  }
+
+  void processBool(String name, bool val) {
+    if(name == 'email') {
+      emailNotification = val;
+    } else if (name == 'app') {
+      appNotification = val;
+    }
+    else {
+      textNotification = val;
+    }
     notifyListeners();
   }
 
@@ -142,7 +158,7 @@ class RegisterViewModel extends BaseModel {
     notifyListeners();
   }
 
-  Future<Message> registerUser(User user, Profile profile, int location, int profession) async {
+  Future<Message> registerUser(User user, Profile profile, int location, int profession, bool email, bool app, bool text) async {
     setState(ViewState.Processing);
     notifyListeners();
 
@@ -150,7 +166,7 @@ class RegisterViewModel extends BaseModel {
 
     String token = await _fcm.getToken();
 
-    Message response = await userService.registerUser(user, profile, location, profession, token);
+    Message response = await userService.registerUser(user, profile, location, profession, token, email, app, text);
 
     setState(ViewState.Completed);
     notifyListeners();

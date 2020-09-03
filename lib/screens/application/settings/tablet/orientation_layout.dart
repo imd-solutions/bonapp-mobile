@@ -6,7 +6,7 @@ class LoyaltyTabletPortrait extends BaseModelWidget<LoyaltyViewModel> {
   @override
   Widget build(BuildContext context, LoyaltyViewModel data) {
     return Center(
-      child: Text('Loyalty Page'),
+      child: const Text('Loyalty Page'),
     );
   }
 }
@@ -15,7 +15,7 @@ class LoyaltyTabletLandscape extends BaseModelWidget<LoyaltyViewModel> {
   @override
   Widget build(BuildContext context, LoyaltyViewModel data) {
     return Center(
-      child: Text('Loyalty Page'),
+      child: const Text('Loyalty Page'),
     );
   }
 }

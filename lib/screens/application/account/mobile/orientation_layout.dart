@@ -47,8 +47,8 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
 
     List switchers = [
       {"icon": Icons.mail_outline, "text": "Email Notification", "divider": true, "type": "email", "alert": data.state != ViewState.Busy ? data.user.profile.alerts.email : data.emailNotification},
-      {"icon": Icons.notifications, "text": "App Notification", "divider": true, "type": "app", "alert": data.state != ViewState.Busy ? data.user.profile.alerts.notification : data.appNotification},
-      {"icon": Icons.phone_android, "text": "Text Notification", "divider": false, "type": "text", "alert": data.state != ViewState.Busy ? data.user.profile.alerts.text : data.textNotification},
+      {"icon": Icons.notifications, "text": "App Notification", "divider": false, "type": "app", "alert": data.state != ViewState.Busy ? data.user.profile.alerts.notification : data.appNotification},
+//      {"icon": Icons.phone_android, "text": "Text Notification", "divider": false, "type": "text", "alert": data.state != ViewState.Busy ? data.user.profile.alerts.text : data.textNotification},
     ];
 
     return Scaffold(
@@ -102,7 +102,7 @@ class AccountMobilePortrait extends BaseModelWidget<AccountViewModel> {
                                         SizedBox(
                                           width: 5,
                                         ),
-                                        Text("Select Image"),
+                                        const Text('Select Image'),
                                       ],
                                     ),
                                     onPressed: () => data.selectImage().then((message) {
@@ -283,8 +283,8 @@ class AccountMobileLandscape extends BaseModelWidget<AccountViewModel> {
 
     List switchers = [
       {"icon": Icons.mail_outline, "text": "Email Notification", "divider": true, "type": "email", "alert": data.emailNotification},
-      {"icon": Icons.notifications, "text": "App Notification", "divider": true, "type": "app", "alert": data.appNotification},
-      {"icon": Icons.phone_android, "text": "Text Notification", "divider": false, "type": "text", "alert": data.textNotification},
+      {"icon": Icons.notifications, "text": "App Notification", "divider": false, "type": "app", "alert": data.appNotification},
+//      {"icon": Icons.phone_android, "text": "Text Notification", "divider": false, "type": "text", "alert": data.textNotification},
     ];
 
     return Scaffold(
@@ -655,7 +655,7 @@ void _showEditUser(BuildContext context, User user, AccountViewModel data) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Edit detail'),
+        title: const Text('Edit detail'),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,

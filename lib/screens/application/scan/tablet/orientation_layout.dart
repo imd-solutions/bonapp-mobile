@@ -7,7 +7,7 @@ class ScanTabletPortrait extends BaseModelWidget<ScanViewModel> {
   @override
   Widget build(BuildContext context, ScanViewModel data) {
     return Center(
-      child: Text('Scan Page'),
+      child: const Text('Scan Page'),
     );
   }
 }
@@ -17,7 +17,7 @@ class ScanTabletLandscape extends BaseModelWidget<ScanViewModel> {
   @override
   Widget build(BuildContext context, ScanViewModel data) {
     return Center(
-      child: Text('Scan Page'),
+      child: const Text('Scan Page'),
     );
   }
 }

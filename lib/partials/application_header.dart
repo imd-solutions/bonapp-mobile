@@ -154,7 +154,7 @@ class CartApplicationHeader extends BaseModelWidget<CartViewModel> {
             ),
           ],
         ),
-        Text('')
+        const Text('')
       ],
     );
   }
@@ -181,7 +181,7 @@ class CheckoutApplicationHeader extends BaseModelWidget<CheckoutViewModel> {
             ),
           ],
         ),
-        Text('')
+        const Text('')
       ],
     );
   }

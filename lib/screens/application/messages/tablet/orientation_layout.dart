@@ -6,7 +6,7 @@ class MessagesTabletPortrait extends BaseModelWidget<MessagesViewModel> {
   @override
   Widget build(BuildContext context, MessagesViewModel data) {
     return Container(
-      child: Text('Messages Page.'),
+      child: const Text('Messages Page.'),
     );
   }
 }
@@ -15,7 +15,7 @@ class MessagesTabletLandscape extends BaseModelWidget<MessagesViewModel> {
   @override
   Widget build(BuildContext context, MessagesViewModel data) {
     return Container(
-      child: Text('Messages Page.'),
+      child: const Text('Messages Page.'),
     );
   }
 }

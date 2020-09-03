@@ -116,7 +116,7 @@ class LoyaltyMobilePortrait extends BaseModelWidget<LoyaltyViewModel> {
     return data.state == ViewState.Busy
         ? BusyOverlay(
             show: data.state == ViewState.Busy,
-            child: Text(''),
+            child: const Text(''),
           )
         : Column(
             children: <Widget>[
@@ -284,7 +284,7 @@ class LoyaltyMobileLandscape extends BaseModelWidget<LoyaltyViewModel> {
     return data.state == ViewState.Busy
         ? BusyOverlay(
             show: data.state == ViewState.Busy,
-            child: Text(''),
+            child: const Text(''),
           )
         : Column(
             children: <Widget>[

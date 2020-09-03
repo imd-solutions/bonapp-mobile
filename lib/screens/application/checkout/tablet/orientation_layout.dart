@@ -6,7 +6,7 @@ class CheckoutTabletPortrait extends BaseModelWidget<CheckoutViewModel> {
   @override
   Widget build(BuildContext context, CheckoutViewModel data) {
     return Container(
-      child: Text('Checkout Page.'),
+      child: const Text('Checkout Page.'),
     );
   }
 }
@@ -15,7 +15,7 @@ class CheckoutTabletLandscape extends BaseModelWidget<CheckoutViewModel> {
   @override
   Widget build(BuildContext context, CheckoutViewModel data) {
     return Container(
-      child: Text('Checkout Page.'),
+      child: const Text('Checkout Page.'),
     );
   }
 }

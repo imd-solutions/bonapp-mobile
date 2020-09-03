@@ -21,7 +21,7 @@ class FavouriteScreen extends StatelessWidget {
                       'assets/images/logo.png',
                       height: 35.0,
                     ),
-                    Text('Favourites Page',
+                    const Text('Favourites Page',
                       style: TextStyle(fontFamily: primaryFont),
                     )
                   ],

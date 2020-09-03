@@ -117,7 +117,7 @@ class CartMobilePortrait extends BaseModelWidget<CartViewModel> {
                         ),
                       ),
                     ),
-                    Text('')
+                    const Text('')
                   ],
                 ),
         ),
@@ -238,7 +238,7 @@ class CartMobileLandscape extends BaseModelWidget<CartViewModel> {
                         ),
                       ),
                     ),
-                    Text('')
+                    const Text('')
                   ],
                 ),
         ),

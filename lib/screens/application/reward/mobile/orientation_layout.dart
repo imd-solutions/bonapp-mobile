@@ -12,7 +12,7 @@ class RewardMobilePortrait extends BaseModelWidget<RewardViewModel> {
     return data.state == ViewState.Busy
         ? BusyOverlay(
             show: data.state == ViewState.Busy,
-            child: Text(''),
+            child: const Text(''),
           )
         : Column(
             children: <Widget>[
@@ -43,7 +43,7 @@ class RewardMobileLandscape extends BaseModelWidget<RewardViewModel> {
     return data.state == ViewState.Busy
         ? BusyOverlay(
             show: data.state == ViewState.Busy,
-            child: Text(''),
+            child: const Text(''),
           )
         : Column(
             crossAxisAlignment: CrossAxisAlignment.start,

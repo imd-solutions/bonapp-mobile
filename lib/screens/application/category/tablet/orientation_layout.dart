@@ -6,7 +6,7 @@ class CategoryMobilePortrait extends BaseModelWidget<CategoryViewModel> {
   @override
   Widget build(BuildContext context, CategoryViewModel data) {
     return Container(
-      child: Text('Category Page.'),
+      child: const Text('Category Page.'),
     );
   }
 }
@@ -15,7 +15,7 @@ class CategoryMobileLandscape extends BaseModelWidget<CategoryViewModel> {
   @override
   Widget build(BuildContext context, CategoryViewModel data) {
     return Container(
-      child: Text('Category Page.'),
+      child: const Text('Category Page.'),
     );
   }
 }
