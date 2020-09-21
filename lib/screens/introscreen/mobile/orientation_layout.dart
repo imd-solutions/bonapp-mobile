@@ -24,11 +24,14 @@ class IntroScreenMobilePortrait extends BaseModelWidget<IntroScreenViewModel> {
                 flex: 8,
                 child: SplashScreen(
                   seconds: 8,
-                  navigateAfterSeconds: data.user.role.id == 2
-                      ? InitialScreen(
-                          user: data.user,
-                        )
-                      : data.user != null && data.user.role.id != 2 ? LoginScreen() : SlidersScreen(),
+                  navigateAfterSeconds:
+                      data.user != null && data.user.role.id == 2
+                          ? InitialScreen(
+                              user: data.user,
+                            )
+                          : data.user != null && data.user.role.id != 2
+                              ? LoginScreen()
+                              : SlidersScreen(),
                   title: Text(
                     'Catering is our business and we excel at it.',
                     style: TextStyle(
@@ -78,7 +81,9 @@ class IntroScreenMobileLandscape extends BaseModelWidget<IntroScreenViewModel> {
                       ? InitialScreen(
                           user: data.user,
                         )
-                      : data.user != null && data.user.role.id != 2 ? LoginScreen() : SlidersScreen(),
+                      : data.user != null && data.user.role.id != 2
+                          ? LoginScreen()
+                          : SlidersScreen(),
                   title: Text(
                     'Catering is our business and we excel at it.',
                     style: TextStyle(

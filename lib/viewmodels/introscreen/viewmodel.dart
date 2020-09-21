@@ -19,7 +19,9 @@ class IntroScreenViewModel extends BaseModel {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int id = prefs.getInt('userId');
 
-    user = await userService.getUser(id);
+    if (id != null) {
+      user = await userService.getUser(id);
+    }
 
     setState(ViewState.Completed);
     notifyListeners();
